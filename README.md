@@ -1,8 +1,8 @@
 # library-NORJ
 
-update file
+420-P75-AB PHP PROGRAMMING FINAL PROJECT
 
-add new line
+- This project is to design, develop, publish, and maintain a PHP web site using recommended design
+practices.
 
-
-dfafasklfja
+- Developed by Olga, Natariia, Mohammadreza, Jeonghoon
