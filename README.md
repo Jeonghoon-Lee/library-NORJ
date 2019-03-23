@@ -6,5 +6,3 @@
 practices.
 
 - Developed by Olga, Natariia, Mohammadreza, Jeonghoon
-
-- test
