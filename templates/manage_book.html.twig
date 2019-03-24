@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Register Book</title>
+</head>
+<body>
+  <div>
+    <h2>{{ subtitle }}</h2>
+    <form action="register_book.php" method="post">
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title" value="{{ book.Title }}"><br>
+      <label for="publisher">Publisher</label>
+      <input type="text" name="publisher" id="publisher" value="{{ book.Publisher }}"><br>
+      <label for="Author">Author</label>
+      <input type="text" name="Author" id="Author" value="{{ book.Author }}"><br>
+      <label for="year">Year</label>
+      <input type="number" name="year" id="year" value="{{ book.Year }}"><br>
+      <label for="language">Language</label>
+      <select name="language" id="language">
+        {% for lang in languages %}
+          <option value="{{ lang.LangID }}" {% if book.LangID == lang.LangID %}selected{% endif %}>
+            {{ lang.LangDescrip }}
+          </option>
+        {% endfor %}
+      </select><br>
+      <label for="category">Category</label>
+      <select name="category" id="category">
+        {% for category in categories %}
+          <option value="{{ category.CategoryID }}" {% if book.CategoryID == category.CategoryID %}selected{% endif %}>
+            {{ category.CategoryDescrip }}
+          </option>
+        {% endfor %}
+      </select><br>
+      <label for="descrip">Discription</label>
+      <textarea name="descrip" id="descipt" cols="60" rows="10">
+        {{ book.Description }}
+      </textarea><br>     
+      <span>Book Photo:</span><input type="file" name="file" value=""><br>
+      <div><img src="" alt="No image"></div><br>
+
+      <input type="hidden" name="isbn" value="{{ book.ISBN }}">
+      <button type="submit">Register book</button>
+      <button type="reset">Reset</button>
+    </form>
+  </div>
+</body>
+</html>
