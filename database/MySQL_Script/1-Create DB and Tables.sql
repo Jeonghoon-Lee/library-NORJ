@@ -31,7 +31,7 @@ create table Users (
     BirthDate date null,
     RegisteredDate date not null,
     LastLoginTime datetime null,
-    Photo blob null,
+    Photo varchar(100) null,
     
     constraint pk_Members primary key clustered (UserID asc)
 )
@@ -53,7 +53,7 @@ create table Books
 	AgeRating tinyint not null,			-- (0: all, 1: adult-only)
     BookStatus varchar(10) not null,	-- (available, reserved, loaned)
     Description varchar(1024) null,
-    BookImage blob null,
+    BookImage varchar(100) null,
 
 	constraint pk_Books primary key clustered (ISBN asc)
 )
