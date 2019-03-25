@@ -1,0 +1,100 @@
+/*General*/
+body {
+
+}
+
+.row {
+  margin: auto;
+}
+
+/*search*/
+.input-group {
+  width: 30%;
+  float: right;
+}
+
+#search {
+  padding-top: 20px;
+  float: right;
+ 
+}
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+
+
+/*Navigation bar*/
+.navbar-expand-md .navbar-nav .nav-link {
+  padding-right: 1rem;
+}
+
+
+/*Footer*/
+.footer {
+  text-align: center;
+}
+
+h2 a {
+  text-decoration: none;
+  color: rgba(255,255,255,.5);
+}
+
+h2 a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+div.dark {
+  background-color:#343a40;
+  color: white;
+  
+  margin: auto;
+}
+
+.footer-col {
+  padding: 1em 3em;
+}
+
+div#bottom-menu {
+  width: 100%;
+  text-align: center;
+  margin-top: 1em;
+}
+
+ul.centerUL {
+  margin: 2px auto;
+  line-height: 1.4;
+  padding-left: 0;
+  flex-direction: row;
+}
+
+.centerUL li {
+  display: inline;
+  text-align: center;
+  padding: 2%; 
+}
+
+#bottom-menu a {
+  text-decoration: none;
+  color: black;
+}
+
+#bottom-menu a:hover {
+ color:#343a40;
+}
+
+
+
