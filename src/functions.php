@@ -5,6 +5,7 @@
     echo '</pre>';
   }
 
+  // global variables
   $error = '';
   $categories = '';
   $languages = '';
