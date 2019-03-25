@@ -49,7 +49,7 @@ CREATE TABLE `books` (
   `AgeRating` tinyint(4) NOT NULL,
   `BookStatus` varchar(10) NOT NULL,
   `Description` varchar(1024) DEFAULT NULL,
-  `BookImage` varchar(100) NULL,
+  `BookImage` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -211,7 +211,7 @@ CREATE TABLE `users` (
   `BirthDate` date DEFAULT NULL,
   `RegisteredDate` date NOT NULL,
   `LastLoginTime` datetime DEFAULT NULL,
-  `Photo` varchar(100) NULL,
+  `Photo` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
