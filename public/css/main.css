@@ -98,3 +98,15 @@ ul.centerUL {
 
 
 
+
+/*research result icon --- advanse research page*/
+ul.search-results {
+	list-style: none;
+	display: inline;
+	margin-left: 0 !important;
+	padding: 0;
+}
+ul.search-results li {
+	display: inline;
+	margin: 0 5px;
+}

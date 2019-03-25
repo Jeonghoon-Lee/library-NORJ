@@ -2,7 +2,7 @@
   include('.\config.php');
   include('.\functions.php');
 
-  $error = '';
+
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
