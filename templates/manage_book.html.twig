@@ -5,18 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Register Book</title>
-  <style>
-    .book-image {
-      width: 200px;
-      height: 300px;
-      border: 1px solid black;
-    }
-
-    .book-image img {
-      width: 100%;
-    }
-  </style>
+  <link rel="stylesheet" href="../public/css/main.css">
 </head>
+
 <body>
   <div>
     <h2>{{ subtitle }}</h2>
@@ -52,6 +43,7 @@
 
       <label for="book-img">Book Photo:</label>
       <input type="file" id="book-img" name="image" value=""><br>
+      <!-- book image display area -->
       <div class="book-image">
         {% if book.ISBN != null %}
           {% if book.BookImage != null %}
@@ -67,37 +59,7 @@
       <button type="reset">Reset</button>
     </form>
   </div>
-  <script>
-    const inputFileBtn = document.querySelector('#book-img');
-    const upLoadFile = (file) => {
-      const formData = new FormData();
-      formData.append('image', file);
-
-      fetch('upload_image.php', {
-        method: 'POST',
-        body: formData
-      }).then((response) => {
-        console.log(response);
-        // for testing
-        if (document.querySelector('.book-image').childElementCount == 0) {
-          const imageElement = document.createElement('img');
-
-          imageElement.src = '../public/img/' + file.name;
-          imageElement.alt = 'book image';
-          document.querySelector('.book-image').appendChild(imageElement);
-        } else {
-          document.querySelector('.book-image img').src = '../public/img/file.name';
-        }
-      });
-    };
-
-    inputFileBtn.addEventListener('change', () => {
-      if (inputFileBtn.files[0].size < 2000000) {
-        upLoadFile(inputFileBtn.files[0]);
-      } else {
-        alert('too big file');
-      }
-    });
-  </script> 
+  <script src="../public/js/upload_file.js"></script>
+  <script src="../public/js/upload_book_img.js"></script>
 </body>
 </html>

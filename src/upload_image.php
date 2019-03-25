@@ -2,29 +2,36 @@
   include('config.php');
   include('functions.php');
 
-  use Monolog\Logger;
-  use Monolog\Handler\StreamHandler;
-  
-  // create a log channel
-  $log = new Logger('upload_image');
-  $log->pushHandler(new StreamHandler('book.log', Logger::DEBUG));
-
-  $log->info('Upload image file');
+  define('IMAGE_FOLDER', '../public/img/');
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $file_name = '../public/img/' . $_FILES['image']['name'];
-    $file_tmp = $_FILES['image']['tmp_name'];
-
+    //
+    // need to check admin permission
+    //
+    $response = '';
     if (isset($_FILES['image'])) {
-      $log->info('file is upload' . $file_name);
-      move_uploaded_file($file_tmp, $file_name);
+      // generate unique name
+      $file_name = IMAGE_FOLDER . uniqid() . $_FILES['image']['name'];
+      $tmp_name = $_FILES['image']['tmp_name'];
 
-      // $date = array(
-      //   'response' => 'OK'
-      // );
-
-      // header('Content-type: application/json');
-      // echo json_encode( $data );
+      // save the uploaded file.
+      move_uploaded_file($tmp_name, $file_name);
+      $response = array(
+        'status' => 200,    // 200: OK 
+        'message' => 'Success',
+        'filename' => $file_name
+      );
+      http_response_code(200);
+    } else {
+      $response = array(
+        'status' => 400,    // 400: Bad Request 
+        'message' => 'File not exist'
+      );
+      http_response_code(400);
     }
+    // reply to client
+    echo json_encode($response);
+  } else {
+    echo 'Bad request. Not allow to access server!';
   }
 ?>

@@ -110,3 +110,15 @@ ul.search-results li {
 	display: inline;
 	margin: 0 5px;
 }
+
+
+/* manage_book.html.twig */
+.book-image {
+  width: 200px;
+  height: 300px;
+  border: 1px solid black;
+}
+
+.book-image img {
+  width: 100%;
+}
