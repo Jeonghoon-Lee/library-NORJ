@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>NORJ Library</title>
+        <title>{% block page_title %}Default title{% endblock %}</title>
         <meta charset="UTF-8">
         <meta name="description" content="This website is about ...">
         <meta name="keywords" content="Library, books">
@@ -17,48 +17,38 @@
             <div class="container">
                 <!-- Navigation menu -->
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                    <!-- Brand -->
-                    <a class="navbar-brand" href="#">Logo</a>
-                    
-                    <!-- Toggler/collapsibe Button -->
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    
-                    <!-- Navbar links -->
-                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li> 
-                            <li class="nav-item">
+                        <!-- Brand -->
+                        <a class="navbar-brand" href="#">Logo</a>
+                        
+                        <!-- Toggler/collapsibe Button -->
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        
+                        <!-- Navbar links -->
+                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
                                     <a class="nav-link" href="#">Link</a>
-                            </li>
-                        </ul>
-                        <!-- Search box -->
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>   
-                   
-                </nav>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li> 
+                                <li class="nav-item">
+                                        <a class="nav-link" href="#">Link</a>
+                                </li>
+                            </ul>
+                        </div>   
+                      </nav>
             </div>
         </div>
 
             
         <!--Main Content--> 
-        
+        {% block content %}{% endblock %}
 
         <!--Footer-->
         <div class="py-2 footer">
