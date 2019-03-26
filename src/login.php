@@ -12,7 +12,7 @@ DB::$password = "ipdipd";
 DB::$dbName = 'librarynorj'; 
 
 // twig configuration
-$loader = new \Twig\Loader\FilesystemLoader('templates');
+$loader = new \Twig\Loader\FilesystemLoader('../templates');
 $twig = new \Twig\Environment($loader);
 
   
@@ -82,6 +82,6 @@ $log->pushHandler( new StreamHandler("website.log", Logger::DEBUG) );
 
  
   echo $twig->render("login.html", 
-  array(	"form_action"	=>	$_SERVER['PHP_SELF'], "error" => $error	)
+  		array(	"form_action"	=>	$_SERVER['PHP_SELF'], "error" => $error	)
     );
 ?>
