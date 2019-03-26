@@ -1,5 +1,5 @@
 RewriteEngine On
-# RewriteBase /users/
+# RewriteBase /project/
 
 RewriteRule ^(app|dict|ns|tmp)\/|\.ini$ - [R=404]
 
