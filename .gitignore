@@ -1,2 +1,7 @@
 composer.phar
 /vendor/
+
+# image file 
+/public/img/
+
+**/*.log
