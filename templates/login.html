@@ -1,0 +1,27 @@
+{%  extends 'main.html' %}
+{% block page_title %}Login Page{% endblock %}
+{% block content %}
+
+
+{% extends "main.html.twig" %}
+{% block page_title %}Sign in{% endblock %}
+{% block navigation %}
+ {{ parent() }}
+{% endblock %}
+{% block content %}
+<div class="py-2">
+  <div class="container framed">
+    <div>
+        <form action="{{form_action}}" method="post" enctype="multipart/form-data">
+          <input type="text" name="user_name" placeholder="User name" /><br /><br />
+          <input type="password" name="password" placeholder="Password" /><br /><br />
+          <input type="checkbox" name="remember_me" />Remember Me<br /><br />
+          <input type="submit" name="btn_login" value = "Sign in">
+        </form>
+    </div>
+  </div>
+</div>  
+{% endblock %}
+{% block footer %}
+ {{ parent() }}
+{% endblock %}

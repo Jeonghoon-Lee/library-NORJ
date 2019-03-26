@@ -5,7 +5,10 @@
     echo '</pre>';
   }
 
-  $error = '';
+  // global variables
+//  $error = '';
+  $error = array();   // set as array variable.
+ 
   $categories = '';
   $languages = '';
 

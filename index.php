@@ -12,6 +12,6 @@
   <a href="templates/advance_search.html">Advanced Search</a><br/>
   <a href="templates/booksDetails.html">book details</a><br/>
   <a href="templates/main.html">main</a><br/>
-  <a href="templates/search_result.html">search result</a>
+  <a href="src/search_result.php">search result</a>
 </body>
 </html>
