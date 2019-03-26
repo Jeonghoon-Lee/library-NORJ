@@ -6,7 +6,9 @@
   }
 
   // global variables
-  $error = '';
+//  $error = '';
+  $error = array();   // set as array variable.
+ 
   $categories = '';
   $languages = '';
 

@@ -11,13 +11,13 @@
 <body>
   <div>
     <h2>{{ subtitle }}</h2>
-    <form action="register_book.php" method="post">
+    <form action="../src/manage_book.php" method="post">
       <label for="title">Title</label>
       <input type="text" name="title" id="title" value="{{ book.Title }}"><br>
       <label for="publisher">Publisher</label>
       <input type="text" name="publisher" id="publisher" value="{{ book.Publisher }}"><br>
-      <label for="Author">Author</label>
-      <input type="text" name="Author" id="Author" value="{{ book.Author }}"><br>
+      <label for="author">Author</label>
+      <input type="text" name="author" id="author" value="{{ book.Author }}"><br>
       <label for="year">Year</label>
       <input type="number" name="year" id="year" value="{{ book.Year }}"><br>
       <label for="language">Language</label>
@@ -36,6 +36,20 @@
           </option>
         {% endfor %}
       </select><br>
+
+      <input type="radio" name="rating" value="0" {% if book.AgeRating == 0 %}checked{% endif %}>All Age
+      <input type="radio" name="rating" value="1" {% if book.AgeRating == 1 %}checked{% endif %}>Adult Only<br>
+
+      <label for="status">Book Status</label>
+      <select name="status" id="status">
+        {% set bookStatus = ["available", "reserved", "loaned"] %}
+        {% for status in bookStatus %}
+          <option value="{{ status }}" {% if book.BookStatus == status %}selected{% endif %}>
+            {{ status }}
+          </option>
+        {% endfor %}
+      </select><br>  
+
       <label for="descrip">Discription</label>
       <textarea name="descrip" id="descipt" cols="60" rows="10">
         {{ book.Description }}
@@ -47,7 +61,7 @@
       <div class="book-image">
         {% if book.ISBN != null %}
           {% if book.BookImage != null %}
-            <img src="../public/img/{{ book.BookImage }}" alt="Cover image of the {{ book.Title }}"></div>
+            <img src="{{ book.BookImage }}" alt="Cover image of the {{ book.Title }}"></div>
           {% else %}
             <img src="../public/img/no_image_book.png" alt="Cover image of the {{ book.Title }}"></div>     
           {% endif %}
@@ -55,11 +69,13 @@
       </div>
 
       <input type="hidden" name="isbn" value="{{ book.ISBN }}">
+      <input type="hidden" name="new_filename" value="{{ book.BookImage }}">
+
       <button type="submit">Register book</button>
       <button type="reset">Reset</button>
     </form>
   </div>
   <script src="../public/js/upload_file.js"></script>
-  <script src="../public/js/upload_book_img.js"></script>
+  <script src="../public/js/manage_book.js"></script>
 </body>
 </html>
