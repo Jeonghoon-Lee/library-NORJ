@@ -13,6 +13,7 @@
   <a href="templates/booksDetails.html">book details</a><br/>
   <a href="templates/main.html.twig">main</a><br/>
   <a href="src/search_result.php">search result</a><br>
-  <a href="src/login.php">login</a>
+  <a href="src/login.php">login</a><br>
+  <a href="src/home.php">home</a><br>
 </body>
 </html>

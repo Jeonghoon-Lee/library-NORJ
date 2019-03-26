@@ -18,8 +18,9 @@
     <div class="container">
         <h2>{{ heading }}</h2><br>
         <h6>Found {{ books|length }} books</h6><br>
+        {% for book in books %}
         <div class="row">
-                {% for book in books %}
+                
             <div class="col-md-2">
                 <img src="{{ book.BookImage }}" class="img-fluid" alt="Responsive image">
             </div>
@@ -63,8 +64,9 @@
                     </tbody>
                 </table>
             </div>
-        {% endfor %}
+        
         </div>
+        {% endfor %}
         <hr>
 
 
