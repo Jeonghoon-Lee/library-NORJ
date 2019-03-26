@@ -17,37 +17,36 @@
 
     <div class="container">
         <h2>{{ heading }}</h2><br>
-        <h6>Found  books</h6><br>
+        <h6>Found {{ books|length }} books</h6><br>
         <div class="row">
+                {% for book in books %}
             <div class="col-md-2">
-                <img src="..." class="img-fluid" alt="Responsive image">
+                <img src="{{ book.BookImage }}" class="img-fluid" alt="Responsive image">
             </div>
             <div class="col-md-6">
                 <table class="table table-sm">
                     <tbody>
                         <tr>
                             <th scope="row">Title: </th>
-                            <td>{{ books[0].Title }}</td>
+                            <td>{{ book.Title }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Author: </th>
-                            <td>{{ books[0].Author }}</td>
+                            <td>{{ book.Author }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Publication: </th>
-                            <td>{{ books[0].Publisher }}</td>
+                            <td>{{ book.Publisher }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Description: </th>
-                            <td>{{ books[0].Description }}</td>
+                            <td>{{ book.Description }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Status: </th>
-                            <td>{{ books[0].BookStatus }} </td>
+                            <td>{{ book.BookStatus }} </td>
                         </tr>
-
                         <tr>
-
                             <td colspan="2">
                                 <div class="row justify-content-center">
                                     <ul class="search-results">
@@ -59,15 +58,12 @@
                                                     class="fa fa-print fa-2x"></i></a></li>
                                     </ul>
                                 </div>
-
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                
-                
             </div>
-
+        {% endfor %}
         </div>
         <hr>
 
