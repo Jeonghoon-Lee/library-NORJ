@@ -15,5 +15,7 @@
 
   function get_language_list() {
     $languages = DB::query('SELECT * FROM Languages');
-  }  
+  }
+
+
 ?>
