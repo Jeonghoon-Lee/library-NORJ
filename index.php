@@ -11,7 +11,7 @@
   <a href="src/manage_book.php">register a book</a><br/>
   <a href="templates/advance_search.html">Advanced Search</a><br/>
   <a href="templates/booksDetails.html">book details</a><br/>
-  <a href="templates/main.html">main</a><br/>
+  <a href="templates/main.html.twig">main</a><br/>
   <a href="src/search_result.php">search result</a><br>
   <a href="src/login.php">login</a>
 </body>
