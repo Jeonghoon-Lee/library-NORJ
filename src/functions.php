@@ -20,5 +20,20 @@
     $languages = DB::query('SELECT * FROM Languages');
   }
 
+  $db; 
+  
+  //global database object
+
+function database_connect(){
+    global $db;
+                        //server, user, password, database(optional)
+    $db = new mysqli('localhost', 'ipd', 'ipdipd','ipd16');
+
+    //check for connection errors
+    if ( $db->connect_errno > 0){
+        echo 'Connection failed' . $db->connect_error;
+        die();
+    }
+}
 
 ?>
