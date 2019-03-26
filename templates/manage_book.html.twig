@@ -1,81 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Register Book</title>
-  <link rel="stylesheet" href="../public/css/main.css">
-</head>
+{% extends "base.html" %}
 
-<body>
-  <div>
-    <h2>{{ subtitle }}</h2>
-    <form action="../src/manage_book.php" method="post">
-      <label for="title">Title</label>
-      <input type="text" name="title" id="title" value="{{ book.Title }}"><br>
-      <label for="publisher">Publisher</label>
-      <input type="text" name="publisher" id="publisher" value="{{ book.Publisher }}"><br>
-      <label for="author">Author</label>
-      <input type="text" name="author" id="author" value="{{ book.Author }}"><br>
-      <label for="year">Year</label>
-      <input type="number" name="year" id="year" value="{{ book.Year }}"><br>
-      <label for="language">Language</label>
-      <select name="language" id="language">
-        {% for lang in languages %}
-          <option value="{{ lang.LangID }}" {% if book.LangID == lang.LangID %}selected{% endif %}>
-            {{ lang.LangDescrip }}
-          </option>
-        {% endfor %}
-      </select><br>
-      <label for="category">Category</label>
-      <select name="category" id="category">
-        {% for category in categories %}
-          <option value="{{ category.CategoryID }}" {% if book.CategoryID == category.CategoryID %}selected{% endif %}>
-            {{ category.CategoryDescrip }}
-          </option>
-        {% endfor %}
-      </select><br>
+{% block page_title %}{{ subtitle }}{% endblock %}
 
-      <input type="radio" name="rating" value="0" {% if book.AgeRating == 0 %}checked{% endif %}>All Age
-      <input type="radio" name="rating" value="1" {% if book.AgeRating == 1 %}checked{% endif %}>Adult Only<br>
+{% block content %}
+  <h2>{{ subtitle }}</h2>
+  <form action="../src/manage_book.php" method="post">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" value="{{ book.Title }}"><br>
+    <label for="publisher">Publisher</label>
+    <input type="text" name="publisher" id="publisher" value="{{ book.Publisher }}"><br>
+    <label for="author">Author</label>
+    <input type="text" name="author" id="author" value="{{ book.Author }}"><br>
+    <label for="year">Year</label>
+    <input type="number" name="year" id="year" value="{{ book.Year }}"><br>
+    <label for="language">Language</label>
+    <select name="language" id="language">
+      {% for lang in languages %}
+        <option value="{{ lang.LangID }}" {% if book.LangID == lang.LangID %}selected{% endif %}>
+          {{ lang.LangDescrip }}
+        </option>
+      {% endfor %}
+    </select><br>
+    <label for="category">Category</label>
+    <select name="category" id="category">
+      {% for category in categories %}
+        <option value="{{ category.CategoryID }}" {% if book.CategoryID == category.CategoryID %}selected{% endif %}>
+          {{ category.CategoryDescrip }}
+        </option>
+      {% endfor %}
+    </select><br>
 
-      <label for="status">Book Status</label>
-      <select name="status" id="status">
-        {% set bookStatus = ["available", "reserved", "loaned"] %}
-        {% for status in bookStatus %}
-          <option value="{{ status }}" {% if book.BookStatus == status %}selected{% endif %}>
-            {{ status }}
-          </option>
-        {% endfor %}
-      </select><br>  
+    <input type="radio" name="rating" value="0" {% if book.AgeRating == 0 %}checked{% endif %}>All Age
+    <input type="radio" name="rating" value="1" {% if book.AgeRating == 1 %}checked{% endif %}>Adult Only<br>
 
-      <label for="descrip">Discription</label>
-      <textarea name="descrip" id="descipt" cols="60" rows="10">
-        {{ book.Description }}
-      </textarea><br>
+    <label for="status">Book Status</label>
+    <select name="status" id="status">
+      {% set bookStatus = ["available", "reserved", "loaned"] %}
+      {% for status in bookStatus %}
+        <option value="{{ status }}" {% if book.BookStatus == status %}selected{% endif %}>
+          {{ status }}
+        </option>
+      {% endfor %}
+    </select><br>  
 
-      <label for="book-img">Book Photo:</label>
-      <input type="file" id="book-img" name="image" value=""><br>
-      <!-- book image display area -->
-      <div class="book-image">
-        {% if book.ISBN != null %}
-          {% if book.BookImage != null %}
-            <img src="{{ book.BookImage }}" alt="Cover image of the {{ book.Title }}"></div>
-          {% else %}
-            <img src="../public/img/no_image_book.png" alt="Cover image of the {{ book.Title }}"></div>     
-          {% endif %}
+    <label for="descrip">Discription</label>
+    <textarea name="descrip" id="descipt" cols="60" rows="10">
+      {{ book.Description }}
+    </textarea><br>
+
+    <label for="book-img">Book Photo:</label>
+    <input type="file" id="book-img" name="image" value=""><br>
+    <!-- book image display area -->
+    <div class="book-image">
+      {% if book.ISBN != null %}
+        {% if book.BookImage != null %}
+          <img src="{{ book.BookImage }}" alt="Cover image of the {{ book.Title }}"></div>
+        {% else %}
+          <img src="../public/img/no_image_book.png" alt="Cover image of the {{ book.Title }}"></div>     
         {% endif %}
-      </div>
+      {% endif %}
+    </div>
 
-      <input type="hidden" name="isbn" value="{{ book.ISBN }}">
-      <input type="hidden" name="new_filename" value="{{ book.BookImage }}">
+    <input type="hidden" name="isbn" value="{{ book.ISBN }}">
+    <input type="hidden" name="new_filename" value="{{ book.BookImage }}">
 
-      <button type="submit">Register book</button>
-      <button type="reset">Reset</button>
-    </form>
-  </div>
+    <button type="submit">Register book</button>
+    <button type="reset">Reset</button>
+  </form>
+{% endblock content %}
+
+{% block javascripts %}
   <script src="../public/js/upload_file.js"></script>
   <script src="../public/js/manage_book.js"></script>
-</body>
-</html>
+{% endblock %}
+

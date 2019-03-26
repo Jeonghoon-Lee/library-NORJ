@@ -1,7 +1,7 @@
 composer.phar
 /vendor/
 
-# image file 
-/public/img/
+# test folder for image file 
+/public/img/tmp/
 
 **/*.log
