@@ -43,10 +43,8 @@
       {% endfor %}
     </select><br>  
 
-    <label for="Desciption">Discription</label>
-    <textarea name="Desciption" id="descipt" cols="60" rows="10">
-      {{ book.Description }}
-    </textarea><br>
+    <label for="Description">Description</label>
+    <textarea name="Description" id="descipt" cols="60" rows="10">{{ book.Description }}</textarea><br>
 
     <label for="book-img">Book Photo:</label>
     <input type="file" id="book-img" name="image" value=""><br>
@@ -54,9 +52,9 @@
     <div class="book-image">
       {% if book.ISBN != null %}
         {% if book.BookImage != null %}
-          <img src="{{ book.BookImage }}" alt="Cover image of the {{ book.Title }}"></div>
+          <img src="public/img/{{ book.BookImage }}" alt="Cover image of the {{ book.Title }}"></div>
         {% else %}
-          <img src="../public/img/no_image_book.png" alt="Cover image of the {{ book.Title }}"></div>     
+          <img src="public/img/no_image_book.png" alt="Cover image of the {{ book.Title }}"></div>     
         {% endif %}
       {% endif %}
     </div>
@@ -70,7 +68,7 @@
 {% endblock content %}
 
 {% block javascripts %}
-  <script src="../public/js/upload_file.js"></script>
-  <script src="../public/js/manage_book.js"></script>
+  <script src="public/js/upload_file.js"></script>
+  <script src="public/js/manage_book.js"></script>
 {% endblock %}
 
