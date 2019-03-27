@@ -4,25 +4,25 @@
 
 {% block content %}
   <h2>{{ subtitle }}</h2>
-  <form action="../src/manage_book.php" method="post">
-    <label for="title">Title</label>
-    <input type="text" name="title" id="title" value="{{ book.Title }}"><br>
-    <label for="publisher">Publisher</label>
-    <input type="text" name="publisher" id="publisher" value="{{ book.Publisher }}"><br>
-    <label for="author">Author</label>
-    <input type="text" name="author" id="author" value="{{ book.Author }}"><br>
-    <label for="year">Year</label>
-    <input type="number" name="year" id="year" value="{{ book.Year }}"><br>
-    <label for="language">Language</label>
-    <select name="language" id="language">
+  <form action="{{ url }}" method="post">
+    <label for="Title">Title</label>
+    <input type="text" name="Title" id="title" value="{{ book.Title }}"><br>
+    <label for="Publisher">Publisher</label>
+    <input type="text" name="Publisher" id="publisher" value="{{ book.Publisher }}"><br>
+    <label for="Author">Author</label>
+    <input type="text" name="Author" id="author" value="{{ book.Author }}"><br>
+    <label for="Year">Year</label>
+    <input type="number" name="Year" id="year" value="{{ book.Year }}"><br>
+    <label for="LangID">Language</label>
+    <select name="LangID" id="language">
       {% for lang in languages %}
         <option value="{{ lang.LangID }}" {% if book.LangID == lang.LangID %}selected{% endif %}>
           {{ lang.LangDescrip }}
         </option>
       {% endfor %}
     </select><br>
-    <label for="category">Category</label>
-    <select name="category" id="category">
+    <label for="CategoryID">Category</label>
+    <select name="CategoryID" id="category">
       {% for category in categories %}
         <option value="{{ category.CategoryID }}" {% if book.CategoryID == category.CategoryID %}selected{% endif %}>
           {{ category.CategoryDescrip }}
@@ -30,11 +30,11 @@
       {% endfor %}
     </select><br>
 
-    <input type="radio" name="rating" value="0" {% if book.AgeRating == 0 %}checked{% endif %}>All Age
-    <input type="radio" name="rating" value="1" {% if book.AgeRating == 1 %}checked{% endif %}>Adult Only<br>
+    <input type="radio" name="AgeRating" value="0" {% if book.AgeRating == 0 %}checked{% endif %}>All Age
+    <input type="radio" name="AgeRating" value="1" {% if book.AgeRating == 1 %}checked{% endif %}>Adult Only<br>
 
-    <label for="status">Book Status</label>
-    <select name="status" id="status">
+    <label for="BookStatus">Book Status</label>
+    <select name="BookStatus" id="status">
       {% set bookStatus = ["available", "reserved", "loaned"] %}
       {% for status in bookStatus %}
         <option value="{{ status }}" {% if book.BookStatus == status %}selected{% endif %}>
@@ -43,8 +43,8 @@
       {% endfor %}
     </select><br>  
 
-    <label for="descrip">Discription</label>
-    <textarea name="descrip" id="descipt" cols="60" rows="10">
+    <label for="Desciption">Discription</label>
+    <textarea name="Desciption" id="descipt" cols="60" rows="10">
       {{ book.Description }}
     </textarea><br>
 
@@ -61,8 +61,8 @@
       {% endif %}
     </div>
 
-    <input type="hidden" name="isbn" value="{{ book.ISBN }}">
-    <input type="hidden" name="new_filename" value="{{ book.BookImage }}">
+    <input type="hidden" name="ISBN" value="{{ book.ISBN }}">
+    <input type="hidden" name="BookImage" value="{{ book.BookImage }}">
 
     <button type="submit">Register book</button>
     <button type="reset">Reset</button>

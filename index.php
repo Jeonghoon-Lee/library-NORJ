@@ -31,11 +31,11 @@
   // $f3->route('GET @member_create: /members/create', 'Users->create');
   $f3->route('GET /', 'HomePage->index');
 
-  $f3->route('GET /book/register', 'Books->createBook');
-  $f3->route('POST /book/register', 'Books->registerBook');
+  $f3->route('GET /book/create', 'Books->createBookForm');
+  $f3->route('POST /book/create', 'Books->createBookInfo');
 
-  $f3->route('GET /book/update/@ISBN', 'Books->getBook');
-  $f3->route('POST /book/update/@ISBN', 'Books->updateBook');
+  $f3->route('GET /book/update/@ISBN', 'Books->updateBookForm');
+  $f3->route('POST /book/update/@ISBN', 'Books->updateBookInfo');
 
 
   // execute f3

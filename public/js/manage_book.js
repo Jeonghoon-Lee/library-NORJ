@@ -21,7 +21,7 @@ inputFileBtn.addEventListener('change', () => {
             document.querySelector('.book-image img').src = data;
           }
           // set filename value
-          document.querySelector('[name="new_filename"]').value = data;
+          document.querySelector('[name="BookImage"]').value = data;
         }
       });
     } else {

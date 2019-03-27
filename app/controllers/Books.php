@@ -1,14 +1,40 @@
 <?php
 // books.php
   class Books extends Controller {
-    function createBook($f3) {
-      $render_option = array(
-        'subtitle' => 'Update a Book'
-      );      
-      echo $f3->get('twig')->render('manage_book.html', $render_option);
+
+    function validateBookInfo() {
+      //
+      // need to implement validation
+      //
+      return true;
     }
 
-    function getBook($f3) {
+    function createBookForm($f3) {
+      $languages = new LangModel($this->db);
+      $categories = new CategoryModel($this->db);
+
+      $render_option = array(
+        'url' => $f3->get('BASE').'/book/create',
+        'subtitle' => 'Update a Book',
+        'languages' => $languages->fetch_all(),
+        'categories' => $categories->fetch_all()
+      );      
+      echo $f3->get('twig')->render('form_book_create.html', $render_option);
+    }
+
+    function createBookInfo($f3) {
+      echo print_r($_POST);
+
+      $books = new BookModel($this->db);
+      if (validateBookInfo()) {
+        $books->copyfrom('POST');
+        $books->save();
+      } else {
+        echo 'error message';
+      }
+    }
+
+    function updateBookForm($f3) {
       // testing
       // echo $f3->get('PARAMS.ISBN');
       $books = new BookModel($this->db);
@@ -18,13 +44,30 @@
       $search_option = array('ISBN = ?', $f3->get('PARAMS.ISBN'));
       $book = $books->find_book($search_option);
 
-      $render_option = array(
-        'subtitle' => 'Update a Book',
-        'book' => $book, 
-        'languages' => $languages->fetch_all(),
-        'categories' => $categories->fetch_all()
-      );
-      echo $f3->get('twig')->render('manage_book.html', $render_option);
+      if (count($book) == 1) {
+        $render_option = array(
+          'url' => $f3->get('BASE').'/book/update/'.$f3->get('PARAMS.ISBN'),
+          'subtitle' => 'Update a Book',
+          'book' => $book, 
+          'languages' => $languages->fetch_all(),
+          'categories' => $categories->fetch_all()
+        );
+        echo $f3->get('twig')->render('form_book_create.html', $render_option);
+      } else {
+        echo 'No book found';
+      }
+    }
+
+    function updateBookInfo($f3) {
+      echo print_r($_POST);
+
+      $books = new BookModel($this->db);
+      if (validateBookInfo()) {
+        $books->copyfrom('POST');
+        $books->save();
+      } else {
+        echo 'error message';
+      }
     }
     
     function getBookList($f3) {
