@@ -18,24 +18,19 @@
 
   $f3->set('twig', $twig);
   
-  // routes
-  // $f3->route('GET /', function() {
-  //   echo 'Hello, world!';
-  // });
-  
-  // $f3->route('GET /', 'Pages->homepage');
-  // $f3->route('GET /about', 'Pages->about');
-  // $f3->route('GET /temp', 'Pages->temp');
-
-  // $f3->route('GET @member_list: /members', 'Users->listing');
-  // $f3->route('GET @member_create: /members/create', 'Users->create');
   $f3->route('GET /', 'HomePage->index');
 
-  $f3->route('GET /book/create', 'Books->createBookForm');
-  $f3->route('POST /book/create', 'Books->createBookInfo');
-
-  $f3->route('GET /book/update/@ISBN', 'Books->updateBookForm');
-  $f3->route('POST /book/update/@ISBN', 'Books->updateBookInfo');
+  /**
+   * Book handling
+   */
+  // create book
+  $f3->route('GET /book/create', 'Books->create_form');
+  $f3->route('POST /book/create', 'Books->add_new_book');
+  // update book
+  $f3->route('GET /book/update/@ISBN', 'Books->update_form');
+  $f3->route('POST /book/update/@ISBN', 'Books->update_book');
+  // delete book
+  $f3->route('GET /book/delete/@ISBN', 'Books->delete_book');
 
 
   // execute f3
