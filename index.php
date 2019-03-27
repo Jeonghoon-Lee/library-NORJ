@@ -15,5 +15,6 @@
   <a href="src/search_result.php">search result</a><br>
   <a href="src/login.php">login</a><br>
   <a href="src/home.php">home</a><br>
+  <a href="src/create_user.php">Create User</a><br>
 </body>
 </html>

@@ -8,16 +8,17 @@ body {
 }
 
 /*search*/
-.input-group {
-  width: 30%;
-  float: right;
+#search-container {
+	overflow: hidden;
 }
 
-#search {
-  padding-top: 20px;
-  float: right;
+.search {
+	float: right; 
+	margin-top: 1em; 
+	margin-bottom: 1em;
  
 }
+
 .has-search .form-control {
   padding-left: 2.375rem;
 }
@@ -95,13 +96,17 @@ ul.centerUL {
 }
 
 /*Sign In*/
-.container .framed {
+.framed {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-}
+	border: 1px solid black;
+	width: 60%;
+	margin: auto;
+	margin-top: 20%;
+	padding: 2em;
+	}
 
 
 /*Footer*/

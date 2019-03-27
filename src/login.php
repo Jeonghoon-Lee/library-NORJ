@@ -1,25 +1,10 @@
 <?php
-// to move to external file
-
-require('../vendor/autoload.php');
+include('.\config.php');
+include('.\functions.php');
 
 // start session to use session variables
 session_start();
 
-//meekro db configuration
-DB::$user = 'ipd';
-DB::$password = "ipdipd";
-DB::$dbName = 'librarynorj'; 
-
-// twig configuration
-$loader = new \Twig\Loader\FilesystemLoader('../templates');
-$twig = new \Twig\Environment($loader);
-
-  
-include ('config.php');
-include ('functions.php');
-  
-	
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
@@ -27,7 +12,7 @@ $log = new Logger("login");
 $log->pushHandler( new StreamHandler("website.log", Logger::DEBUG) );
 
 	if ( $_SERVER['REQUEST_METHOD'] == "POST" ){
-		pr($_POST);
+		
 		// form submitted
 		$log->info("Login Attemp");
 
@@ -40,7 +25,7 @@ $log->pushHandler( new StreamHandler("website.log", Logger::DEBUG) );
 			
 			//check in database for valid user
 		
-			$results = DB::queryFirstRow("SELECT UserId, FirstName, LastName, type, password 
+			$results = DB::queryFirstRow("SELECT UserId, FirstName, LastName, UserType, password 
 															FROM users 
 															WHERE username = %s 
 															LIMIT 1", $_POST['user_name']);
@@ -53,7 +38,7 @@ $log->pushHandler( new StreamHandler("website.log", Logger::DEBUG) );
 			
 				// encrypt pw to match databases
 				if ( $results['password'] != md5($_POST['password']) ){ //check if passwords match
-					$error = "Passwords do not match";
+					$error = "Wrong password. Please try again.";
 				}else{
 					
 					//update our last_login if user found
@@ -66,21 +51,19 @@ $log->pushHandler( new StreamHandler("website.log", Logger::DEBUG) );
 					
 					//save session
 					$_SESSION['UserId'] = $results['UserId'];
-					$_SESSION['UserName'] = $results['UserName'];
+					$_SESSION['FirstName'] = $results['FirstName'];
+					$_SESSION['LastName'] = $results['LastName'];
 					$_SESSION['UserType'] = $results['UserType'];
 					 
 					$log->info("user #". $results['UserId'] . " had logged in");
-					//redirect user on successful login
-          
-          
-          //header("Location: books.php");
+					
+          //header("Location: account.php");
 					
 				}
 			}
     }
   }
 
- 
   echo $twig->render("login.html", 
   		array(	"form_action"	=>	$_SERVER['PHP_SELF'], "error" => $error	)
     );

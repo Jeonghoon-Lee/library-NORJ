@@ -36,4 +36,13 @@ function database_connect(){
     }
 }
 
+// to check if user is logged in
+function checked_in(){
+  if (isset($_SESSION['UserId']) && $_SESSION['UserId'] != ''){
+      return true;
+      }else{
+          return false;
+      }
+}
+
 ?>
