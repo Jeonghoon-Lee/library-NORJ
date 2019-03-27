@@ -17,8 +17,17 @@
 
     <div class="container">
         <h2>{{ heading }}</h2><br>
-        <h6>Found {{ books|length }} books</h6><br>
-        {% for book in books %}
+
+
+        <form action='search_result.php' method='get'>
+                <input type='text' name='queryTitle' placeholder='title'/>
+                <input type='text' name='queryAuthor'  placeholder='Author'/>
+                <input type='submit' name='submit' />
+        </form> 
+
+
+        <h6>Found {{ results|length }} books</h6><br>
+        {% for result in results %}
         <div class="row">
                 
             <div class="col-md-2">
@@ -29,23 +38,23 @@
                     <tbody>
                         <tr>
                             <th scope="row">Title: </th>
-                            <td>{{ book.Title }}</td>
+                            <td>{{ result.Title }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Author: </th>
-                            <td>{{ book.Author }}</td>
+                            <td>{{ result.Author }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Publication: </th>
-                            <td>{{ book.Publisher }}</td>
+                            <td>{{ result.Publisher }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Description: </th>
-                            <td>{{ book.Description }}</td>
+                            <td>{{ result.Description }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Status: </th>
-                            <td>{{ book.BookStatus }} </td>
+                            <td>{{ result.BookStatus }} </td>
                         </tr>
                         <tr>
                             <td colspan="2">

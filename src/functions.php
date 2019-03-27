@@ -27,7 +27,7 @@
 function database_connect(){
     global $db;
                         //server, user, password, database(optional)
-    $db = new mysqli('localhost', 'ipd', 'ipdipd','ipd16');
+    $db = new mysqli('localhost', 'ipd', 'ipdipd','librarynorj');
 
     //check for connection errors
     if ( $db->connect_errno > 0){

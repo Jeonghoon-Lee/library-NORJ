@@ -15,9 +15,9 @@
     <div class="container">
         <h2>Advanced search</h2><br>
 
-        <form>
+        <form action='search_result.php' method="GET">
             <!--1 row in the form-->
-            <div class="form-row" method="GET">
+            <div class="form-row">
                 <div class="form-group col-md-1">
                 </div>
                 <div class="form-group col-md-2">
@@ -36,7 +36,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-5">
-                    <input type="text" class="form-control" id="inputText">
+                    <input type="text" class="form-control" name='query' id="inputText">
                 </div>
             </div>
             <!--2 row in the form-->
