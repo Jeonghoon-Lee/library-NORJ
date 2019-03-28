@@ -1,7 +1,7 @@
 function show_user_loans() {
   
   const xhrObj = new XMLHttpRequest();
-        xhrObj.open("POST", "http://localhost/PHP_class/project/library-NORJ/src/get_user_loans.php");
+        xhrObj.open("POST", "http://localhost:81/project/library-NORJ/src/get_user_loans.php");
         xhrObj.send();
         //handle errors
         xhrObj.onerror = function () {
@@ -10,10 +10,10 @@ function show_user_loans() {
         xhrObj.onload = function (e) {
             //parse received JSON to JS object to retrieve data
             responseObj = JSON.parse(xhrObj.response);
-            alert(responseObj[0].ISBN);
+            console.log(responseObj[0].ISBN);
         }
       }
-      
+        
       // TODO - create table
       /*var container = getElementByID("user_info");
             var table = document.createElement('table');
