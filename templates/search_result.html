@@ -20,9 +20,8 @@
 
 
         <form action='search_result.php' method='get'>
-                <input type='text' name='queryTitle' placeholder='title'/>
-                <input type='text' name='queryAuthor'  placeholder='Author'/>
-                <input type='submit' name='submit' />
+                <input type='text' name='valueToSearch' placeholder='title'/>
+                <input type='submit' name='Submit'  value='filter'/>
         </form> 
 
 
@@ -31,7 +30,7 @@
         <div class="row">
                 
             <div class="col-md-2">
-                <img src="{{ book.BookImage }}" class="img-fluid" alt="Responsive image">
+                <img src="{{ result.BookImage }}" class="img-fluid" alt="Responsive image">
             </div>
             <div class="col-md-6">
                 <table class="table table-sm">

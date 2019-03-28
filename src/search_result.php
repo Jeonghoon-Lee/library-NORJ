@@ -4,23 +4,36 @@ include ('.\functions.php');
 
 //$books = DB::query("SELECT * FROM books");
 $heading = 'Search results';
-//$title_results = "";
-//$author_results = "";
-$row_results = "";
 
-database_connect();
+//$row_results = "";
+
+//database_connect();
 // process registering book into database
-$queryTitle = (isset($_GET['queryTitle']) ? $_GET['queryTitle'] : '');
-$queryAuthor = (isset($_GET['queryAuthor']) ? $_GET['queryAuthor'] : '');
+//$query = (isset($_GET['search']) ? $_GET['search'] : '');
+if (isset($_GET['Submit'])){
 
-// gets value sent over search form
+$valueToSearch = $_GET['valueToSearch'];
+$query = DB::query("SELECT * FROM books WHERE (`Title` LIKE '%" . $valueToSearch . "%')");
+
+pr($query) ;
+
+}
+else{
+    $error='No mach result';
+}
+
+
+
+
+
+/*// gets value sent over search form
 
 $min_length = 3;  // you can set minimum length of the query if you want
 
 if (strlen($queryTitle) >= $min_length || strlen($queryAuthor) >= $min_length) { // if query length is more or equal minimum length then
 
     $queryTitle = htmlspecialchars($queryTitle);
-    $queryAuthor = htmlspecialchars($queryAuthor); // changes characters used in html to their equivalents, for example: < to &gt;
+    //$queryAuthor = htmlspecialchars($queryAuthor); // changes characters used in html to their equivalents, for example: < to &gt;
     
     $queryTitle = $db->real_escape_string($queryTitle);
     $queryAuthor = $db->real_escape_string($queryAuthor); // makes sure nobody uses SQL injection
@@ -28,7 +41,7 @@ if (strlen($queryTitle) >= $min_length || strlen($queryAuthor) >= $min_length) {
     //echo $query;
 
     $row_results = DB::query("SELECT * FROM books
-            WHERE (`Title` LIKE '%" . $queryTitle . "%') OR (`Author` LIKE '%" . $queryAuthor . "%')") or die(mysql_error());
+           WHERE CONCAT('id','Title', 'author', 'Category') LIKE '%" .$valueToSearch. "%'") or die(mysql_error());
             
     //$author_results = DB::query("SELECT * FROM books
     //WHERE (`Author` LIKE '%" . $queryAuthor . "%')") or die(mysql_error());
@@ -43,7 +56,7 @@ if (strlen($queryTitle) >= $min_length || strlen($queryAuthor) >= $min_length) {
 
 
  
-pr($raw_results);
+//pr($raw_results);
 
     
 
@@ -54,16 +67,15 @@ pr($raw_results);
         
     /*if (empty($title_results) && empty($author_results)) { // if there is no matching rows do following
         header('location: advance_search.php');
-    }*/
+    }
     } else { // if query length is less than minimum
         echo "Minimum length is " . $min_length;
-    }
+    }*/
 
 
 
     //was here
     //show the template file
-echo $twig->render('search_result.html', array('results'=>$row_results, 'heading'=> $heading));
-
+echo $twig->render('search_result.html', array('results'=>$query, 'heading'=> $heading));
 
 ?>
