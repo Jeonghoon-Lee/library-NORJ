@@ -6,7 +6,7 @@
 
   <meta charset="UTF-8">
   <meta name="description" content="This website is about ...">
-  <meta name="keywords" content="Library, books">
+  <meta name="keywords" content="{% block page_keywords %}Libary, Books{% endblock %}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <base href="http://localhost:81/project/">
@@ -34,7 +34,7 @@
       <!-- Navigation menu -->
       <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">Logo</a>
+        <a class="navbar-brand" href="">Library-NORJ</a>
 
         <!-- Toggler/collapsibe Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -45,16 +45,16 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="book/create">Create Book</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="member/create">Create Account</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="member/login">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="search">Search</a>
             </li>
           </ul>
         </div>
