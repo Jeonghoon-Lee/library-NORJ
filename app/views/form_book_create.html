@@ -12,7 +12,13 @@
     <label for="Author">Author</label>
     <input type="text" name="Author" id="author" value="{{ book.Author }}"><br>
     <label for="Year">Year</label>
-    <input type="number" name="Year" id="year" value="{{ book.Year }}"><br>
+    <select name="Year" id="year">
+      {% for year in now|date('Y')..1980 %}
+        <option value="{{ year }}" {% if book.Year == year %}selected{% endif %}>
+          {{ year }}
+        </option>
+      {% endfor %}
+    </select><br>
     <label for="LangID">Language</label>
     <select name="LangID" id="language">
       {% for lang in languages %}
@@ -62,7 +68,7 @@
     <input type="hidden" name="ISBN" value="{{ book.ISBN }}">
     <input type="hidden" name="BookImage" value="{{ book.BookImage }}">
 
-    <button type="submit">Register book</button>
+    <button type="submit">{{ subtitle }}</button>
     <button type="reset">Reset</button>
   </form>
 {% endblock content %}
