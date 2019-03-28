@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_title %}My Account{% endblock %}
+
+
+{% block content %}
+<h1>Hello {{session.FirstName}}</h1>
+{% if error!= ''%}
+  <div class="alert alert-danger" role="alert">{{error}}</div>
+{% endif %}
+<div class="py-2">
+  <div class="container">
+    <div class="row">
+      <div id="user_profile" style="border: 1px solid black" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <img src="#" alt="user photo"><br /><br />
+        <h2>{{session.FirstName}} {{session.LastName}}</h2>
+        
+        <p><a href="" onclick="show_user_loans()">Loans (0)</a></p>
+        <p><a href="#">Reservations (0)</a></p>
+        <p><a href="#">Charges (0)</a></p>
+      </div>
+      <div id="user_info" style="border: 1px solid red" class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+      </div>
+    </div>
+  </div>
+</div> 
+<script src = "../public/js/jquery.js"> </script>
+<script type="text/javascript"  src="../public/js/show_user_loans.js" > </script>
+{% endblock %}

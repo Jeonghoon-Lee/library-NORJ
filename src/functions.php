@@ -45,4 +45,13 @@ function checked_in(){
       }
 }
 
+function user_loans($u_id) {
+  $u_loans = DB::query("SELECT * FROM loans WHERE UserId=%i", $u_id);
+  return $u_loans;   
+}
+
+/*function user_reservations($u_id) {
+  $reservations = DB::query("SELECT * FROM reservations WHERE UserId=%i", $u_id);
+}*/
+
 ?>

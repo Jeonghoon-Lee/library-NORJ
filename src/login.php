@@ -57,7 +57,7 @@ $log->pushHandler( new StreamHandler("website.log", Logger::DEBUG) );
 					 
 					$log->info("user #". $results['UserId'] . " had logged in");
 					
-          //header("Location: account.php");
+          header("Location: manage_account.php");
 					
 				}
 			}
