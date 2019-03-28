@@ -7,17 +7,11 @@
     // fetch all the result from our table
     function fetch_all() {
       $this->load();
-
-      // return $this->query->cast();
-      $this->query;
+      return $this->query;
     }
 
     function find_book($search_option) {
       $this->load($search_option);
-
-      // if (sizeof($this->query) == 1) 
-      //   return $this->query[0]->cast();
-
       return $this->query;  // empty array
     }
 

@@ -18,7 +18,8 @@
   $twig = new \Twig\Environment($loader);
 
   $f3->set('twig', $twig);
-  
+
+  // Home page
   $f3->route('GET /', 'HomePage->index');
 
   /**
@@ -34,10 +35,13 @@
   $f3->route('GET /book/delete/@ISBN', 'Books->delete_book');
 
 
+  // util page
+  $f3->route('GET|POST|PUT /book/upload_image', 'UploadImage->book_image');
+
+
   // execute f3
   $f3->run();
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">

@@ -10,7 +10,7 @@ const upLoadFile = (file, callback) => {
   const formData = new FormData();
   formData.append('image', file);
 
-  fetch('upload_image.php', {
+  fetch('book/upload_image', {
     method: 'POST',
     body: formData
   })
@@ -18,10 +18,7 @@ const upLoadFile = (file, callback) => {
     if (response.status == 200) {
       return response.json();
     } else {
-      if (response.status == 400)
-        throw new Error(response.json().message);
-      else 
-        throw new Error(response.statusText);
+      throw new Error('File upload failed!');
     }
   })
   .then((data) => {

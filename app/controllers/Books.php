@@ -26,7 +26,7 @@
     function create_form($f3) {
       $render_option = array(
         'url' => 'book/create',
-        'subtitle' => 'Update a Book',
+        'subtitle' => 'Create Book',
         'languages' => $this->languages->fetch_all(),
         'categories' => $this->categories->fetch_all()
       );      
@@ -52,7 +52,7 @@
       if (count($book) == 1) {
         $render_option = array(
           'url' => 'book/update/'.$f3->get('PARAMS.ISBN'),
-          'subtitle' => 'Update a Book',
+          'subtitle' => 'Update Book',
           'book' => $book[0], 
           'languages' => $this->languages->fetch_all(),
           'categories' => $this->categories->fetch_all()
