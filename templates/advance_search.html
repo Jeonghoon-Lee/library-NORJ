@@ -40,7 +40,7 @@
                 </div>
             </div>
             <!--2 row in the form-->
-            <div class="form-row">
+            <div class="form-row searchRow">
                 <div class="form-group col-md-1">
                     <select id="inputKeyWord2" class="form-control">
                         <option selected>AND</option>
@@ -67,7 +67,7 @@
                     <input type="text" class="form-control" id="inputText2">
                 </div>
                 <div class="form-group col-md-2">
-                    <button type="button" class="btn btn-info">Add Another</button>
+                    <button type="button" class="btn btn-info" onclick="addFunction()">Add Another</button>
                 </div>
 
                 <div class="form-group col-md-2">
@@ -205,6 +205,13 @@
 
 
     <!--Bootstrap source-->
+    <script>
+    function addFunction() {
+  var elmnt = document.getElementsByClassName("form-row searchRow")[0];
+  var cln = elmnt.cloneNode(true);
+  document.body.appendChild(cln);
+}
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
