@@ -97,7 +97,7 @@ create table Reservations
 	ISBN int not null,				-- foreign Key (ISBN in Books table)
 	UserID int not null,			-- foreign key (UserID in Users table)
 	ReservDate datetime not null,
-	ProcessedDate datetime not null,
+	ProcessedDate datetime null,
 	ReservStatus varchar(10) not null,		-- (reserved, canceled, processed)
 
 	constraint pk_Reservations primary key clustered (ReservID asc)   
