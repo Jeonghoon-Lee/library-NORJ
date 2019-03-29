@@ -9,7 +9,7 @@
   <meta name="keywords" content="{% block page_keywords %}Libary, Books{% endblock %}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <base href="http://localhost:81/project/">
+  <base href="http://localhost:81/library_NORJ/">
 
   <!-- Font awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -61,8 +61,10 @@
       </nav>
     </div>
   </div>
-  {% block search %}
-    <div class='container'>
+
+  {# search bar #}
+  <div class='container'>
+    {% block search %}
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search">
         <div class="input-group-append">
@@ -71,8 +73,8 @@
           </button>
         </div>
       </div>
-    </div>
-  {% endblock %}
+    {% endblock %}
+  </div>
 
   <!-- Main Content -->
   <div class='container'>

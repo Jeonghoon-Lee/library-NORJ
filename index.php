@@ -64,7 +64,7 @@
   $f3->route('GET|POST /search/result', 'Search->search_result');
 
   // get book detail
-  $f3->route('GET /search/detail/@ISBN', 'Search->get_book_detail');
+  $f3->route('GET /search/detail/@ISBN', 'Search->get_detail');
 
 
   // util page
