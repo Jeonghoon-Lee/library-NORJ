@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block page_title %}Book Detail{% endblock %}
+
+{% block content %}
+	<div>
+		<h2>Search Result</h2>
+	</div>
+	<h6>Found {{ books|length }} books</h6><br>
+	<div class="row">
+		<div class="col-md-10">
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+					<th scope="col">#</th>
+					<th scope="col">Title</th>
+					<th scope="col">Author</th>
+					<th scope="col">Category</th>
+					<th scope="col">Language</th>
+					<th scope="col">Status</th>
+					<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for book in books %}
+					<tr>
+						<th scope="row">{{loop.index}}</th>
+						<td>{{book.Title}}</td>
+						<td>{{book.Author}}</td>
+						<td>{{book.CategoryID}}</td>
+						<td>{{book.LangID}}</td>
+						<td>{{book.BookStatus}}</td>
+						<td><a href="search/detail/{{book.ISBN}}">Detail</a></td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>		
+	</div>
+{% endblock %}
