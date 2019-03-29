@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 6b183cf0d9ac76d97a54ee949c619125ca5c8485
 <?php
 // index.php
   require_once('vendor/autoload.php');
@@ -75,7 +71,7 @@
 
   // execute f3
   $f3->run();
-<<<<<<< HEAD
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,8 +93,3 @@
   <a href="src/manage_account.php">User Account</a><br>
 </body>
 </html>
-
->>>>>>> create fat-free framework directory structure
-=======
-?>
->>>>>>> 6b183cf0d9ac76d97a54ee949c619125ca5c8485
