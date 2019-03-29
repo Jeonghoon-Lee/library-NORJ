@@ -5,189 +5,115 @@
 {% block content %}
 	<h2>Advanced search</h2><br>
 
-	<form>
-		<!--1 row in the form-->
-		<div class="form-row" method="GET">
-				<div class="form-group col-md-1">
-				</div>
-				<div class="form-group col-md-2">
-						<select id="inputKeyWord" class="form-control">
-								<option selected>Keyword Anywere</option>
-								<option>Title</option>
-								<option>Author</option>
-								<option>Category</option>
-								<option>Title</option>
+	<form action="search/result" method="GET">
+		{% for row in 1..3 %}
+			<div class="form-row">
+				{% if row > 1 %}			
+					<div class="form-group col-md-1">
+						<select name="operator{{row-1}}" class="form-control">
+							<option value="and" selected>AND</option>
+							<option value="or">OR</option>
+							<option value="not">NOT</option>
 						</select>
+					</div>
+				{% else %}
+					<div class="form-group col-md-1"></div>
+				{% endif %}
+				{# search criteria #}
+				<div class="form-group col-md-2">
+					<select name="field{{row}}" class="form-control">
+						<option value="all">All</option>
+						<option value="title" {% if row == 1 %}selected{% endif %}>Title</option>
+						<option value="author" {% if row == 2 %}selected{% endif %}>Author</option>
+						<option value="publisher" {% if row == 3 %}selected{% endif %}>Publisher</option>
+					</select>
 				</div>
 				<div class="form-group col-md-2">
-						<select id="inputInclude" class="form-control">
-								<option selected>All words</option>
-								<option>Any words</option>
-						</select>
+					<select name="match{{row}}" class="form-control">
+						<option value=0 selected>All words</option>
+						<option value=1>Exact pharse</option>
+					</select>
 				</div>
-				<div class="form-group col-md-5">
-						<input type="text" class="form-control" id="inputText">
+				<div class="form-group col-md-7">
+						<input type="text" class="form-control" name="keyword{{row}}">
 				</div>
-		</div>
-		<!--2 row in the form-->
-		<div class="form-row">
-				<div class="form-group col-md-1">
-						<select id="inputKeyWord2" class="form-control">
-								<option selected>AND</option>
-								<option>OR</option>
-								<option>NOT</option>
-						</select>
-				</div>
-				<div class="form-group col-md-2">
-						<select id="inputKeyWord" class="form-control">
-								<option selected>Keyword Anywere</option>
-								<option>Title</option>
-								<option>Author</option>
-								<option>Category</option>
-								<option>Title</option>
-						</select>
-				</div>
-				<div class="form-group col-md-2">
-						<select id="inputInclude" class="form-control">
-								<option selected>All words</option>
-								<option>Any words</option>
-						</select>
-				</div>
-				<div class="form-group col-md-5">
-						<input type="text" class="form-control" id="inputText2">
-				</div>
-				<div class="form-group col-md-2">
-						<button type="button" class="btn btn-info">Add Another</button>
-				</div>
-
-				<div class="form-group col-md-2">
-						<button type="submit" class="btn btn-info">Show Results</button>
-				</div>
-
+			</div>
+		{% endfor %}
+		<div class="form-group">
+			<button type="submit" class="btn btn-info">Search</button>
 		</div>
 
 		<hr>
-		<h5>Limit search results by</h5>
+		<h5>Limit search (optional)</h5>
 		<br>
 
+		{# Audience #}
+		<div class="form-row">
+			<div class="form-group col-md-12 limit-search-category">
+				<h6>Audience</h6>
+			</div>
+			<div class="form-group col-md-2">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="checkAdult" name="adult">
+					<label class="form-check-label" for="checkAdult">Adult</label>
+				</div>
+			</div>
+			<div class="form-group col-md-2">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="checkChild" name="child">
+					<label class="form-check-label" for="checkChild">Child</label>
+				</div>
+			</div>
+		</div>
 
-		<!--3 row in the form-->
+		{# Language #}
 		<div class="form-row">
-				<div class="form-group col-md-2">
-						Audience
+			<div class="form-group col-md-12 limit-search-category">
+				<h6>Language</h6>
+			</div>
+			{% for lang in languages %}
+				<div class="form-group col-md-2 col-sm-3">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="check_lang{{loop.index}}" name="{{ lang.LangDescrip }}">
+						<label class="form-check-label" for="check_lang{{loop.index}}">{{ lang.LangDescrip }}</label>
+					</div>
 				</div>
-				<div class="form-group col-md-2">
-						<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="checkAdult">
-								<label class="form-check-label" for="checkAdult">
-										Adult
-								</label>
-						</div>
-				</div>
-				<div class="form-group col-md-2">
-						<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="checkChild">
-								<label class="form-check-label" for="checkChild">
-										Child
-								</label>
-						</div>
-				</div>
+			{% endfor %}
 		</div>
-		<!--4 row in the form-->
-		<div class="form-row">
-				<div class="form-group col-md-2">
-						Language
-				</div>
-				<div class="form-group col-md-2">
-						<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="checkEnglish">
-								<label class="form-check-label" for="checkEnglish">
-										English
-								</label>
-						</div>
-				</div>
-				<div class="form-group col-md-2">
-						<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="checkFrench">
-								<label class="form-check-label" for="checkFrench">
-										French
-								</label>
-						</div>
-				</div>
-				<div class="form-group col-md-2">
-						<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="checkSpanish">
-								<label class="form-check-label" for="checkSpanish">
-										Spanish
-								</label>
-						</div>
-				</div>
-				<div class="form-group col-md-2">
-						<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="checkOtherLang">
-								<label class="form-check-label" for="checkOtherLang">
-										Other
-								</label>
-						</div>
-				</div>
-		</div>
-		<!--5 row in the form-->
-		<div class="form-row">
-				<div class="form-group col-md-2">
-						Place of Publication
-				</div>
-				<div class="form-group col-md-2">
-						<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="checkCanada">
-								<label class="form-check-label" for="checkCanada">
-										Canada
-								</label>
-						</div>
-				</div>
-				<div class="form-group col-md-2">
-						<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="checkFrance">
-								<label class="form-check-label" for="checkFrance">
-										France
-								</label>
-						</div>
-				</div>
-				<div class="form-group col-md-2">
-						<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="checkUSA">
-								<label class="form-check-label" for="checkUSA">
-										USA
-								</label>
-						</div>
-				</div>
-				<div class="form-group col-md-2">
-						<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="checkOtherContr">
-								<label class="form-check-label" for="checkOtherContr">
-										Other
-								</label>
-						</div>
-				</div>
-		</div>
-		<!--6 row in the form-->
 
+		{# Categories #}
 		<div class="form-row">
+			<div class="form-group col-md-12 limit-search-category">
+				<h6>Categories</h6>
+			</div>
+      {% for category in categories %}
+				<div class="form-group col-md-3">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="check_cat{{loop.index}}" name="{{ category.CategoryDescrip }}">
+						<label class="form-check-label" for="check_cat{{loop.index}}">{{ category.CategoryDescrip }}</label>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+		{# Year #}
+		<div class="form-row">
+			<div class="form-group col-md-12 limit-search-category">
+				<h6>Year of publication</h6>
+			</div>
 				<div class="form-group col-md-2">
-						Year of publication
+					<span>From</span>
+					<input type="text" class="form-control" id="year_from" size="4" placeholder="YYYY">
 				</div>
-				between
-				<div class="form-group col-md-1">
-						<input type="text" class="form-control" id="inputYearStart" size="4" placeholder="YYYY">
-				</div>
-				to
-				<div class="form-group col-md-1">
-						<input type="text" class="form-control" id="inputYearFinish" size="4" placeholder="YYYY">
+				<div class="form-group col-md-2">
+					<span>To</span>
+					<input type="text" class="form-control" id="year_to" size="4" placeholder="YYYY">
 				</div>
 		</div>
+
+		{# Search Button #}
 		<div class="form-row">
-				<button type="submit" class="btn btn-info">Show Results</button>
+			<button type="submit" class="btn btn-info">Search</button>
 		</div>
 	</form>
-	<!--hiden field-->
-	<input type="hidden" name="isbn" value="{{ book.ISBN }}">
 {% endblock %}
