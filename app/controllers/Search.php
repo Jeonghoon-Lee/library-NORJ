@@ -11,14 +11,14 @@
     }
 
     function search_book($f3) {
+      echo $f3->get('twig')->render('search.html');
+    }
+
+    function search_result($f3) {
       $search_option = array(
         'books' => $this->books->fetch_all()
       );
       echo $f3->get('twig')->render('search_result.html', $search_option);
-    }
-
-    function search_result($f3) {
-      echo '<h2>Search result list</h2>';
     }
 
     function get_detail($f3) {
