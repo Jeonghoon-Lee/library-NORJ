@@ -1,3 +1,8 @@
+document.getElementById("loan_link").addEventListener("click", function(event){
+  event.preventDefault()
+  alert('aaa');
+});
+
 function show_user_loans() {
   var info_container = document.getElementById("user_info");
   //info_container.innerHTML = "";
