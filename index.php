@@ -5,9 +5,8 @@
   // initiate f3
   $f3 = Base::instance();
 
-  // configuration
-  // $f3->set('AUTOLOAD', 'controllers/');
-  // $f3->set('DEBUG', 3);
+  // set the default timezone
+  date_default_timezone_set('America/Toronto');
 
   // use a configuration file
   $f3->config('app/config/config.ini');
@@ -48,6 +47,17 @@
   // delete account
   $f3->route('GET /member/delete/@id', 'Members->delete_account');
 
+  // login user
+  $f3->route('GET /member/login', 'Members->login_form');
+  $f3->route('POST /member/login', 'Members->login');
+
+  // login user account information
+  $f3->route('GET /member/detail', 'Members->get_account_detail');
+
+  // logout
+  $f3->route('GET /member/logout', 'Members->logout');
+
+  
 
   /**
    * Admin Users

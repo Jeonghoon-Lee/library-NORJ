@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_title %}Sign in{% endblock %}
+
+{% block content %}
+{% if error!= '' %}
+<div class="alert alert-danger" role="alert">{{error}}</div>
+{% endif %}
+
+<div class="py-2">
+  <div class="container">
+    <div class="row">
+      <div class="framed">
+        <form action="{{form_action}}" method="post">
+          <img src="#" alt="user icon"><br /><br />
+          <input type="text" name="UserName" placeholder="User Name" value=""/><br /><br />
+          <input type="password" name="Password" placeholder="Password" value=""/><br /><br />
+          <input type="checkbox" name="RememberMe" />Remember Me<br /><br />
+          <input type="submit" name="btn_login" value = "Sign in">
+          <input type="reset" value="Reset">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>  
+{% endblock %}
+
+{% block javascripts %}<script src="public/js/show_user_loans.js"> </script>{% endblock %}
+
+
