@@ -23,9 +23,10 @@
     }
 
     function search_result($f3) {
-      echo '<pre>';
-      echo print_r($f3->get('POST'));
-      echo '</pre>';
+      // for testing
+      // echo '<pre>';
+      // echo print_r($f3->get('POST'));
+      // echo '</pre>';
 
       $search_options = [];
 

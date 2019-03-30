@@ -14,11 +14,84 @@
     }
 
     function create_form($f3) {
-      echo '<h2>Load Register User Form</h2>';
+      $months = array(
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December',
+      );
+      $min_year = 1920;
+      $cur_year = date('Y');
+
+      // clear session
+      $f3->set('SESSION', array());
+
+      $render_options = array(
+        "form_action"	=> "member/create", 
+        "min_year" => $min_year, 
+        "cur_year" => $cur_year, 
+        "months" => $months
+      );
+      echo $f3->get("twig")->render("create_user.html", $render_options);
     }
 
     function create($f3) {
-      echo '<h2>DB update and Create Account Done</h2>';
+      // form submitted
+      $error = "";
+
+      echo "<pre>";
+      echo print_r($f3->get("POST"));
+      echo "</pre>";
+
+      if ($f3->get("POST.FirstName") == "") {
+        $error = "Please fill in your first name.";
+      } else if (is_numeric($f3->get("POST.FirstName"))) {
+        $error = "Please enter a valid first name.";
+      } else if (is_numeric($f3->get("POST.MiddleName"))) {
+        $error = "Please enter a valid middle name.";
+      } else if ($f3->get("POST.LastName") == "") {
+        $error = "Please fill in your last name.";
+      } else if (is_numeric($f3->get("POST.LastName"))) {
+        $error = "Please enter a valid last name.";
+      } else if ($f3->get("POST.UserName") == "") {
+        $error = "Please fill in your user name.";
+      } else if ($this->members->is_exist_username($f3->get("POST.UserName")) > 0) {
+        $error = "User name is already exist.";
+      } else if ($f3->get("POST.Email") == "") {
+        $error = "Please fill in your email.";
+      } else if (!filter_var($f3->get("POST.Email"), FILTER_VALIDATE_EMAIL)) {
+        $error = "Please enter a vaild email";
+      } else if ($f3->get("POST.Password") == "") {
+        $error = "Please enter your password.";
+      } else if (strlen($f3->get("POST.Password")) < 1) {
+        $error = "Password is too short.";
+      } else if (strlen($f3->get("POST.Password")) > 15) {
+        $error = "Password is too long.";
+      } else if ($f3->get("POST.Password") != ($f3->get("POST.Password_c"))) {
+        $error = "Passwords don't match.";
+      } else if ($f3->get("POST.day") == "") {
+        $error = "Please enter your Date of Birth.";
+      } else if ($f3->get("POST.month") == "") {
+        $error = "Please enter your Date of Birth.";
+      } else if ($f3->get("POST.year") == "") {
+        $error = "Please enter your Date of Birth.";
+      }
+
+      if ($error == '') {
+        // No error
+        $f3->set("POST.BirthDate", date($f3->get("POST.year") . '-' . $f3->get("POST.month") . '-' . $f3->get("POST.day")));
+        $f3->set("POST.Password", md5($f3->get("POST.Password")));
+        $f3->set("POST.RegisteredDate", date('Y-m-d'));
+        $f3->set("POST.UserType", "user");
+        
+        // create new user in user table
+        $this->members->create_user();
+
+        // reroute to login page
+        $f3->reroute('/member/login');
+      } else {
+        echo $error;
+      }
+
+        // TO DO check if user name already exists
     }
 
     // create login form
