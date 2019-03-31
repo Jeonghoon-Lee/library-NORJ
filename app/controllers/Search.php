@@ -23,6 +23,26 @@
     }
 
     function search_result($f3) {
+      if (sizeof($f3->get('GET')) > 0) {
+        // create query
+        $keyword = trim($f3->get('GET.keyword'));
+
+        $search_options = 'Title like "%' . $keyword . '%"' . ' or '
+                          . 'Author like "%' . $keyword . '%"' . ' or '
+                          . 'Category like "%' . $keyword . '%"' . ' or '
+                          . 'Language like "%' . $keyword . '%"';
+        
+        $render_option = array(
+          'books' => $this->books->find_book($search_options)
+        );
+        echo $f3->get('twig')->render('search_result.html', $render_option);
+      } else {
+        // go to detail search page
+        $f3->reroute('/search');
+      }
+    }
+
+    function detail_search_result($f3) {
       // for testing
       // echo '<pre>';
       // echo print_r($f3->get('POST'));
