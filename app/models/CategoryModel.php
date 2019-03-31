@@ -12,8 +12,12 @@
       foreach ($this->query as $value) {
         $categories[] = $value->cast();
       }
-
       return $categories;
+    }
+
+    // check id validation
+    function is_valid_id($id) {
+      return $this->count(array('CategoryID=?', $id));
     }
   }
 ?>

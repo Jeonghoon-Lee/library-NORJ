@@ -16,6 +16,7 @@
 
     function search_book($f3) {
       $render_option = array(
+        'session' => $f3->get('SESSION'),
         'languages' => $this->languages->fetch_all(),
         'categories' => $this->categories->fetch_all()
       );
@@ -33,12 +34,27 @@
                           . 'Language like "%' . $keyword . '%"';
         
         $render_option = array(
+          'session' => $f3->get('SESSION'),
           'books' => $this->books->find_book($search_options)
         );
         echo $f3->get('twig')->render('search_result.html', $render_option);
       } else {
-        // go to detail search page
-        $f3->reroute('/search');
+        echo print_r($f3->get('SESSION'));
+
+        if ($f3->get('SESSION.booklist') == 'on') {
+          $f3->set('SESSION.booklist', '');   // clear
+
+          // order by not working in MySQL view
+          // array_reverse to display recent to old
+          $render_option = array(
+            'session' => $f3->get('SESSION'),
+            'books' => array_reverse($this->books->fetch_all())
+          );          
+          echo $f3->get('twig')->render('search_result.html', $render_option);
+        } else {
+          // go to detail search page
+          $f3->reroute('/search');
+        }
       }
     }
 
@@ -137,6 +153,7 @@
       // echo '</pre>';  
 
       $render_option = array(
+        'session' => $f3->get('SESSION'),
         'books' => $this->books->find_book(implode(' and ', $search_options))
       );
       echo $f3->get('twig')->render('search_result.html', $render_option);
@@ -146,7 +163,11 @@
       $ISBN = $f3->get('PARAMS.ISBN');    // get ISBN     
       $book = $this->books->find_by_isbn($ISBN);
 
-      echo $f3->get('twig')->render('book_detail.html', array('book' => $book));
+      $render_option = array(
+        'session' => $f3->get('SESSION'),
+        'book' => $book
+      );      
+      echo $f3->get('twig')->render('book_detail.html', $render_option);
     }    
   }
 ?>

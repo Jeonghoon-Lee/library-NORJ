@@ -12,8 +12,12 @@
       foreach ($this->query as $value) {
         $languages[] = $value->cast();
       }
-
       return $languages;
+    }
+
+    // check id validation
+    function is_valid_id($id) {
+      return $this->count(array('LangID=?', $id));
     }
   }
 ?>
