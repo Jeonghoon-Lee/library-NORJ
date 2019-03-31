@@ -39,7 +39,7 @@
         );
         echo $f3->get('twig')->render('search_result.html', $render_option);
       } else {
-        echo print_r($f3->get('SESSION'));
+        // echo print_r($f3->get('SESSION'));
 
         if ($f3->get('SESSION.booklist') == 'on') {
           $f3->set('SESSION.booklist', '');   // clear
@@ -48,7 +48,8 @@
           // array_reverse to display recent to old
           $render_option = array(
             'session' => $f3->get('SESSION'),
-            'books' => array_reverse($this->books->fetch_all())
+            'books' => $this->books->fetch_all()
+            // 'books' => array_reverse($this->books->fetch_all())
           );          
           echo $f3->get('twig')->render('search_result.html', $render_option);
         } else {

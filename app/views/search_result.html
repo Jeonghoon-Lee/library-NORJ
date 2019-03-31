@@ -30,7 +30,13 @@
 						<td>{{book.Category}}</td>
 						<td>{{book.Language}}</td>
 						<td>{{book.BookStatus}}</td>
-						<td><a href="search/detail/{{book.ISBN}}">Detail</a></td>
+						<td>
+							<a href="search/detail/{{book.ISBN}}">Detail</a>
+							{% if session.UserType == 'admin' %}
+								<br/><a href="book/update/{{book.ISBN}}">Update</a>
+								<br/><a href="book/delete/{{book.ISBN}}">Delete</a>
+							{% endif %}
+						</td>
 					</tr>
 				{% endfor %}
 				</tbody>

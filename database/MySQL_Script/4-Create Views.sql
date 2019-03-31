@@ -25,6 +25,7 @@ from books as B
 		on B.CategoryID = C.CategoryID
 	inner join languages as L
 		on B.LangID = L.LangID
+order by B.ISBN
 ;
 
 select * 
@@ -45,6 +46,7 @@ from reservations as R
 		on R.UserID = U.UserID
 	inner join booklist_view as BV
 		on R.ISBN = BV.ISBN
+order by R.ReservID desc
 ;
 
 select *
@@ -65,6 +67,7 @@ from loans as L
 		on L.UserID = U.UserID
 	inner join booklist_view as BV
 		on L.ISBN = BV.ISBN
+order by L.LoanID desc
 ;
 
 select *
