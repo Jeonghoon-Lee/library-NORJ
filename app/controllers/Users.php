@@ -1,14 +1,14 @@
 <?php
-// members.php
-  class Members extends Controller {
-    private $members;
+// Users.php
+  class Users extends Controller {
+    private $Users;
     private $loans;
     private $reservations;
 
     function __construct(){
       parent::__construct();
       // Initialize Models
-      $this->members = new MemberModel($this->db);
+      $this->Users = new UserModel($this->db);
       $this->loans = new LoanViewModel($this->db);
       $this->reservations = new ReserveViewModel($this->db);
     }
@@ -25,7 +25,7 @@
       $f3->set('SESSION', array());
 
       $render_options = array(
-        "form_action"	=> "member/create", 
+        "form_action"	=> "user/create", 
         "min_year" => $min_year, 
         "cur_year" => $cur_year, 
         "months" => $months
@@ -53,7 +53,7 @@
         $error = "Please enter a valid last name.";
       } else if ($f3->get("POST.UserName") == "") {
         $error = "Please fill in your user name.";
-      } else if ($this->members->is_exist_username($f3->get("POST.UserName")) > 0) {
+      } else if ($this->Users->is_exist_username($f3->get("POST.UserName")) > 0) {
         $error = "User name is already exist.";
       } else if ($f3->get("POST.Email") == "") {
         $error = "Please fill in your email.";
@@ -83,10 +83,10 @@
         $f3->set("POST.UserType", "user");
         
         // create new user in user table
-        $this->members->create_user();
+        $this->Users->create_user();
 
         // reroute to login page
-        $f3->reroute('/member/login');
+        $f3->reroute('/user/login');
       } else {
         echo $error;
       }
@@ -96,7 +96,7 @@
 
     // create login form
     function login_form($f3) {
-      $render_options = array("form_action" => "member/login");
+      $render_options = array("form_action" => "user/login");
       echo $f3->get("twig")->render("login.html", $render_options);
     }
 
@@ -116,7 +116,7 @@
         // username and password are filled in
         //check in database for valid user
       
-        $results = $this->members->get_member_by_username($f3->get("POST.UserName"));
+        $results = $this->Users->get_user_by_username($f3->get("POST.UserName"));
 
         // without framework
         // $results = DB::queryFirstRow("SELECT UserId, FirstName, LastName, UserType, password 
@@ -141,14 +141,14 @@
             $f3->set('SESSION.UserType', $results[0]->UserType);
 
             // update our last_login if user found
-            $this->members->update_logintime_by_username($f3->get("POST.UserName"));
+            $this->Users->update_logintime_by_username($f3->get("POST.UserName"));
 
             // for testing
             // echo '<pre>';
             // echo print_r($f3->get('SESSION'));
             // echo '</pre>';
 
-            $f3->reroute('/member/detail');
+            $f3->reroute('/user/detail');
 
             // $render_options = array(
             //   "session" => $f3->get("SESSION")
@@ -174,7 +174,7 @@
       if ($error != "") {
         $render_options = array(
           "session" => $f3->get("SESSION"),
-          "form_action" => "member/login", 
+          "form_action" => "user/login", 
           "error" => $error
         );
         echo $f3->get("twig")->render("login.html", $render_options);  

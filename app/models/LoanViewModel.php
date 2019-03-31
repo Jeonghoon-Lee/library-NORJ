@@ -4,7 +4,7 @@
       parent::__construct($db, 'loan_user_view');
     }
 
-    // fetch all the member list
+    // fetch all the user list
     function fetch_all() {
       $this->load();
       return $this->query;

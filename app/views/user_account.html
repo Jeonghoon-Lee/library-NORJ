@@ -13,9 +13,9 @@
         <img src="#" alt="user photo"><br /><br />
         <h2>{{session.FirstName}} {{session.LastName}}</h2>
         
-        <p><a href="http://localhost:81/library_NORJ/member/detail#" onclick="show_user_loans()">Loans ({{loan_amount}})</a></p>
-        <p><a href="http://localhost:81/library_NORJ/member/detail#" onclick="show_user_res()">Reservations ({{res_amount}})</a></p>
-        <p><a href="http://localhost:81/library_NORJ/member/detail#">Overdue charges to pay: ${{charges}}</a></p>
+        <p><a href="http://localhost:81/library_NORJ/user/detail#" onclick="show_user_loans()">Loans ({{loan_amount}})</a></p>
+        <p><a href="http://localhost:81/library_NORJ/user/detail#" onclick="show_user_res()">Reservations ({{res_amount}})</a></p>
+        <p><a href="http://localhost:81/library_NORJ/user/detail#">Overdue charges to pay: ${{charges}}</a></p>
       </div>
       <div id="user_info" style="border: 1px solid red" class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
         <img id="img_disappear" src="public/img/bookpile.jpg" >

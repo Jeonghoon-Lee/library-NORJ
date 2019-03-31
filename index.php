@@ -42,25 +42,25 @@
   $f3->route('GET /book/delete/@ISBN', 'Books->delete_book');
 
   /**
-   * Members 
+   * Users 
    */
   // register user
-  $f3->route('GET /member/create', 'Members->create_form');
-  $f3->route('POST /member/create', 'Members->create');
-  // update members
-  $f3->route('GET /member/update/@id', 'Members->update_form');
-  $f3->route('POST /member/update/@id', 'Members->update');
+  $f3->route('GET /user/create', 'Users->create_form');
+  $f3->route('POST /user/create', 'Users->create');
+  // update Users
+  $f3->route('GET /user/update/@id', 'Users->update_form');
+  $f3->route('POST /user/update/@id', 'Users->update');
   // delete account
-  $f3->route('GET /member/delete/@id', 'Members->delete_account');
+  $f3->route('GET /user/delete/@id', 'Users->delete_account');
 
   // login user
-  $f3->route('GET /member/login', 'Members->login_form');
-  $f3->route('POST /member/login', 'Members->login');
+  $f3->route('GET /user/login', 'Users->login_form');
+  $f3->route('POST /user/login', 'Users->login');
   // logout
-  $f3->route('GET /member/logout', 'Members->logout');
+  $f3->route('GET /user/logout', 'Users->logout');
 
   // login user account information
-  $f3->route('GET /member/detail', 'Members->get_account_detail');
+  $f3->route('GET /user/detail', 'Users->get_account_detail');
 
   /**
    * Search
@@ -76,7 +76,7 @@
   /**
    * Admin Users
    */
-  $f3->route('GET /admin/user_list', 'Members->list_user');
+  $f3->route('GET /admin/user_list', 'Users->list_user');
 
   // other function page
   $f3->route('GET|POST|PUT /book/upload_image', 'UploadImage->book_image');
