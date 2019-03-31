@@ -21,6 +21,13 @@
   $f3->route('GET /', function($f3) {
     echo $f3->get('twig')->render('home.html');
   });
+  // About Us page
+  $f3->route('GET /about', function($f3) {
+    echo 'About US page';
+  });
+  $f3->route('GET /contact', function($f3) {
+    echo 'Contact US page';
+  });
 
   /**
    * Book handling
@@ -33,7 +40,6 @@
   $f3->route('POST /book/update/@ISBN', 'Books->update_book');
   // delete book
   $f3->route('GET /book/delete/@ISBN', 'Books->delete_book');
-
 
   /**
    * Members 
@@ -50,20 +56,11 @@
   // login user
   $f3->route('GET /member/login', 'Members->login_form');
   $f3->route('POST /member/login', 'Members->login');
-
-  // login user account information
-  $f3->route('GET /member/detail', 'Members->get_account_detail');
-
   // logout
   $f3->route('GET /member/logout', 'Members->logout');
 
-  
-
-  /**
-   * Admin Users
-   */
-  $f3->route('GET /admin/user_list', 'Members->list_user');
-
+  // login user account information
+  $f3->route('GET /member/detail', 'Members->get_account_detail');
 
   /**
    * Search
@@ -76,6 +73,10 @@
   // get book detail
   $f3->route('GET /search/detail/@ISBN', 'Search->get_detail');
 
+  /**
+   * Admin Users
+   */
+  $f3->route('GET /admin/user_list', 'Members->list_user');
 
   // other function page
   $f3->route('GET|POST|PUT /book/upload_image', 'UploadImage->book_image');
