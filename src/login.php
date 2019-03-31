@@ -54,6 +54,14 @@ $log->pushHandler( new StreamHandler("website.log", Logger::DEBUG) );
 					$_SESSION['FirstName'] = $results['FirstName'];
 					$_SESSION['LastName'] = $results['LastName'];
 					$_SESSION['UserType'] = $results['UserType'];
+
+					if(!empty($_POST["remember_me"])) {
+						setcookie ("user_login", $_POST['user_name'], time()+ (10 * 365 * 24 * 60 * 60));
+					} else {
+						if(isset($_COOKIE["user_login"])) {
+							setcookie ("user_login","");
+						}
+					}
 					 
 					$log->info("user #". $results['UserId'] . " had logged in");
 					

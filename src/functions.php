@@ -7,7 +7,7 @@
 
   // global variables
 //  $error = '';
-  $error = array();   // set as array variable.
+  $error = '';   // set as array variable.
  
   $categories = '';
   $languages = '';
@@ -46,21 +46,15 @@ function logged_in(){
       }
 }
 
+
 function user_loans($u_id) {
-  $u_loans = DB::query("SELECT LoanID, ISBN, UserID, DateOut, DateDue, FineAssessed FROM loans WHERE UserId=%i", $u_id);
-  
-  //$loan_info = array_push_assoc($loan_info, 'Title', $book['Title']);
-  //$loan_info = array_merge($book,$u_loans);
+  $u_loans = DB::query("SELECT Title, DateOut, DateDue FROM loan_user_view WHERE Datein is null and UserId=%i", $u_id);
   return $u_loans;   
 }
 
-function get_book_by_ISBN($b_isbn) {
-  $book = DB::query("SELECT Title, ISBN FROM books WHERE ISBN=%i", $b_isbn);
-  return $book;
-}
 
 function user_res($u_id) {
-  $reservations = DB::query("SELECT * FROM reservations WHERE UserId=%i", $u_id);
+  $reservations = DB::query("SELECT ReservID, Title, ReservDate, ReservStatus FROM reserve_user_view WHERE UserId=%i", $u_id);
   return $reservations; 
 }
 
