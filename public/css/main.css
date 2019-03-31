@@ -1,97 +1,5 @@
-/*General*/
-
-
-.row {
-  margin: auto;
-}
-
-/*search*/
-#search-container {
-	overflow: hidden;
-}
-
-.search {
-	float: right; 
-	margin-top: 1em; 
-	margin-bottom: 1em;
- 
-}
-
-.has-search .form-control {
-  padding-left: 2.375rem;
-}
-
-.has-search .form-control-feedback {
-  position: absolute;
-  z-index: 2;
-  display: block;
-  width: 2.375rem;
-  height: 2.375rem;
-  line-height: 2.375rem;
-  text-align: center;
-  pointer-events: none;
-  color: #aaa;
-}
-
-
-
-/*Navigation bar*/
-.navbar-expand-md .navbar-nav .nav-link {
-  padding-right: 1rem;
-}
-
-
-
-
-
-h2 a {
-  text-decoration: none;
-  color: rgba(255,255,255,.5);
-}
-
-h2 a:hover {
-  text-decoration: none;
-  color: white;
-}
-
-div.dark {
-  background-color:#343a40;
-  color: white;
-  
-  margin: auto;
-}
-
-.footer-col {
-  padding: 1em 3em;
-}
-
-div#bottom-menu {
-  width: 100%;
-  text-align: center;
-  margin-top: 1em;
-}
-
-ul.centerUL {
-  margin: 2px auto;
-  line-height: 1.4;
-  padding-left: 0;
-  flex-direction: row;
-}
-
-.centerUL li {
-  display: inline;
-  text-align: center;
-  padding: 2%; 
-}
-
-#bottom-menu a {
-  text-decoration: none;
-  color: black;
-}
-
-#bottom-menu a:hover {
- color:#343a40;
-}
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei');
+@import url('https://fonts.googleapis.com/css?family=Barlow');
 
 /*Sign In*/
 .framed {
@@ -105,9 +13,38 @@ ul.centerUL {
 	margin-top: 20%;
 	padding: 2em;
 	}
+/*research result icon --- advanse research page*/
+ul.search-results {
+	list-style: none;
+	display: inline;
+	margin-left: 0 !important;
+	padding: 0;
+}
+ul.search-results li {
+	display: inline;
+	margin: 0.5px;
+}
+/* manage_book.html.twig */
+.book-image {
+  width: 200px;
+  height: 300px;
+  border: 1px solid black;
+}
+
+.book-image img {
+  width: 100%;
+}
 
 
-/*Footer*/
+.heding-services {
+	margin-top: 5%;
+	margin-bottom: 3%;
+}
+hr{
+	margin-top: 8%
+}
+
+/*Social media*/
 ul.social-network {
 	list-style: none;
 	display: inline;
@@ -144,7 +81,7 @@ a.socialIcon:hover, .socialHoverClass {
 	width: 50px;
 	height: 50px;
 	font-size: 20px;
-	background-color:rgba(247, 164, 26, 1);
+	background-color: #C2625F;
 }
 .social-circle li i {
 	margin: 0;
@@ -171,27 +108,68 @@ a.socialIcon:hover, .socialHoverClass {
 	transition: all 0.8s;
 }
 
-
-/*research result icon --- advanse research page*/
-ul.search-results {
-	list-style: none;
-	display: inline;
-	margin-left: 0 !important;
-	padding: 0;
-}
-ul.search-results li {
-	display: inline;
-	margin: 0 5px;
+/*button style*/
+input.btn {
+	background: #C2625F !important;
+	color: #FFF !important;
 }
 
-
-/* manage_book.html.twig */
-.book-image {
-  width: 200px;
-  height: 300px;
-  border: 1px solid black;
+.righted {
+    text-align: right;
 }
 
-.book-image img {
-  width: 100%;
+/*header font*/
+div#company-name {
+	font-family: 'ZCOOL XiaoWei', serif;
+	font-size: 5ex;
+	margin-top: 0;
+  margin-bottom: -0.5	em;
+}
+
+/*container home page*/
+
+.jumbotron.hero-main
+ {     
+	background-image: url("../img/slider_3.jpg");
+	width: 100%;
+	height: 350px;
+  }
+
+/**header*/
+div.header {
+	background-color: #fff;
+}
+
+.bg-1 {
+	background-color:#845176;
+}
+
+/*post hero section home page*/
+#post-hero {
+	font-family: 'Barlow', sans-serif;
+  padding: 20px 0;
+	background: #E27E5F;
+	color: #fff;
+}
+/*body*/
+body { 
+	font-family: 'Barlow', sans-serif;
+}
+ /*footer nav bar*/
+a.nav-link:first-of-type {
+	color: white;
+}
+/*search bar on header*/
+div.col-sm-4.justify-content-end.search{
+   	padding-top: 20px;
+    padding-right: 35px;
+    padding-left: 15px;
+}
+
+div.row.services{
+    margin-top: 50px;
+}
+
+div#post-hero{
+	margin-bottom: 50px;
 }
