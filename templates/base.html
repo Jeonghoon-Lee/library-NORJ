@@ -2,110 +2,112 @@
 <html lang="en">
 
 <head>
-    <title>{% block page_title %}Default title{% endblock %}</title>
-     <meta charset="UTF-8">
-    <meta name="description" content="This website is about ...">
-    <meta name="keywords" content="Library, books">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- CSS dependencies -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../public/css/main.css">
-    <link rel="shortcut icon" href="#">
-    <!--Font awesome-->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <meta charset="UTF-8" />
+  <title>Library NORJ</title>
+  <link rel="stylesheet" href="../public/css/main.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <!--Font awesome-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 
 <body>
-        <div class="py-2">
-                <div class="container">
-                    <!-- Navigation menu -->
-                    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                      <!-- Brand -->
-                      <a class="navbar-brand" href="#">Logo</a>
-                      
-                      <!-- Toggler/collapsibe Button -->
-                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                          <span class="navbar-toggler-icon"></span>
-                      </button>
-                      
-                      <!-- Navbar links -->
-                      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                        <ul class="navbar-nav">
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                          </li> 
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                          </li>
-                        </ul>
-                      </div>   
-                    </nav>
-                    
-    
-                </div>
-            </div>
-    
-            {% block search %}
-        <div class='container' id="search-container">
-          <div class="row search">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search">
-              <div class="input-group-append">
-                <button class="btn btn-secondary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </div>
+  <!--Top page compaany name and search bar-->
+  <header>
+    <div class='sticky-top fixed-top header'>
+      <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 justify-content-center" id="company-name">NORJ Library</div>
+        <div class="col-sm-4 justify-content-end search">
+          <div class="input-group ">
+            <input type="text" class="form-control" placeholder="Search">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button">
+                <i class="fa fa-search"></i>
+              </button>
             </div>
           </div>
         </div>
-            {% endblock %}
-
-            <!--Main Content--> 
-        
-        <div class='container'>
-                {% block content %}
-                {% endblock %}
+      </div>
+      <!--Navigation Bar!-->
+      <nav class="navbar navbar-light bg-light navbar-expand-sm navbar-template">
+        <a class="navbar-brand" href=""><img src="../public/img/Library-2-icon.png" width="50" height="50"></a>
+        <div class="collapse navbar-collapse order-3 order-sm-2" id="#NavbarNavDropdown">
+          <ul class="navbar-nav ">
+            <li class="nav-item active">
+              <a class="nav-link" href="../src/home.php">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../src/advance_search.php">Catalog</a>
+            </li>
+          </ul>
         </div>
-        
+        <div class="d-flex flex-row order-2 ordes-sm-3">
+          <ul class="navbar-nav flex-row">
+            <li class="nav-item">
+              <a class="nav-link px-2" href="#"><i class="fa fa-user fa-2x"></i> Sign In</a>
+            </li>
+          </ul>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+  {% block hero_section %}
+  {% endblock %}
+  <!--Main Content-->
+  <div class='container'>
+    {% block content %}
+    {% endblock %}
+  </div>
 
-    
-    
-    <!--Footer-->
-    <footer class="container">
-        <hr>
-        <div class="row justify-content-center">
-            <ul class="social-network social-circle">
-                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#" class="icoSkype" title="Skype"><i class="fa fa-skype"></i></a></li>
-                <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+  <!--Footer-->
+  <hr>
+  <div class="bg-1">
+  <!--Footer navigation bar-->
+      <div class="row justify-content-center">
+          <ul class="nav footer-nav">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Catalog</a>
+              </li>
             </ul>
         </div>
-        <div>
-            <p class="text-center">© 2019 by Library NORJ. Created with NORJ Team Corp. </p>
-        </div>
-    </footer>
-    <!--Bootstrap source-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-
+        <hr>
+        <div class="row justify-content-center ">
+    <ul class="social-network social-circle">
+      <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+      <li><a href="#" class="icoSkype" title="Skype"><i class="fa fa-skype"></i></a></li>
+      <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+    </ul>
+  </div>
+  <div class="row justify-content-center">
+    <p class="text-center">© 2019 by NORJ Library . Created with NORJ Team Corp. </p>
+  </div>
+</div>
+  <!--Bootstrap source-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
     {% block javascripts %}{% endblock %}
+  </div>
 </body>
-
 </html>

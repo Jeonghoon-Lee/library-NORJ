@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block page_title %}{{ heading }}{% endblock %}
+
+
+{% block content %}
+
+<!--{% for block in blocks %}
+  {% if loop.index0 % 2 == 0 %}
+    <div>
+  {% endif %}
+   {# other stuff #}
+  {% if loop.index0 % 2 == 1 or loop.last %}
+    </div>
+  {% endif %}
+{% endfor %}-->
+
+<h2>{{ heading}}</h2><br>
+
+{% for row in books|batch(3) %}
+<div class="row justify-content-between">
+        {% for book in row %}
+    <div class="col-md-3 justify-content-center release">
+            <a href="book_detail.php?b_id={{ book.ISBN }}"><img src="{{ book.BookImage }}" class="img-fluid book-cover "></a>
+            <table class="table table-sm release">
+                <tbody>
+                    <tr>
+                        <th scope="row">Title: </th>
+                        <td>{{ book.Title }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Author: </th>
+                        <td>{{ book.Author }}b</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+{% endblock %}
