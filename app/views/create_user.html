@@ -10,36 +10,42 @@
       <div class="row">
         <div class="framed">
           <form action="{{form_action}}" method="post" enctype="multipart/form-data">
-            <input type="text" name="FirstName" placeholder="First name" /><br /><br />
-            <input type="text" name="MiddleName" placeholder="Middle name" /><br /><br />
-            <input type="text" name="LastName" placeholder="Last name" /><br /><br />
+            <input type="text" name="FirstName" placeholder="First name" value="{{ user.FirstName }}"/><br /><br />
+            <input type="text" name="MiddleName" placeholder="Middle name" value="{{ user.MiddleName }}"/><br /><br />
+            <input type="text" name="LastName" placeholder="Last name" value="{{ user.LastName }}"/><br /><br />
 
             Date of Birth: 
             <select name="day" class="form-control">
               <option value ="" selected disabled>Day</option>
               {% for day in 1..31 %}
-                <option value="{{ day }}">{{ day }}</option>
+                <option value="{{ day }}" {% if day == user.BirthDate|date('d') %} selected {% endif %}>{{ day }}</option>
               {% endfor %}
             </select>
             <select name="month" class="form-control">
               <option value="" selected disabled>Month</option>
               {% for month in months %}
-                <option value="{{ loop.index }}">{{ month }}</option>
+                <option value="{{ loop.index }}" {% if loop.index == user.BirthDate|date('m') %} selected {% endif %}>{{ month }}</option>
               {% endfor %}
             </select>
             <select name="year" class="form-control">
               <option value="" selected disabled>Year</option>
               {% for year in cur_year..min_year %}
-                <option value="{{ year }}">{{ year }}</option>
+                <option value="{{ year }}" {% if year == user.BirthDate|date('Y') %} selected {% endif %}>{{ year }}</option>
               {% endfor %}
             </select><br />
 
-            <input type="text" name="UserName" placeholder="User name" /><br /><br />
-            <input type="email" name="Email" placeholder="Email" /><br /><br />
-            <input type="password" name="Password" value="" placeholder="Password" /><br /><br />
-            <input type="password" name="Password_c" value="" placeholder="Confirm Password" /><br /><br />
-            <input type="submit" name="btn_create" value = "Create Account">
+            <input type="text" name="UserName" placeholder="User name" value="{{ user.UserName }}"/><br /><br />
+            <input type="email" name="Email" placeholder="Email" value="{{ user.Email }}"/><br /><br />
+            <input type="password" name="Password" value="" placeholder="Password" value=""/><br /><br />
+            <input type="password" name="Password_c" value="" placeholder="Confirm Password" value=""/><br /><br />
+            {% if user.UserName != '' %}
+              <input type="submit" name="btn_update" value="Update">
+            {% else %}
+              <input type="submit" name="btn_create" value="Create Account">
+            {% endif %}
+            
             <input type="reset" value="Reset">
+            <input type="hidden" name="UserID" value="{{ user.UserID }}"/>
           </form>
         </div>
       </div>

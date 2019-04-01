@@ -1,23 +1,26 @@
 {% extends "base.html" %}
 
-{% block page_title %}Book Detail{% endblock %}
+{% block page_title %}Book List{% endblock %}
 
 {% block content %}
-	<div>
-		<h2>Search Result</h2>
+	<div class="row justify-content-md-center mt-5">
+		<div class="col-md-12">
+			<h2>{{ subtitle }}</h2>
+			<h6 class="text-right">Found {{ books|length }} books</h6><br>
+		</div>
 	</div>
-	<h6>Found {{ books|length }} books</h6><br>
-	<div class="row">
-		<div class="col-md-10">
+
+	<div class="row justify-content-md-center">
+		<div class="col-md-12 table-responsive">
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
 					<th scope="col">#</th>
 					<th scope="col">Title</th>
 					<th scope="col">Author</th>
-					<th scope="col">Category</th>
-					<th scope="col">Language</th>
-					<th scope="col">Status</th>
+					<th scope="col" class="hide-column">Category</th>
+					<th scope="col" class="hide-column">Language</th>
+					<th scope="col" class="hide-column">Status</th>
 					<th scope="col"></th>
 					</tr>
 				</thead>
@@ -25,11 +28,11 @@
 				{% for book in books %}
 					<tr>
 						<th scope="row">{{loop.index}}</th>
-						<td>{{book.Title}}</td>
-						<td>{{book.Author}}</td>
-						<td>{{book.Category}}</td>
-						<td>{{book.Language}}</td>
-						<td>{{book.BookStatus}}</td>
+						<td>{{ book.Title }}</td>
+						<td>{{ book.Author }}</td>
+						<td class="hide-column">{{ book.Category }}</td>
+						<td class="hide-column">{{ book.Language }}</td>
+						<td class="hide-column">{{ book.BookStatus }}</td>
 						<td>
 							<a href="search/detail/{{book.ISBN}}">Detail</a>
 							{% if session.UserType == 'admin' %}

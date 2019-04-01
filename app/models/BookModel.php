@@ -28,13 +28,15 @@
       $this->save();
     }
 
-    function update_book($search_option) {
+    function update_book_by_isbn($isbn) {
+      $search_option = array('ISBN = ?', $isbn);
       $this->load($search_option);
       $this->copyfrom('POST');
       $this->update();
     }
 
-    function delete_book($search_option) {
+    function delete_book_by_isbn($ISBN) {
+      $search_option = array('ISBN = ?', $ISBN);
       $this->load($search_option);
       $this->erase();
     }

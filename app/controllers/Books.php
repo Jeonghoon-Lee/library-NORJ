@@ -107,8 +107,7 @@
     function update_book($f3) {
       $error = $this->check_validation($f3);
       if ($error == '') {
-        $search_option = array('ISBN = ?', $f3->get('PARAMS.ISBN'));
-        $this->books->update_book($search_option);
+        $this->books->update_book_by_isbn($f3->get('PARAMS.ISBN'));
         // set value to display result
         $f3->set('SESSION.booklist', 'on');
         $f3->reroute('/search/result');
@@ -127,12 +126,12 @@
 
     // delete book from books table
     function delete_book($f3) {
-      $search_option = array('ISBN = ?', $f3->get('PARAMS.ISBN'));
-      $this->books->delete_book($search_option);
-
-      // set value to display result
-      $f3->set('SESSION.booklist', 'on');
-      $f3->reroute('/search/result');
+      if ($f3->get("SESSION.UserType") == "admin") {
+        $this->books->delete_book_by_isbn($f3->get('PARAMS.ISBN'));
+        // set value to display result
+        $f3->set('SESSION.booklist', 'on');
+        $f3->reroute('/search/result');
+      }
     }
 
     // display book list

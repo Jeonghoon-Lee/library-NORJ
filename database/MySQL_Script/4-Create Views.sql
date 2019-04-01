@@ -61,7 +61,8 @@ drop view if exists loan_user_view
 create view loan_user_view
 as 
 select L.LoanID, L.ISBN, L.UserID, U.UserName, BV.Title, 
-	BV.Author, L.DateOut, L.DateDue, L.Datein
+	BV.Author, L.DateOut, L.DateDue, L.Datein, 
+    L.FineAssessed, L.FinePaid, L.FineWaived
 from loans as L
 	inner join users as U
 		on L.UserID = U.UserID

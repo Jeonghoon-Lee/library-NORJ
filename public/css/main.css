@@ -203,3 +203,11 @@ div.limit-search-category {
 	margin-bottom: 3px;
 	color: darkolivegreen;
 }
+
+/* testing media query */
+/* search result view */
+@media only screen and (max-width: 768px) {
+  td.hide-column, th.hide-column {
+    display: none;
+  }
+}

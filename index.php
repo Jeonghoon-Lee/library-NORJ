@@ -19,7 +19,10 @@
 
   // Home page
   $f3->route('GET /', function($f3) {
-    echo $f3->get('twig')->render('home.html');
+    $render_option = array(
+      'session' => $f3->get('SESSION')
+    );
+    echo $f3->get('twig')->render('home.html', $render_option);
   });
   // About Us page
   $f3->route('GET /about', function($f3) {
@@ -76,7 +79,10 @@
   /**
    * Admin Users
    */
-  $f3->route('GET /admin/user_list', 'Users->list_user');
+  $f3->route('GET /admin/home', 'Admin->book_list');
+  $f3->route('GET /admin/user_list', 'Admin->user_list');
+  $f3->route('GET /admin/book_list', 'Admin->book_list');
+  $f3->route('GET /admin/message_list', 'Admin->message_list');
 
   // other function page
   $f3->route('GET|POST|PUT /book/upload_image', 'UploadImage->book_image');

@@ -5,41 +5,41 @@
     private $loans;
     private $reservations;
 
+    private $month;
+    private $min_year;
+    private $max_year;
+
     function __construct(){
       parent::__construct();
+
       // Initialize Models
       $this->Users = new UserModel($this->db);
       $this->loans = new LoanViewModel($this->db);
       $this->reservations = new ReserveViewModel($this->db);
+
+      $this->months = array(
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December",
+      );
+      $this->min_year = 1920;
+      $this->cur_year = date("Y");
     }
 
     function create_form($f3) {
-      $months = array(
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December',
-      );
-      $min_year = 1920;
-      $cur_year = date('Y');
-
       // clear session
-      $f3->set('SESSION', array());
+      $f3->set("SESSION", array());
 
       $render_options = array(
         "form_action"	=> "user/create", 
-        "min_year" => $min_year, 
-        "cur_year" => $cur_year, 
-        "months" => $months
+        "min_year" => $this->min_year, 
+        "cur_year" => $this->cur_year, 
+        "months" => $this->months
       );
       echo $f3->get("twig")->render("create_user.html", $render_options);
     }
 
-    function create($f3) {
-      // form submitted
-      $error = "";
-
-      echo "<pre>";
-      echo print_r($f3->get("POST"));
-      echo "</pre>";
+    function check_validation($f3) {
+      $error = '';
 
       if ($f3->get("POST.FirstName") == "") {
         $error = "Please fill in your first name.";
@@ -75,7 +75,14 @@
         $error = "Please enter your Date of Birth.";
       }
 
-      if ($error == '') {
+      return $error;
+    }
+
+    function create($f3) {
+      // form submitted
+      $error = $this->check_validation($f3);
+
+      if ($error == "") {
         // No error
         $f3->set("POST.BirthDate", date($f3->get("POST.year") . '-' . $f3->get("POST.month") . '-' . $f3->get("POST.day")));
         $f3->set("POST.Password", md5($f3->get("POST.Password")));
@@ -88,10 +95,18 @@
         // reroute to login page
         $f3->reroute('/user/login');
       } else {
-        echo $error;
+        // clear session
+        $f3->set("SESSION", array());
+  
+        $render_options = array(
+          "form_action"	=> "user/create", 
+          "min_year" => $this->min_year, 
+          "cur_year" => $this->cur_year, 
+          "months" => $this->months,
+          "error" => $error
+        );
+        echo $f3->get("twig")->render("create_user.html", $render_options);
       }
-
-        // TO DO check if user name already exists
     }
 
     // create login form
@@ -136,6 +151,7 @@
           } else {
             // save session
             $f3->set('SESSION.UserID', $results[0]->UserID);
+            $f3->set('SESSION.UserName', $results[0]->UserName);
             $f3->set('SESSION.FirstName', $results[0]->FirstName);
             $f3->set('SESSION.LastName', $results[0]->LastName);
             $f3->set('SESSION.UserType', $results[0]->UserType);
@@ -148,7 +164,13 @@
             // echo print_r($f3->get('SESSION'));
             // echo '</pre>';
 
-            $f3->reroute('/user/detail');
+            if ($f3->get('SESSION.UserType') == 'user') {
+              // user page
+              $f3->reroute('/user/detail');
+            } else {
+              // admin page
+              $f3->reroute('/admin/home');
+            }
 
             // $render_options = array(
             //   "session" => $f3->get("SESSION")
@@ -204,22 +226,70 @@
     // log out
     function logout($f3) {
       // clear session
-      $f3->set('SESSION', array());
+      $f3->set("SESSION", array());
 
       // redirect to home
       $f3->reroute("/");
     }
 
     function update_form($f3) {
-      echo '<h2>Load Update User Form</h2>';      
+      if ($f3->get('SESSION.UserName') != '') {
+        $render_options = array(
+          "form_action"	=> "user/update/" . $f3->get("PARAMS.id"), 
+          "min_year" => $this->min_year, 
+          "cur_year" => $this->cur_year, 
+          "months" => $this->months,
+          "session" => $f3->get("SESSION"),
+          "user" => $this->Users->get_user_by_userid($f3->get("PARAMS.id"))[0]
+        );
+        echo $f3->get("twig")->render("create_user.html", $render_options);
+      }
     }
 
     function update($f3) {
-      echo '<h2>Load Update User Form</h2>';      
+      // form submitted
+      $error = $this->check_validation($f3);
+
+      if ($error == "") {
+        // No error
+        $f3->set("POST.BirthDate", date($f3->get("POST.year") . '-' . $f3->get("POST.month") . '-' . $f3->get("POST.day")));
+        $f3->set("POST.Password", md5($f3->get("POST.Password")));
+        
+        // update user information
+        $this->Users->update_user_by_id($f3->get("POST.UserID"));
+
+        // reroute to login page
+        if ($f3->get("SESSION.UserType") == "admin") {
+          $f3->reroute("/admin/user_list");
+        } else {
+          $f3->reroute('/user/detail');
+        }
+      } else { 
+        if ($f3->get('SESSION.UserName') != '') {
+          $render_options = array(
+            "form_action"	=> "user/update/" . $f3->get("PARAMS.id"), 
+            "min_year" => $this->min_year, 
+            "cur_year" => $this->cur_year, 
+            "months" => $this->months,
+            "session" => $f3->get("SESSION"),
+            "user" => $this->Users->get_user_by_userid($f3->get("PARAMS.id"))[0],
+            "error" => $error
+          );
+          echo $f3->get("twig")->render("create_user.html", $render_options);
+        }
+      }
     }
 
     function delete_account($f3) {
-      echo '<h2>account was deleted successfully.</h2>';
+      if ($f3->get("PARMS.id") == $f3->get("SESSION.UserID")) {
+        $this->books->delete_user_by_userid($f3->get('PARAMS.id'));
+        // session clear
+        $f3->set("SESSION", array());
+        $f3->reroute("/");
+      } else if ($f3->get("SESSION.UserType") == "admin") {
+        $this->books->delete_user_by_userid($f3->get('PARAMS.id'));
+        $f3->reroute("admin/home");
+      }
     }
   }
 ?>

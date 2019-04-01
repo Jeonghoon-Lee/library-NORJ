@@ -35,6 +35,7 @@
         
         $render_option = array(
           'session' => $f3->get('SESSION'),
+          'subtitle' => 'Search Result',
           'books' => $this->books->find_book($search_options)
         );
         echo $f3->get('twig')->render('search_result.html', $render_option);
@@ -48,6 +49,7 @@
           // array_reverse to display recent to old
           $render_option = array(
             'session' => $f3->get('SESSION'),
+            'subtitle' => 'Book List',
             'books' => $this->books->fetch_all()
             // 'books' => array_reverse($this->books->fetch_all())
           );          
@@ -155,6 +157,7 @@
 
       $render_option = array(
         'session' => $f3->get('SESSION'),
+        'subtitle' => 'Advanced Search Result',
         'books' => $this->books->find_book(implode(' and ', $search_options))
       );
       echo $f3->get('twig')->render('search_result.html', $render_option);
