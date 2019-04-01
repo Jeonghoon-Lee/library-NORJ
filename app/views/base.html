@@ -11,15 +11,10 @@
 
   <base href="http://localhost:81/library_NORJ/">
 
-  <!-- Font awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <!-- bootstrap css -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-  <link rel="shortcut icon" href="#">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <!--Font awesome-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <!-- common css: main.css  -->
@@ -29,7 +24,95 @@
 </head>
 
 <body>
-  <div class="py-2">
+  <!--Top page compaany name and search bar-->
+  <header>
+      <div class='sticky-top fixed-top header'>
+        <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4 justify-content-center" id="company-name">NORJ Library</div>
+          <div class="col-sm-4 justify-content-end search">
+            <div class="input-group ">
+              <input type="text" class="form-control" placeholder="Search">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Navigation Bar!-->
+        <nav class="navbar navbar-light bg-light navbar-expand-sm navbar-template">
+          <!-- Brand -->
+          {% if session.UserType == "admin" %}
+          <a class="navbar-brand" href="admin/home">        
+          {% else %}
+          <a class="navbar-brand" href="">      
+          {% endif %}
+            <img src="public/img/Library-2-icon.png" width="50" height="50">
+          </a>
+          <div class="collapse navbar-collapse order-3 order-sm-2" id="#NavbarNavDropdown">
+            <ul class="navbar-nav">
+              {% if session.UserType == "user" %}
+                <li class="nav-item">
+                  <a class="nav-link" href="user/detail">Home</a>
+                </li>
+              {% elseif session.UserType == "" %}
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Home</a>
+                </li>
+              {% endif %}
+              {% if session.UserType != "admin" %}            
+                <li class="nav-item">
+                  <a class="nav-link" href="about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="contact">Contact US</a>
+                </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="search">Catalog</a>
+              </li>
+              {# {% if session.UserID == "" %}
+                <li class="nav-item">
+                    <a class="nav-link" href="user/create">Create Account</a>
+                </li>
+              {% endif %} #}
+              {% if session.UserType == "admin" %}
+                <li class="nav-item">
+                  <a class="nav-link" href="book/create">Create Book</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="user/create">Create User</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="admin/book_list">Book List</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="admin/user_list">User List</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="admin/message_list">Message List</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+          <div class="d-flex flex-row order-2 ordes-sm-3">
+            <ul class="navbar-nav flex-row">
+              {% if session.UserID != "" %}
+                <a class="nav-link" href="user/logout"><i class="fa fa-user fa-2x"></i> Sign out</a>
+              {% else %}
+                <a class="nav-link" href="user/login"><i class="fa fa-user fa-2x"></i> Sign In</a>
+              {% endif %}
+            </ul>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarNavDropdown">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>  
+  {# <div class="py-2">
     <div class="container">
       <!-- Navigation menu -->
       <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -105,30 +188,47 @@
         </div>
       </nav>
     </div>
-  </div>
+  </div> #}
 
   {# search bar #}
-  {% block search %}{% endblock %}
+  {# {% block search %}{% endblock %} #}
 
+  {# hero section #}
+  {% block hero_section %}{% endblock %}
   <!-- Main Content -->
   <div class='container'>
     {% block content %}{% endblock %}
   </div>
 
-  <!-- Footer -->
-  <footer class="container">
-    <hr>
+  <!--Footer-->
+  <hr>
+  <div class="bg-1">
+  <!--Footer navigation bar-->
     <div class="row justify-content-center">
-      <ul class="social-network social-circle">
-        <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="#" class="icoSkype" title="Skype"><i class="fa fa-skype"></i></a></li>
-        <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-      </ul>
+      <ul class="nav footer-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Catalog</a>
+          </li>
+        </ul>
+      </div>
+      <hr>
+      <div class="row justify-content-center ">
+    <ul class="social-network social-circle">
+      <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+      <li><a href="#" class="icoSkype" title="Skype"><i class="fa fa-skype"></i></a></li>
+      <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+    </ul>
+  </div>
+    <div class="row justify-content-center">
+      <p class="text-center">© 2019 by NORJ Library . Created with NORJ Team Corp. </p>
     </div>
-    <div>
-      <p class="text-center">© 2019 by Library NORJ. Created with NORJ Team Corp. </p>
-    </div>
-  </footer>
+  </div>
 
   <!-- Bootstrap javascript source -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
