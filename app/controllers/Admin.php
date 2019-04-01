@@ -2,20 +2,16 @@
 // Admin.php
   class Admin extends Controller {
     // define Model variable
-    private $books;
     private $book_list;
-    private $languages;
-    private $categories;
     private $users;
+    private $messages;
 
     function __construct() {
       parent::__construct();
       // initialize Models
-      $this->books = new BookModel($this->db);
       $this->book_list = new BookViewModel($this->db);
-      $this->languages = new LangModel($this->db);
-      $this->categories = new CategoryModel($this->db);
       $this->users = new UserModel($this->db);
+      $this->messages = new ContactMessageModel($this->db);      
     }
 
     function book_list($f3) {
@@ -33,15 +29,28 @@
 
     function user_list($f3) {
       if ($f3->get('SESSION.UserType') == 'admin') {
-        $render_option = array(
+        $render_options = array(
           'session' => $f3->get('SESSION'),
           'subtitle' => 'User List',
           'users' => $this->users->fetch_all()
         );
-        echo $f3->get('twig')->render('user_list.html', $render_option);
+        echo $f3->get('twig')->render('user_list.html', $render_options);
       } else {
         $f3->reroute('/');
       }
     }
+
+    function message_list($f3) {
+      if ($f3->get('SESSION.UserType') == 'admin') {
+        $render_options = array(
+          'session' => $f3->get('SESSION'),
+          'subtitle' => 'Message List',
+          'messages' => $this->messages->fetch_all()
+        );
+        echo $f3->get('twig')->render('message_list.html', $render_options);
+      } else {
+        $f3->reroute('/');
+      }
+    }    
   }
 ?>

@@ -50,6 +50,15 @@
           <ul class="navbar-nav">
             {% if session.UserType == "user" %}
               <li class="nav-item">
+                <a class="nav-link" href="user/detail">Home</a>
+              </li>
+            {% elseif session.UserType == "" %}
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+            {% endif %}
+            {% if session.UserType != "admin" %}            
+              <li class="nav-item">
                 <a class="nav-link" href="about">About</a>
               </li>
               <li class="nav-item">

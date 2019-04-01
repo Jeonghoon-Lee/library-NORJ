@@ -24,12 +24,13 @@
     );
     echo $f3->get('twig')->render('home.html', $render_option);
   });
-  // About Us page
+
+  // About page
   $f3->route('GET /about', function($f3) {
-    echo 'About US page';
-  });
-  $f3->route('GET /contact', function($f3) {
-    echo 'Contact US page';
+    $render_option = array(
+      'session' => $f3->get('SESSION')
+    );  
+    echo $f3->get('twig')->render('about.html', $render_option);
   });
 
   /**
@@ -64,6 +65,11 @@
 
   // login user account information
   $f3->route('GET /user/detail', 'Users->get_account_detail');
+  
+  // Contact page
+  $f3->route('GET /contact', 'Users->contact_form');
+  $f3->route('POST /contact', 'Users->contact');
+
 
   /**
    * Search

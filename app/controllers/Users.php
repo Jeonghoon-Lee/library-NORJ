@@ -4,6 +4,7 @@
     private $Users;
     private $loans;
     private $reservations;
+    private $messages;
 
     private $month;
     private $min_year;
@@ -16,6 +17,7 @@
       $this->Users = new UserModel($this->db);
       $this->loans = new LoanViewModel($this->db);
       $this->reservations = new ReserveViewModel($this->db);
+      $this->messages = new ContactMessageModel($this->db);
 
       $this->months = array(
         "January", "February", "March", "April", "May", "June",
@@ -26,11 +28,14 @@
     }
 
     function create_form($f3) {
-      // clear session
-      $f3->set("SESSION", array());
+      if ($f3->get("SESSION.UserType") != "admin") {
+        // clear session
+        $f3->set("SESSION", array());
+      }
 
       $render_options = array(
         "form_action"	=> "user/create", 
+        "session" => $f3->get("SESSION"),
         "min_year" => $this->min_year, 
         "cur_year" => $this->cur_year, 
         "months" => $this->months
@@ -289,6 +294,44 @@
       } else if ($f3->get("SESSION.UserType") == "admin") {
         $this->books->delete_user_by_userid($f3->get('PARAMS.id'));
         $f3->reroute("admin/home");
+      }
+    }
+
+    // create contact form
+    function contact_form($f3) {
+      $render_option = array(
+        "session" => $f3->get("SESSION")
+      );  
+      echo $f3->get("twig")->render("contact.html", $render_option);
+    }
+    
+    // save contact to database
+    function contact($f3) {
+      $error = "";
+      if ($f3->get("POST.Email") == "") {
+        $error = "Please fill in your email.";
+      } else if (!filter_var($f3->get("POST.Email"), FILTER_VALIDATE_EMAIL)) {
+        $error = "Please enter a vaild email";
+      } else if ($f3->get("POST.Subject") == "") {
+        $error = "Please enter Subject.";
+      } else if ($f3->get("POST.Message") == "") {
+        $error = "Please enter Message.";
+      } else if ($f3->get("POST.Name") == "") {
+        $error = "Please enter Contact Name.";
+      } else if (is_numeric($f3->get("POST.Name"))) {
+        $error = "Please enter a valid Contact Name.";
+      }
+
+      if ($error == "") {
+        // successfully posted
+        $this->messages->add_message();
+        $f3->reroute('/');
+      } else {
+        $render_option = array(
+          "session" => $f3->get("SESSION"),
+          "error" => $error
+        );  
+        echo $f3->get("twig")->render("contact.html", $render_option);
       }
     }
   }

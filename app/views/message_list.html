@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block page_title %}Message List{% endblock %}
+
+{% block content %}
+	<div class="row justify-content-md-center mt-5">
+		<div class="col-md-12">
+			<h2>{{ subtitle }}</h2>
+			<h6 class="text-right">Total # of messages: {{ messages|length }}</h6><br>
+		</div>
+	</div>
+
+	<div class="row justify-content-md-center">
+		<div class="col-md-12 table-responsive">
+			<table class="table">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Subject</th>
+					<th scope="col">Message</th>
+					<th scope="col">UserName</th>
+					<th scope="col">Email</th>
+					<th></th>
+				</tr>
+				{% for message in messages %}
+					<tr>
+						<td scope="col">{{ message.MsgID }}</th>
+						<td scope="col">{{ message.Subject }}</th>
+						<td scope="col">{{ message.Message }}</th>
+						<td scope="col">{{ message.Name }}</th>
+						<td scope="col"><a href="mailto:{{ message.Email }}">{{ message.Email }}</a></th>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>		
+	</div>
+{% endblock %}
