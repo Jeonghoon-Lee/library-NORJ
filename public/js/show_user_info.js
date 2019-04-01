@@ -1,43 +1,67 @@
-document.getElementById("loan_link").addEventListener("click", function(event){
-  event.preventDefault()
-  alert('aaa');
-});
-
 function show_user_loans() {
   var info_container = document.getElementById("user_info");
-  //info_container.innerHTML = "";
-  var img = document.getElementById("img_disappear");
-  img.style.display = "none";
-
+  
   const xhrObj = new XMLHttpRequest();
-        xhrObj.open("POST", "http://localhost/PHP_class/project/library-NORJ/src/get_user_loans.php");
-        xhrObj.send();
-        //handle errors
-        xhrObj.onerror = function () {
-            console.error("An error has occured!");
-        }
-        xhrObj.onload = function (e) {
-            //parse received JSON to JS object to retrieve data
-            responseObj = JSON.parse(xhrObj.response);
-            console.log(JSON.stringify(responseObj));
-            info_container.innerHTML = JSON.stringify(responseObj);
-            /*for (var i = 0; i < responseObj.length; i++) { 
-              for (var j = 0; j < responseObj.length; j++) {
-              var info;
-              info += stringify(responseObj[i][j]) + "<br>"; }
-              info_container.innerHTML = info;
-             
+  xhrObj.open("POST", "user/get_user_loans");
+  xhrObj.send();
+  //handle errors
+  xhrObj.onerror = function () {
+    console.error("An error has occured!");
+  }
+  xhrObj.onload = function (e) {
+    console.log(xhrObj.response);
+    //parse received JSON to JS object to retrieve data
+    responseObj = JSON.parse(xhrObj.response);
+    console.log(JSON.stringify(responseObj));
+    //info_container.innerHTML = JSON.stringify(responseObj);
 
-            }*/
+    //table
+    var heading = document.createElement('h2');
+    if (responseObj.length == 0) {
+      info_container.innerHTML = "";
+      info_container.appendChild(heading);
+      heading.innerHTML = "You have no active loans.";
+    } else {    
+      heading.innerHTML = "My Loans";
+      var labels = ['Book Title', 'Loan Date', 'Due Date']; 
+      var keys = ['Title', 'DateOut', 'DateDue'];
+      var table = document.createElement('table');
+      var thead = document.createElement('thead');
+      var tbody = document.createElement('tbody');
+
+      var theadTr = document.createElement('tr');
+        for (var i = 0; i < labels.length; i++) {
+          var theadTh = document.createElement('th');
+          theadTh.innerHTML = labels[i];
+          theadTr.appendChild(theadTh);
         }
-        
+    
+      thead.appendChild(theadTr);
+      table.appendChild(thead);
+
+      for (j = 0; j < responseObj.length; j++) {
+        var tbodyTr = document.createElement('tr');
+        for (k = 0; k < keys.length; k++) {
+          var tbodyTd = document.createElement('td');
+          tbodyTd.innerHTML = responseObj[j][keys[k]];
+          tbodyTr.appendChild(tbodyTd);
+        }
+        tbody.appendChild(tbodyTr);
       }
+      table.appendChild(tbody);
+      info_container.innerHTML = "";
+      info_container.appendChild(heading);
+      info_container.appendChild(table);
+      var loan_table = info_container.getElementsByTagName("table")[0];
+      info_container.classList.add('table-responsive');
+      loan_table.classList.add('table');
+    }
+  }
+}
+            
 
 function show_user_res() {
   var info_container = document.getElementById("user_info");
-  //info_container.innerHTML = "";
-  var img = document.getElementById("img_disappear");
-  img.style.display = "none";
 
   const xhrObj = new XMLHttpRequest();
         xhrObj.open("POST", "http://localhost/PHP_class/project/library-NORJ/src/get_user_reservations.php");
@@ -50,40 +74,49 @@ function show_user_res() {
             //parse received JSON to JS object to retrieve data
             responseObj = JSON.parse(xhrObj.response);
             console.log(responseObj);
-            info_container.innerHTML = JSON.stringify(responseObj);
+            
+           // ReservID, Title, ReservDate, ReservStatus
+          
+      //table
+    var heading = document.createElement('h2');
+    if (responseObj.length == 0) {
+      info_container.innerHTML = "";
+      info_container.appendChild(heading);
+      heading.innerHTML = "You have no reservations.";
+    } else {
+      heading.innerHTML = "My Reservations";
+      var labels = ['No.', 'Book Title', 'Date', 'Status']; 
+      var keys = ['ReservID', 'Title', 'ReservDate', 'ReservStatus'];
+      var table = document.createElement('table');
+      var thead = document.createElement('thead');
+      var tbody = document.createElement('tbody');
+
+      var theadTr = document.createElement('tr');
+        for (var i = 0; i < labels.length; i++) {
+          var theadTh = document.createElement('th');
+          theadTh.innerHTML = labels[i];
+          theadTr.appendChild(theadTh);
         }
+    
+      thead.appendChild(theadTr);
+      table.appendChild(thead);
+
+      for (j = 0; j < responseObj.length; j++) {
+        var tbodyTr = document.createElement('tr');
+        for (k = 0; k < keys.length; k++) {
+          var tbodyTd = document.createElement('td');
+          tbodyTd.innerHTML = responseObj[j][keys[k]];
+          tbodyTr.appendChild(tbodyTd);
+        }
+        tbody.appendChild(tbodyTr);
       }
-        
-      // TODO - create table
-      /*var container = getElementByID("user_info");
-            var table = document.createElement('table');
-            var thead = document.createElement('thead');
-            var tbody = document.createElement('tbody');
-
-            var theadTr = document.createElement('tr');
-            for (var i = 0; i < 5; i++) {
-              var theadTh = document.createElement('th');
-              theadTh.innerHTML = responseObj[i];
-              theadTr.appendChild(theadTh);
-            }
-            thead.appendChild(theadTr);
-            table.appendChild(thead);
-
-            for (j = 0; j < responseObj.length; j++) {
-    var tbodyTr = document.createElement('tr');
-    for (k = 0; k < 5; k++) {
-      var tbodyTd = document.createElement('td');
-      tbodyTd.innerHTML = responseObj[j][labels[k].toLowerCase()];
-      tbodyTr.appendChild(tbodyTd);
+      table.appendChild(tbody);
+      info_container.innerHTML = "";
+      info_container.appendChild(heading);
+      info_container.appendChild(table);
+      var loan_table = info_container.getElementsByTagName("table")[0];
+      info_container.classList.add('table-responsive');
+      loan_table.classList.add('table');
     }
-    tbody.appendChild(tbodyTr);
   }
-  table.appendChild(tbody);
-
-  container.appendChild(table);
 }
-
-            
-            
-            
-        }*/

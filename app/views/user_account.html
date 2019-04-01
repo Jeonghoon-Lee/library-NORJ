@@ -2,7 +2,9 @@
 {% block page_title %}My Account{% endblock %}
 
 {% block content %}
-<h1>Loan / Reservation List</h1>
+<a href="user/logout" >Sign out</a><br />
+<a href="user/update/{{ session.UserID }}">Edit account</a>
+<h1>Hello {{session.FirstName}}</h1>
 {% if error!= ''%}
   <div class="alert alert-danger" role="alert">{{error}}</div>
 {% endif %}
@@ -11,6 +13,12 @@
     <div class="row">
       <div id="user_profile" style="border: 1px solid black" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
         <img src="#" alt="user photo"><br /><br />
+
+        <form action="{{form_action}}" method="POST" enctype="multipart/form-data"></form>
+        <input type="file" name="image"><br /><br />
+        <span>{{error}}</span>
+        <input type="submit" name="btn_img" value="Upload photo">
+
         <h2>{{session.FirstName}} {{session.LastName}}</h2>
         
         <p><a href="http://localhost:81/library_NORJ/user/detail#" onclick="show_user_loans()">Loans ({{loan_amount}})</a></p>
