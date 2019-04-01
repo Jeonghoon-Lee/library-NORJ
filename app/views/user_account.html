@@ -2,7 +2,7 @@
 {% block page_title %}My Account{% endblock %}
 
 {% block content %}
-<a href="user/logout" >Sign out</a><br />
+<!--<a href="user/logout" >Sign out</a><br /> moved to the top-->
 <a href="user/update/{{ session.UserID }}">Edit account</a>
 <h1>Hello {{session.FirstName}}</h1>
 {% if error!= ''%}
