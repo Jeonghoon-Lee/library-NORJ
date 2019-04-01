@@ -9,7 +9,7 @@
 <body>
   <h1>Library HOME ^^</h1>
   <a href="src/manage_book.php">register a book</a><br/>
-  <a href="templates/advance_search.html">Advanced Search</a><br/>
+  <a href="src/advance_search.php">Advanced Search</a><br/>
   <a href="templates/booksDetails.html">book details</a><br/>
   <a href="templates/main.html.twig">main</a><br/>
   <a href="src/search_result.php">search result</a><br>
@@ -17,5 +17,6 @@
   <a href="src/home.php">home</a><br>
   <a href="src/create_user.php">Create User</a><br>
   <a href="src/manage_account.php">User Account</a><br>
+  <a href="src/new_releases.php">New releases</a><br>
 </body>
 </html>

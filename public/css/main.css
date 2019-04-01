@@ -108,7 +108,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 /*button style*/
-input.btn {
+a.btn, input.btn {
 	background: #C2625F !important;
 	color: #FFF !important;
 }
@@ -171,4 +171,17 @@ div.row.services{
 
 div#post-hero{
 	margin-bottom: 50px;
+}
+
+div.col-md-3.release {
+	margin-top: 25px;
+	margin-right: 10px;
+	margin-bottom: 40px;
+	margin-left: 10px;
+}
+
+img.img-fluid.book-cover{
+	width: 150px;
+	height: 100px;
+	background-image: url("../img/no_image_book.png");
 }
