@@ -20,7 +20,7 @@
 <div class="row justify-content-between">
         {% for book in row %}
     <div class="col-md-3 justify-content-center release">
-            <img src="..." class="img-fluid book-cover ">
+            <a href="book_detail.php?b_id={{ book.ISBN }}"><img src="{{ book.BookImage }}" class="img-fluid book-cover "></a>
             <table class="table table-sm release">
                 <tbody>
                     <tr>
