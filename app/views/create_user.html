@@ -1,55 +1,110 @@
 {% extends "base.html" %}
 {% block page_title %}Create Account{% endblock %}
 
-{% block content %}
-  {% if error!= ''%}
-    <div class="alert alert-danger" role="alert">{{error}}</div>
-  {% endif %}
-  <div class="py-2">
-    <div class="container">
-      <div class="row">
-        <div class="framed">
-          <form action="{{form_action}}" method="post" enctype="multipart/form-data">
-            <input type="text" name="FirstName" placeholder="First name" value="{{ user.FirstName }}"/><br /><br />
-            <input type="text" name="MiddleName" placeholder="Middle name" value="{{ user.MiddleName }}"/><br /><br />
-            <input type="text" name="LastName" placeholder="Last name" value="{{ user.LastName }}"/><br /><br />
 
-            Date of Birth: 
+{% block content %}
+{% if error!= ''%}
+<div class="alert alert-danger" role="alert">{{error}}</div>
+{% endif %}
+<div class="py-2">
+  <div class="container">
+    <h1>{{title}}</h1>
+    
+    <form action="{{form_action}}" method="post" enctype="multipart/form-data">
+        <!--Row 1-->
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                Enter your name:
+            </div>
+          <div class="form-group col-md-4">
+            <input type="text" name="first_name" class="form-control" placeholder="First name"
+              value="{{user.FirstName}}" required /><br /><br />
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                Enter your midle name:
+            </div>
+          <div class="form-group col-md-4">
+            <input type="text" name="middle_name" class="form-control" placeholder="Middle name"
+              value="{{user.MiddleName}}" /><br /><br />
+          </div>
+        </div>
+          <div class="form-group col-md-4">
+            <input type="text" name="last_name" class="form-control" placeholder="Last name"
+              value="{{user.LastName}}" /><br /><br />
+          </div>
+        </div>
+        <!--Row 2-->
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            Date of Birth:
+          </div>
+          <div class="form-group col-md-2">
             <select name="day" class="form-control">
-              <option value ="" selected disabled>Day</option>
+              <option value="" selected disabled>Day</option>
               {% for day in 1..31 %}
-                <option value="{{ day }}" {% if day == user.BirthDate|date('d') %} selected {% endif %}>{{ day }}</option>
+              <option value="{{ day }}" {% if day == user.BirthDate|date("d") %} selected {% endif %}>{{ day }}</option>
               {% endfor %}
             </select>
+          </div>
+          <div class="form-group col-md-2">
             <select name="month" class="form-control">
               <option value="" selected disabled>Month</option>
               {% for month in months %}
-                <option value="{{ loop.index }}" {% if loop.index == user.BirthDate|date('m') %} selected {% endif %}>{{ month }}</option>
+              <option value="{{ month }}" {% if month == user.BirthDate|date("F") %} selected {% endif %}>{{ month }}
+              </option>
               {% endfor %}
             </select>
+          </div>
+          <div class="form-group col-md-2">
             <select name="year" class="form-control">
               <option value="" selected disabled>Year</option>
               {% for year in cur_year..min_year %}
-                <option value="{{ year }}" {% if year == user.BirthDate|date('Y') %} selected {% endif %}>{{ year }}</option>
+              <option value="{{ year }}" {% if year == user.BirthDate|date("Y") %} selected {% endif %}>{{ year }}
+              </option>
               {% endfor %}
-            </select><br />
-
-            <input type="text" name="UserName" placeholder="User name" value="{{ user.UserName }}"/><br /><br />
-            <input type="email" name="Email" placeholder="Email" value="{{ user.Email }}"/><br /><br />
-            <input type="password" name="Password" value="" placeholder="Password" value=""/><br /><br />
-            <input type="password" name="Password_c" value="" placeholder="Confirm Password" value=""/><br /><br />
-            {% if user.UserName != '' %}
-              <input type="submit" name="btn_update" value="Update">
-            {% else %}
-              <input type="submit" name="btn_create" value="Create Account">
-            {% endif %}
-            
-            <input type="reset" value="Reset">
-            <input type="hidden" name="UserID" value="{{ user.UserID }}"/>
-          </form>
+            </select>
+          </div>
         </div>
-      </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            Choose User name:
+          </div>
+          <div class="form-group col-md-4">
+            <input type="text" name="user_name" class="form-control" placeholder="User name"
+              value="{{user.UserName}}" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            Enter e-mail:
+          </div>
+          <div class="form-group col-md-4">
+            <input type="email" name="email" class="form-control" placeholder="Email" value="{{user.Email}}" />
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+              Enter Password:
+            </div>
+            <div class="form-group col-md-4">
+              <input type="password" name="passw" class="form-control" placeholder="Password" minlength="7" />
+            </div>
+        </div>
+        <div class="form-row">
+              <div class="form-group col-md-3">
+                Re-type Password:
+              </div>
+              <div class="form-group col-md-4">
+                  <input type="password" name="passw_c" class="form-control" placeholder="Confirm password" /><br /><br />
+              </div>
+        </div>
+        <input type="hidden" name="user_id" value="{{user.UserID}}"><br />
+        <input type="submit" name="btn_create" class="btn" value="{{button}}">
+      </form>
     </div>
-  </div>  
+  </div>
+</div>
+<!--</div> -->
 {% endblock %}
-
