@@ -3,6 +3,8 @@ include('.\config.php');
 include('.\functions.php');
 session_start();
 
+database_connect();
+
 $loans = user_loans($_SESSION['UserId']);
 $loan_amount = DB::count($loans);
 $charges = 0;
@@ -30,16 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 				$allowed_extensions = array("png", "gif", "jpg", "jpeg");
 				if ( in_array( $extension, $allowed_extensions ) ){
 					// file extensions is allowed
-         
+				 
+//					"UPDATE users set Photo = '" . basename($_FILES['image']['name']) . "' WHERE UserID=%i", $_SESSION['UserId']
 					//upload our file
 					//if ( move_uploaded_file( $_FILES['image']['tmp_name'], "uploads/" . $_POST['name'] . "." . $extension ) ){
 					if ( move_uploaded_file( $_FILES['image']['tmp_name'], "../public/img/" . $_SESSION['UserId']. "." . $extension ) ){
-            $insert = $db->query("INSERT into users (photo) VALUES ('".basename($_FILES['image']['name'])."')");
-            if($insert){
-              $error = "The file ".$fileName. " has been uploaded successfully.";
-            }else{
-              $error = "File upload failed, please try again.";
-            } 
+						echo 'aaa' . $db;
+            // $insert = $db->query('update users set Photo="aaa" where UserID=1');
+            // if($insert){
+            //   $error = "The file ".$fileName. " has been uploaded successfully.";
+            // }else{
+            //   $error = "File upload failed, please try again.";
+            // } 
 						die(); 
 					}else{
 						$error = "An error has occured!";

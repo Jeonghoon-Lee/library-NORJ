@@ -2,7 +2,7 @@ function show_user_loans() {
   var info_container = document.getElementById("user_info");
   
   const xhrObj = new XMLHttpRequest();
-  xhrObj.open("POST", "http://localhost/PHP_class/project/library-NORJ/src/get_user_loans.php");
+  xhrObj.open("POST", "http://localhost:81/NORJ/library-NORJ/src/get_user_loans.php");
   xhrObj.send();
   //handle errors
   xhrObj.onerror = function () {
@@ -63,7 +63,7 @@ function show_user_res() {
   var info_container = document.getElementById("user_info");
 
   const xhrObj = new XMLHttpRequest();
-        xhrObj.open("POST", "http://localhost/PHP_class/project/library-NORJ/src/get_user_reservations.php");
+        xhrObj.open("POST", "http://localhost:81/NORJ/library-NORJ/src/get_user_reservations.php");
         xhrObj.send();
         //handle errors
         xhrObj.onerror = function () {
