@@ -3,6 +3,8 @@
 
 
 {% block content %}
+<a href="logout.php" >Sign out</a><br />
+<a href="create_user.php?user_id={{ user.0.UserID }}">Edit account</a>
 <h1>Hello {{session.FirstName}}</h1>
 {% if error!= ''%}
   <div class="alert alert-danger" role="alert">{{error}}</div>
@@ -22,9 +24,10 @@
         <!-- <button onclick="show_user_loans()">test</button> -->
         <p><a href="#" onclick="show_user_res()">Reservations ({{res_amount}})</a></p>
         <p>Charges to pay: ${{charges}}</p>
+  
       </div>
       <div id="user_info" class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-        <img id="img_disappear" src="../public/img/bookpile.jpg" >
+        <img src="../public/img/bookpile.jpg" >
 
       </div>
     </div>

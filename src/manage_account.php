@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 					// file extensions is allowed
          
 					//upload our file
-					if ( move_uploaded_file( $_FILES['image']['tmp_name'], "../public/img/" . $_FILES["image"]["name"]) ){
+					//if ( move_uploaded_file( $_FILES['image']['tmp_name'], "uploads/" . $_POST['name'] . "." . $extension ) ){
+					if ( move_uploaded_file( $_FILES['image']['tmp_name'], "../public/img/" . $_SESSION['UserId']. "." . $extension ) ){
             $insert = $db->query("INSERT into users (photo) VALUES ('".basename($_FILES['image']['name'])."')");
             if($insert){
               $error = "The file ".$fileName. " has been uploaded successfully.";
@@ -68,7 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 				}
 			}
     }
-  }
+	}
+	
+$user = DB::query("SELECT * FROM users WHERE UserId=%i", $_SESSION['UserId']);
 
 echo $twig->render('user_account.html', array(
                   'session'=>$_SESSION,
@@ -76,7 +79,8 @@ echo $twig->render('user_account.html', array(
                   'res_amount'=>$res_amount,
                   'charges'=>$charges,
                   "form_action"	=>	$_SERVER['PHP_SELF'],
-                  "error" => $error
+									"error" => $error,
+									"user" => $user
                 ));
 
 ?>

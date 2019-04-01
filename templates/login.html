@@ -12,7 +12,7 @@
       <div class="framed">
         <form action="{{form_action}}" method="post" enctype="multipart/form-data">
           <img src="#" alt="user icon"><br /><br />
-          <input type="text" name="user_name" placeholder="User name" /><br /><br />
+          <input type="text" name="user_name" placeholder="User name" value="{% if post.user_name is defined%}{{post.user_name}}{% endif %}"/><br /><br />
           <input type="password" name="password" placeholder="Password" /><br /><br />
           <input type="checkbox" name="remember_me" />Remember Me<br /><br />
           <input type="submit" name="btn_login" value = "Sign in">

@@ -56,12 +56,8 @@ $log->pushHandler( new StreamHandler("website.log", Logger::DEBUG) );
 					$_SESSION['UserType'] = $results['UserType'];
 
 					if(!empty($_POST["remember_me"])) {
-						setcookie ("user_login", $_POST['user_name'], time()+ (10 * 365 * 24 * 60 * 60));
-					} else {
-						if(isset($_COOKIE["user_login"])) {
-							setcookie ("user_login","");
-						}
-					}
+						setcookie ("user_login", $_POST['user_name'], time()+ 3600);
+					} 
 					 
 					$log->info("user #". $results['UserId'] . " had logged in");
 					
@@ -73,6 +69,6 @@ $log->pushHandler( new StreamHandler("website.log", Logger::DEBUG) );
   }
 
   echo $twig->render("login.html", 
-  		array(	"form_action"	=>	$_SERVER['PHP_SELF'], "error" => $error	)
+  		array(	"form_action"	=>	$_SERVER['PHP_SELF'], "error" => $error, "post" => $_POST)
     );
 ?>
