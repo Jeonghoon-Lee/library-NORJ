@@ -24,7 +24,6 @@
 
     function get_user_loans_by_id($id) {
       $search_option = array('Datein is null and UserID = ?', $id);
-
       $this->load($search_option);
 
       // make associative array and return

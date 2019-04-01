@@ -93,7 +93,7 @@
         $f3->set("POST.Password", md5($f3->get("POST.Password")));
         $f3->set("POST.RegisteredDate", date('Y-m-d'));
         $f3->set("POST.UserType", "user");
-        
+
         // create new user in user table
         $this->Users->create_user();
 

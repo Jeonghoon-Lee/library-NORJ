@@ -26,110 +26,32 @@
 <body>
   <!--Top page compaany name and search bar-->
   <header>
-      <div class='sticky-top fixed-top header'>
-        <div class="row">
-          <div class="col-sm-4"></div>
-          <div class="col-sm-4 justify-content-center" id="company-name">NORJ Library</div>
-          <div class="col-sm-4 justify-content-end search">
-            <div class="input-group ">
-              <input type="text" class="form-control" placeholder="Search">
-              <div class="input-group-append">
-                <button class="btn btn-secondary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </div>
+    <div class='sticky-top fixed-top header'>
+      <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 justify-content-center" id="company-name">NORJ Library</div>
+        <div class="col-sm-4 justify-content-end search">
+          <div class="input-group ">
+            <input type="text" class="form-control" placeholder="Search">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button">
+                <i class="fa fa-search"></i>
+              </button>
             </div>
           </div>
         </div>
-        <!--Navigation Bar!-->
-        <nav class="navbar navbar-light bg-light navbar-expand-sm navbar-template">
-          <!-- Brand -->
-          {% if session.UserType == "admin" %}
-          <a class="navbar-brand" href="admin/home">        
-          {% else %}
-          <a class="navbar-brand" href="">      
-          {% endif %}
-            <img src="public/img/Library-2-icon.png" width="50" height="50">
-          </a>
-          <div class="collapse navbar-collapse order-3 order-sm-2" id="#NavbarNavDropdown">
-            <ul class="navbar-nav">
-              {% if session.UserType == "user" %}
-                <li class="nav-item">
-                  <a class="nav-link" href="user/detail">Home</a>
-                </li>
-              {% elseif session.UserType == "" %}
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Home</a>
-                </li>
-              {% endif %}
-              {% if session.UserType != "admin" %}            
-                <li class="nav-item">
-                  <a class="nav-link" href="about">About</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact">Contact US</a>
-                </li>
-              {% endif %}
-              <li class="nav-item">
-                <a class="nav-link" href="search">Catalog</a>
-              </li>
-              {# {% if session.UserID == "" %}
-                <li class="nav-item">
-                    <a class="nav-link" href="user/create">Create Account</a>
-                </li>
-              {% endif %} #}
-              {% if session.UserType == "admin" %}
-                <li class="nav-item">
-                  <a class="nav-link" href="book/create">Create Book</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="user/create">Create User</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="admin/book_list">Book List</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="admin/user_list">User List</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="admin/message_list">Message List</a>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
-          <div class="d-flex flex-row order-2 ordes-sm-3">
-            <ul class="navbar-nav flex-row">
-              {% if session.UserID != "" %}
-                <a class="nav-link" href="user/logout"><i class="fa fa-user fa-2x"></i> Sign out</a>
-              {% else %}
-                <a class="nav-link" href="user/login"><i class="fa fa-user fa-2x"></i> Sign In</a>
-              {% endif %}
-            </ul>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarNavDropdown">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
-        </nav>
       </div>
-    </header>  
-  {# <div class="py-2">
-    <div class="container">
-      <!-- Navigation menu -->
-      <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+      <!--Navigation Bar!-->
+      <nav class="navbar navbar-light bg-light navbar-expand-sm navbar-template">
         <!-- Brand -->
         {% if session.UserType == "admin" %}
-          <a class="navbar-brand" href="admin/home">Library-NORJ</a>        
+        <a class="navbar-brand" href="admin/home">        
         {% else %}
-          <a class="navbar-brand" href="">Library-NORJ</a>      
+        <a class="navbar-brand" href="">      
         {% endif %}
-        
-        <!-- Toggler/collapsibe Button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Navbar links -->
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <img src="public/img/Library-2-icon.png" width="50" height="50">
+        </a>
+        <div class="collapse navbar-collapse order-3 order-sm-2" id="#NavbarNavDropdown">
           <ul class="navbar-nav">
             {% if session.UserType == "user" %}
               <li class="nav-item">
@@ -140,22 +62,22 @@
                 <a class="nav-link" href="#">Home</a>
               </li>
             {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="search">Catalog</a>
+            </li>            
             {% if session.UserType != "admin" %}            
               <li class="nav-item">
-                <a class="nav-link" href="about">About</a>
+                <a class="nav-link" href="about">About US</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="contact">Contact US</a>
               </li>
             {% endif %}
-            <li class="nav-item">
-              <a class="nav-link" href="search">Search Books</a>
-            </li>
-            {% if session.UserID == "" %}
+            {# {% if session.UserID == "" %}
               <li class="nav-item">
                   <a class="nav-link" href="user/create">Create Account</a>
               </li>
-            {% endif %}
+            {% endif %} #}
             {% if session.UserType == "admin" %}
               <li class="nav-item">
                 <a class="nav-link" href="book/create">Create Book</a>
@@ -173,22 +95,23 @@
                 <a class="nav-link" href="admin/message_list">Message List</a>
               </li>
             {% endif %}
-            <li class="nav-item">
-              {% if session.UserID != "" %}
-                <a class="nav-link" href="user/logout">Logout</a>
-              {% else %}
-                <a class="nav-link" href="user/login">Login</a>
-              {% endif %}
-            </li>
           </ul>
-
-          {% if session.UserID != "" %}
-            <div class="text-success">Hello, {{ session.FirstName ~ ' ' ~ session.LastName }} </div>
-          {% endif %}
+        </div>
+        <div class="d-flex flex-row order-2 ordes-sm-3">
+          <ul class="navbar-nav flex-row">
+            {% if session.UserID != "" %}
+              <a class="nav-link" href="user/logout"><i class="fa fa-user fa-2x"></i> Sign out</a>
+            {% else %}
+              <a class="nav-link" href="user/login"><i class="fa fa-user fa-2x"></i> Sign In</a>
+            {% endif %}
+          </ul>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+          </button>
         </div>
       </nav>
     </div>
-  </div> #}
+  </header>  
 
   {# search bar #}
   {# {% block search %}{% endblock %} #}
@@ -196,36 +119,69 @@
   {# hero section #}
   {% block hero_section %}{% endblock %}
   <!-- Main Content -->
-  <div class='container'>
+  <div class="container">
     {% block content %}{% endblock %}
   </div>
 
   <!--Footer-->
-   <div class="bg-1">
+  <div class="bg-1 pt-3">
   <!--Footer navigation bar-->
     <div class="row justify-content-center">
       <ul class="nav footer-nav">
+        {% if session.UserType == "user" %}
           <li class="nav-item">
-            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="user/detail">Home</a>
+          </li>
+        {% elseif session.UserType == "" %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="search">Catalog</a>
+        </li>        
+        {% if session.UserType != "admin" %}            
+          <li class="nav-item">
+            <a class="nav-link" href="about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="contact">Contact US</a>
+          </li>
+        {% endif %}
+        {# {% if session.UserID == "" %}
+          <li class="nav-item">
+              <a class="nav-link" href="user/create">Create Account</a>
+          </li>
+        {% endif %} #}
+        {% if session.UserType == "admin" %}
+          <li class="nav-item">
+            <a class="nav-link" href="book/create">Create Book</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Catalog</a>
+            <a class="nav-link" href="user/create">Create User</a>
           </li>
-        </ul>
-      </div>
-      <hr>
-      <div class="row justify-content-center ">
-    <ul class="social-network social-circle">
-      <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-      <li><a href="#" class="icoSkype" title="Skype"><i class="fa fa-skype"></i></a></li>
-      <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-    </ul>
-  </div>
+          <li class="nav-item">
+            <a class="nav-link" href="admin/book_list">Book List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin/user_list">User List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin/message_list">Message List</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+    <hr>
+    <div class="row justify-content-center ">
+      <ul class="social-network social-circle">
+        <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#" class="icoSkype" title="Skype"><i class="fa fa-skype"></i></a></li>
+        <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+      </ul>
+    </div>
     <div class="row justify-content-center">
-      <p class="text-center">© 2019 by NORJ Library . Created with NORJ Team Corp. </p>
+      <p class="text-center text-light"><small>© 2019 by NORJ Library . Created with NORJ Team Corp.</small></p>
     </div>
   </div>
 
