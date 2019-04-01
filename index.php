@@ -92,6 +92,7 @@
 
   // other function page
   $f3->route('GET|POST|PUT /book/upload_image', 'UploadImage->book_image');
+  $f3->route('GET|POST /user/get_user_loans', 'Users->get_user_loans');
 
 
   // execute f3

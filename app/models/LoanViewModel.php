@@ -21,5 +21,26 @@
       $search_option = array('UserID = ?', $id);
       return $this->count($search_option);
     }
+
+    function get_user_loans_by_id($id) {
+      $search_option = array('Datein is null and UserID = ?', $id);
+
+      $this->load($search_option);
+
+      // make associative array and return
+      $loans = array();
+      $filter_keys = array('Title', 'DateOut', 'DateDue');
+      foreach ($this->query as $loan) {
+        $loans[] = array_filter(
+          $loan->cast(),
+          function ($key) use ($filter_keys) {
+              return in_array($key, $filter_keys);
+          },
+          ARRAY_FILTER_USE_KEY
+        );
+      }
+
+      return $loans;
+    }
   }
 ?>

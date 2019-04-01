@@ -22,5 +22,12 @@
       $search_option = array('UserID = ?', $id);
       return $this->count($search_option);
     }
+
+    function get_user_reservation($id) {
+      $search_option = array('UserID = ?', $id);
+      $this->select('ReservID, Title, ReservDate, ReservStatus' , $search_option);
+      // make associative array and return
+      return $this->query;      
+    }
   }
 ?>

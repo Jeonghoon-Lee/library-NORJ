@@ -334,5 +334,19 @@
         echo $f3->get("twig")->render("contact.html", $render_option);
       }
     }
+
+    function get_user_loans($f3) {
+      //get array of user's loans (array of arrays)
+      $loans = $this->loans->get_user_loans_by_id($f3->get('SESSION.UserID'));
+
+      echo json_encode($loans);
+    }
+
+    function get_user_reservation($f3) {
+      //get array of user's loans (array of arrays)
+      $res = $this->reservations->get_user_reservation_by_id($f3->get('SESSION.UserID'));
+
+      echo json_encode($res);  
+    }
   }
 ?>
