@@ -40,5 +40,13 @@
       $this->load($search_option);
       $this->erase();
     }
+
+    function get_new_books($no_of_books) {
+      // doesn't work properly
+      // $search_option = array('order' => 'Year DESC', 'limit' => 3);
+      $search_option = array('order' => 'Year DESC');
+      $this->load($search_option);
+      return array_slice($this->query, 0, $no_of_books);
+    }
   }
 ?>

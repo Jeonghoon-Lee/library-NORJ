@@ -16,6 +16,16 @@
       $this->reservations = new ReservationModel($this->db);
     }
 
+    function home ($f3) {
+      $newbooks = $this->books->get_new_books(3);
+
+      $render_option = array(
+        'session' => $f3->get('SESSION'),
+        'newbooks' => $newbooks
+      );
+      echo $f3->get('twig')->render('home.html', $render_option);
+    }
+
     function check_validation($f3) {
       $book_status = array('available', 'reserved', 'loaned');
       $error = '';

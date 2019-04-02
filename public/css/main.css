@@ -208,6 +208,12 @@ h1.h1main {
 	border-radius: 0.3rem;
 }
 
+/* homepage.html */
+.card-body img {
+	width: 100%;
+	height: auto;
+}
+
 /* manage_book.html */
 .book-image {
   width: 100%;

@@ -18,12 +18,7 @@
   $f3->set('twig', $twig);
 
   // Home page
-  $f3->route('GET /', function($f3) {
-    $render_option = array(
-      'session' => $f3->get('SESSION')
-    );
-    echo $f3->get('twig')->render('home.html', $render_option);
-  });
+  $f3->route('GET /', 'Books->home');
 
   // About page
   $f3->route('GET /about', function($f3) {
