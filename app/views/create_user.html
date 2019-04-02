@@ -24,7 +24,7 @@
   <!--Row 2-->
   <div class="form-row">
     <div class="form-group col-md-3">
-      Enter your midle name:
+      Enter your middle name:
     </div>
     <div class="form-group col-md-6">
       <input type="text" name="MiddleName" class="form-control" placeholder="Middle name" value="{{user.MiddleName}}" />
@@ -48,7 +48,7 @@
       <select name="day" class="form-control">
         <option value="" selected disabled>Day</option>
         {% for day in 1..31 %}
-        <option value="{{ day }}" {% if day == user.BirthDate|date("d") %} selected {% endif %}>{{ day }}</option>
+        <option value="{{ day }}" {% if session.UserID != "" %}{% if day == user.BirthDate|date("d") %} selected {% endif %}{% endif %}>{{ day }}</option>
         {% endfor %}
       </select>
     </div>
@@ -56,7 +56,7 @@
       <select name="month" class="form-control">
         <option value="" selected disabled>Month</option>
         {% for month in months %}
-        <option value="{{ loop.index }}" {% if month == user.BirthDate|date("F") %} selected {% endif %}>{{ month }}
+        <option value="{{ loop.index }}" {% if session.UserID != "" %}{% if month == user.BirthDate|date("F") %} selected {% endif %}{% endif %}>{{ month }}
         </option>
         {% endfor %}
       </select>
@@ -65,7 +65,7 @@
       <select name="year" class="form-control">
         <option value="" selected disabled>Year</option>
         {% for year in cur_year..min_year %}
-        <option value="{{ year }}" {% if year == user.BirthDate|date("Y") %} selected {% endif %}>{{ year }}
+        <option value="{{ year }}" {% if session.UserID != "" %}{% if year == user.BirthDate|date("Y") %} selected {% endif %}{% endif %}>{{ year }}
         </option>
         {% endfor %}
       </select>
