@@ -182,3 +182,29 @@ img.img-fluid.book-cover{
 	height: 100px;
 	background-image: url("../img/no_image_book.png");
 }
+
+/*about page style*/
+.jumbotron.jum-about {
+	background: url("../img/bookpile.jpg") center;
+	margin-top:5%; 
+	padding: 9rem 2rem;
+	background-size: cover;
+}
+
+h1.h1main {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+.col-lg-4.backgr-about {
+	margin-top: 5%;
+	margin-bottom: 2%;
+	background-color:  rgb(243, 244, 245);
+	border-radius: 0.3rem;
+}
+.col-lg-4.backgr-about-1 {
+	margin-top: 5%;
+	margin-bottom: 2%;
+	background-color:#E27E5F;
+	border-radius: 0.3rem;
+}
