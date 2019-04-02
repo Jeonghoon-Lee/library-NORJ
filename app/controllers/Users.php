@@ -342,8 +342,8 @@
       echo json_encode($loans);
     }
 
-    function get_user_reservation($f3) {
-      //get array of user's loans (array of arrays)
+    function get_user_reservations($f3) {
+      //get array of user's reservations (array of arrays)
       $res = $this->reservations->get_user_reservation_by_id($f3->get('SESSION.UserID'));
 
       echo json_encode($res);  

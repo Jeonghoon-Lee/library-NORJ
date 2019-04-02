@@ -45,6 +45,9 @@
   // delete book
   $f3->route('GET /book/delete/@ISBN', 'Books->delete_book');
 
+  // reserve book
+  $f3->route('POST /book/reserve', 'Books->reserve_book');
+
   /**
    * Users 
    */
@@ -93,7 +96,7 @@
   // other function page
   $f3->route('GET|POST|PUT /book/upload_image', 'UploadImage->book_image');
   $f3->route('GET|POST /user/get_user_loans', 'Users->get_user_loans');
-
+  $f3->route('GET|POST /user/get_user_reservations', 'Users->get_user_reservations');
 
   // execute f3
   $f3->run();

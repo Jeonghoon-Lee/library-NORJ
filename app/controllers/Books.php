@@ -5,6 +5,7 @@
     private $books;
     private $languages;
     private $categories;
+    private $reservations;
 
     function __construct() {
       parent::__construct();
@@ -12,6 +13,7 @@
       $this->books = new BookModel($this->db);
       $this->languages = new LangModel($this->db);
       $this->categories = new CategoryModel($this->db);
+      $this->reservations = new ReservationModel($this->db);
     }
 
     function check_validation($f3) {
@@ -131,6 +133,21 @@
         // set value to display result
         $f3->set('SESSION.booklist', 'on');
         $f3->reroute('/search/result');
+      }
+    }
+
+    function reserve_book($f3) {
+      if ($f3->get("SESSION.UserID") != null) {
+        $this->reservations->add_reserve_book($f3->get("SESSION.UserID"));
+
+        $response = array(
+          'status' => 200,    // 200: OK 
+          'message' => 'Success'
+        );
+        http_response_code(200);
+  
+        // reply to client
+        echo json_encode($response);  
       }
     }
 

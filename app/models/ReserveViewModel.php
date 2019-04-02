@@ -23,15 +23,16 @@
       return $this->count($search_option);
     }
 
-    function get_user_reservation($id) {
-      $search_option = array('UserID = ?', $id);
+    function get_user_reservation_by_id($id) {
+      $search_option = array('ReservStatus like "reserved" and UserID = ?', $id);
       $this->load($search_option);
+      
       // make associative array and return
       $reservations = array();
-      $filter_keys = array('ReservID, Title, ReservDate, ReservStatus');
-      foreach ($this->query as $loan) {
+      $filter_keys = array('ReservID', 'Title', 'ReservDate', 'ReservStatus');
+      foreach ($this->query as $reserve) {
         $reservations[] = array_filter(
-          $loan->cast(),
+          $reserve->cast(),
           function ($key) use ($filter_keys) {
               return in_array($key, $filter_keys);
           },

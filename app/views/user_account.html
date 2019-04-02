@@ -3,31 +3,32 @@
 
 {% block content %}
 <!--<a href="user/logout" >Sign out</a><br /> moved to the top-->
-<a href="user/update/{{ session.UserID }}">Edit account</a>
-<h1>Hello {{session.FirstName}}</h1>
+
+<div class="mt-5">
+  <h2>Hello {{session.FirstName}} {{session.LastName}}</h2>
+</div>
 {% if error!= ''%}
   <div class="alert alert-danger" role="alert">{{error}}</div>
 {% endif %}
 <div class="py-2">
   <div class="container">
-    <div class="row">
-      <div id="user_profile" style="border: 1px solid black" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <img src="#" alt="user photo"><br /><br />
+    <div class="row mt-3 mb-5">
+      <div id="user_profile" style="border: 1px solid black" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pt-3 pb-3">
+        <!-- <img src="public/img/default-image.jpg" alt="user photo"><br /><br /> -->
+        <img src="public/img/default-image.jpg" alt="user photo"><br /><br />
 
         <form action="{{form_action}}" method="POST" enctype="multipart/form-data"></form>
         <input type="file" name="image"><br /><br />
         <span>{{error}}</span>
         <input type="submit" name="btn_img" value="Upload photo">
-
-        <h2>{{session.FirstName}} {{session.LastName}}</h2>
-        
+      
         <p><a href="http://localhost:81/library_NORJ/user/detail#" onclick="show_user_loans()">Loans ({{loan_amount}})</a></p>
         <p><a href="http://localhost:81/library_NORJ/user/detail#" onclick="show_user_res()">Reservations ({{res_amount}})</a></p>
         <p><a href="http://localhost:81/library_NORJ/user/detail#">Overdue charges to pay: ${{charges}}</a></p>
+        <p><a href="user/update/{{ session.UserID }}">Edit account</a></p>
       </div>
-      <div id="user_info" style="border: 1px solid red" class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <div id="user_info" style="border: 1px solid red" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pt-3 pb-3">
         <img id="img_disappear" src="public/img/bookpile.jpg" >
-
       </div>
     </div>
   </div>
