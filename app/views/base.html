@@ -31,12 +31,14 @@
         <div class="col-sm-4"></div>
         <div class="col-sm-4 justify-content-center" id="company-name">NORJ Library</div>
         <div class="col-sm-4 justify-content-end search">
-          <div class="input-group ">
-            <input type="text" class="form-control" placeholder="Search">
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button">
-                <i class="fa fa-search"></i>
-              </button>
+          <form action="search/result" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control"  name="keyword" value = "" placeholder="Search">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="submit">
+                  <i class="fa fa-search"></i>
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -119,7 +121,7 @@
   {# hero section #}
   {% block hero_section %}{% endblock %}
   <!-- Main Content -->
-  <div class="container">
+  <div class="container" style="min-height: 500px">
     {% block content %}{% endblock %}
   </div>
 
