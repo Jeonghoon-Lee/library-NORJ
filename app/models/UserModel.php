@@ -40,14 +40,14 @@
       $search_option = array('UserName = ?', $username);
       $this->load($search_option);
       $this->LastLoginTime = date('Y-m-d H:i:s');
-      $this->save();
+      $this->update();
     }
 
     function update_user_by_id($id) {
       $search_option = array('UserID = ?', $id);
       $this->load($search_option);
       $this->copyfrom('POST');
-      $this->save();
+      $this->update();
     }
 
     function delete_user_by_id($id) {

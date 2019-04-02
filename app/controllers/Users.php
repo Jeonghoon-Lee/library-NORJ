@@ -43,7 +43,7 @@
       echo $f3->get("twig")->render("create_user.html", $render_options);
     }
 
-    function check_validation($f3) {
+    function check_validation($f3, $create_mode) {
       $error = '';
 
       if ($f3->get("POST.FirstName") == "") {
@@ -58,7 +58,7 @@
         $error = "Please enter a valid last name.";
       } else if ($f3->get("POST.UserName") == "") {
         $error = "Please fill in your user name.";
-      } else if ($this->Users->is_exist_username($f3->get("POST.UserName")) > 0) {
+      } else if ($create_mode && $this->Users->is_exist_username($f3->get("POST.UserName")) > 0) {
         $error = "User name is already exist.";
       } else if ($f3->get("POST.Email") == "") {
         $error = "Please fill in your email.";
@@ -85,7 +85,7 @@
 
     function create($f3) {
       // form submitted
-      $error = $this->check_validation($f3);
+      $error = $this->check_validation($f3, true);
 
       if ($error == "") {
         // No error
@@ -253,7 +253,7 @@
 
     function update($f3) {
       // form submitted
-      $error = $this->check_validation($f3);
+      $error = $this->check_validation($f3, false);
 
       if ($error == "") {
         // No error
