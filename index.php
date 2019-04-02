@@ -17,6 +17,7 @@
 
   $f3->set('twig', $twig);
 
+
   // Home page
   $f3->route('GET /', 'Books->home');
 
@@ -39,7 +40,6 @@
   $f3->route('POST /book/update/@ISBN', 'Books->update_book');
   // delete book
   $f3->route('GET /book/delete/@ISBN', 'Books->delete_book');
-
   // reserve book
   $f3->route('POST /book/reserve', 'Books->reserve_book');
 
@@ -67,6 +67,7 @@
   // Contact page
   $f3->route('GET /contact', 'Users->contact_form');
   $f3->route('POST /contact', 'Users->contact');
+  $f3->route('POST /contact/update', 'Users->update_message');
 
 
   /**

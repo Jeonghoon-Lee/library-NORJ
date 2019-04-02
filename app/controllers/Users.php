@@ -325,7 +325,7 @@
       if ($error == "") {
         // successfully posted
         $this->messages->add_message();
-        $f3->reroute('/');
+        $f3->reroute("/");
       } else {
         $render_option = array(
           "session" => $f3->get("SESSION"),
@@ -335,16 +335,29 @@
       }
     }
 
+    function update_message($f3) {
+      if ($f3->get("SESSION.UserType") == "admin") {
+        if ($f3->get("POST.completed") == "Completed") {
+          $this->messages->completed_message_by_id($f3->get("POST.MsgID"));
+        } else if ($f3->get("POST.delete") == "Delete") {
+          $this->messages->delete_message_by_id($f3->get("POST.MsgID"));
+        }
+        $f3->reroute('/admin/message_list');
+      } else {
+        $f3->reroute("/");
+      }
+    }
+
     function get_user_loans($f3) {
       //get array of user's loans (array of arrays)
-      $loans = $this->loans->get_user_loans_by_id($f3->get('SESSION.UserID'));
+      $loans = $this->loans->get_user_loans_by_id($f3->get("SESSION.UserID"));
 
       echo json_encode($loans);
     }
 
     function get_user_reservations($f3) {
       //get array of user's reservations (array of arrays)
-      $res = $this->reservations->get_user_reservation_by_id($f3->get('SESSION.UserID'));
+      $res = $this->reservations->get_user_reservation_by_id($f3->get("SESSION.UserID"));
 
       echo json_encode($res);  
     }

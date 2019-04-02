@@ -22,12 +22,21 @@
 					<th></th>
 				</tr>
 				{% for message in messages %}
-					<tr>
-						<td scope="col">{{ message.MsgID }}</th>
-						<td scope="col">{{ message.Subject }}</th>
-						<td scope="col">{{ message.Message }}</th>
-						<td scope="col">{{ message.Name }}</th>
-						<td scope="col"><a href="mailto:{{ message.Email }}">{{ message.Email }}</a></th>
+					<tr {% if message.Status == 1 %} style="text-decoration: line-through" {% endif %}>
+						<td scope="col">{{ message.MsgID }}</td>
+						<td scope="col">{{ message.Subject }}</td>
+						<td scope="col">{{ message.Message }}</td>
+						<td scope="col">{{ message.Name }}</td>
+						<td scope="col"><a href="mailto:{{ message.Email }}">{{ message.Email }}</a></td>
+						<td>
+							<form action="contact/update" method="POST">
+							{% if message.Status == 0 %}
+								<input type="submit" class="btn-success" name="completed" value="Completed">
+							{% endif %}
+								<input type="submit" class="btn-warning" name="delete" value="Delete">
+								<input type="hidden" name="MsgID" value="{{ message.MsgID }}">
+							</form>
+						</td>
 					</tr>
 				{% endfor %}
 			</table>

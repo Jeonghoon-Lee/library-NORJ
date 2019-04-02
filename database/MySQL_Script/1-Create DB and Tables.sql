@@ -137,6 +137,7 @@ create table ContactMessages
 	Subject varchar(50) not null,		
 	Message varchar(512) not null,		
 	Name varchar(30) not null,
+	Status int not null default 0
 
 	constraint pk_ContactMessages primary key clustered (MsgID asc)   
 )
