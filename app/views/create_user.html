@@ -17,7 +17,7 @@
     <div class="form-group col-md-3">
       Enter your first name:
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
       <input type="text" name="FirstName" class="form-control" placeholder="First name" value="{{user.FirstName}}" required />
     </div>
   </div>
@@ -26,7 +26,7 @@
     <div class="form-group col-md-3">
       Enter your midle name:
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
       <input type="text" name="MiddleName" class="form-control" placeholder="Middle name" value="{{user.MiddleName}}" />
     </div>
   </div>
@@ -35,7 +35,7 @@
     <div class="form-group col-md-3">
       Enter your family name:
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
       <input type="text" name="LastName" class="form-control" placeholder="Last name" value="{{user.LastName}}" />
     </div>
   </div>
@@ -44,7 +44,7 @@
     <div class="form-group col-md-3">
       Date of Birth:
     </div>
-    <div class="form-group col-md-1">
+    <div class="form-group col-md-2">
       <select name="day" class="form-control">
         <option value="" selected disabled>Day</option>
         {% for day in 1..31 %}
@@ -61,7 +61,7 @@
         {% endfor %}
       </select>
     </div>
-    <div class="form-group col-md-1">
+    <div class="form-group col-md-2">
       <select name="year" class="form-control">
         <option value="" selected disabled>Year</option>
         {% for year in cur_year..min_year %}
@@ -76,7 +76,7 @@
     <div class="form-group col-md-3">
       Choose User name:
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
       <input type="text" name="UserName" class="form-control" placeholder="User name" value="{{user.UserName}}" />
     </div>
   </div>
@@ -85,7 +85,7 @@
     <div class="form-group col-md-3">
       Enter e-mail:
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
       <input type="email" name="Email" class="form-control" placeholder="Email" value="{{user.Email}}" />
     </div>
   </div>
@@ -94,7 +94,7 @@
     <div class="form-group col-md-3">
       Enter Password:
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
       <input type="password" name="Password" class="form-control" placeholder="Password" minlength="7" />
     </div>
   </div>
@@ -103,16 +103,16 @@
     <div class="form-group col-md-3">
       Re-type Password:
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
       <input type="password" name="Password_c" class="form-control" placeholder="Confirm password" />
     </div>
   </div>
   {% if error!= '' %}
-    <div class="form-row alert alert-danger" role="alert">{{error}}</div>
+    <div class="form-row alert alert-danger" role="alert">{{ error }}</div>
   {% endif %}
   <!--Row 9-->
   <div class="form-row">
-    <div class="form-group col-md-7 righted">
+    <div class="form-group col-md-9 righted">
       <input type="hidden" name="UserID" value="{{user.UserID}}">
       <input type="submit" name="btn_create" class="btn pr-4 pl-4" 
         {% if user.UserID != null %}

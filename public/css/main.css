@@ -181,3 +181,25 @@ img.img-fluid.book-cover{
 	height: 100px;
 	background-image: url("../img/no_image_book.png");
 }
+
+/* manage_book.html */
+.book-image {
+  width: 100%;
+  height: 225px;
+	border: 1px solid lightgray;
+	border-radius: 1%;
+	text-align: center;
+}
+
+.book-image img {
+	width: auto;
+	height: 100%;
+}
+
+/* testing media query */
+/* search result view */
+@media only screen and (max-width: 768px) {
+  td.hide-column, th.hide-column {
+    display: none;
+  }
+}

@@ -28,7 +28,7 @@
   <header>
     <div class='sticky-top fixed-top header'>
       <div class="row">
-        <div class="col-sm-4"></div>
+        <div class="col-sm-4 mt-4 text-danger font-weight-bold">{% if session.UserType == 'admin' %}<span class="ml-2">ADMIN MODE</span>{% endif %}</div>
         <div class="col-sm-4 justify-content-center" id="company-name">NORJ Library</div>
         <div class="col-sm-4 justify-content-end search">
           <form action="search/result" method="GET">
@@ -81,13 +81,7 @@
               </li>
             {% endif %} #}
             {% if session.UserType == "admin" %}
-              <li class="nav-item">
-                <a class="nav-link" href="book/create">Create Book</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="user/create">Create User</a>
-              </li>
-              <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="admin/book_list">Book List</a>
               </li>
               <li class="nav-item">
@@ -95,6 +89,12 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="admin/message_list">Message List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="book/create">Create Book</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="user/create">Create User</a>
               </li>
             {% endif %}
           </ul>

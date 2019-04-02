@@ -18,7 +18,8 @@
       $render_option = array(
         'session' => $f3->get('SESSION'),
         'languages' => $this->languages->fetch_all(),
-        'categories' => $this->categories->fetch_all()
+        'categories' => $this->categories->fetch_all(),
+        'min_year' => 1980
       );
       echo $f3->get('twig')->render('search.html', $render_option);
     }
@@ -40,8 +41,8 @@
         );
         echo $f3->get('twig')->render('search_result.html', $render_option);
       } else {
-        // echo print_r($f3->get('SESSION'));
-
+        // for admin user mode
+        // after inserting book, display list of books.
         if ($f3->get('SESSION.booklist') == 'on') {
           $f3->set('SESSION.booklist', '');   // clear
 
@@ -66,7 +67,15 @@
       // echo '<pre>';
       // echo print_r($f3->get('POST'));
       // echo '</pre>';
+      
+      // validation check for year value
+      if (($f3->get('POST.From') != '') && (!is_numeric($f3->get('POST.From')))) {
+        $f3->reroute('');
+      } else if (($f3->get('POST.From') != '') && (!is_numeric($f3->get('POST.From')))) {
+        $f3->reroute('');
+      }
 
+      // no error, make search string
       $search_options = [];
 
       $search_keys = '';
@@ -149,6 +158,14 @@
       }      
       if ($cate_options != '')
         $search_options[] = '(' . $cate_options . ')';
+
+      if (($f3->get('POST.From') != '') and ($f3->get('POST.To') != '')) {
+        if ($f3->get('POST.From') < $f3->get('POST.To')) {
+          $search_options[] = '(Year between ' . $f3->get('POST.From') . ' and ' . $f3->get('POST.To') . ')';
+        } else {
+          $search_options[] = '(Year between ' . $f3->get('POST.To') . ' and ' . $f3->get('POST.From') . ')';
+        }
+      }
 
       // for testing
       // echo '<pre>';
