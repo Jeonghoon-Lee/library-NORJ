@@ -27,6 +27,7 @@
       $this->cur_year = date("Y");
     }
 
+    // create user form
     function create_form($f3) {
       if ($f3->get("SESSION.UserType") != "admin") {
         // clear session
@@ -43,6 +44,8 @@
       echo $f3->get("twig")->render("create_user.html", $render_options);
     }
 
+
+    // check validation for create and update user
     function check_validation($f3, $create_mode) {
       $error = '';
 
@@ -138,12 +141,6 @@
       
         $results = $this->Users->get_user_by_username($f3->get("POST.UserName"));
 
-        // without framework
-        // $results = DB::queryFirstRow("SELECT UserId, FirstName, LastName, UserType, password 
-        //                         FROM users 
-        //                         WHERE username = %s 
-        //                         LIMIT 1", $_POST['user_name']);
-        
         // check 1 row returned
         if (sizeof($results) == 0) { // number of rows returned
           $error = "User does not exist";
@@ -176,25 +173,6 @@
               // admin page
               $f3->reroute('/admin/home');
             }
-
-            // $render_options = array(
-            //   "session" => $f3->get("SESSION")
-            // );
-            // echo $f3->get("twig")->render("user_account.html", $render_options);  
-            // without frame work
-            // DB::update('users', array('LastLoginTime'=>DB::sqleval("CURTIME()")), 'UserId=%i', $results['UserId']);
-    
-            // if ( DB::affectedRows() != 1 ){ // number of rows altered by query
-            //   $log->error("Did not update last login");
-            // }           
-            // //save session
-            // $_SESSION['UserId'] = $results['UserId'];
-            // $_SESSION['FirstName'] = $results['FirstName'];
-            // $_SESSION['LastName'] = $results['LastName'];
-            // $_SESSION['UserType'] = $results['UserType'];
-                         
-            // header("Location: manage_account.php");
-            
           }
         }
       }
