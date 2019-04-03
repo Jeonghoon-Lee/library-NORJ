@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ subtitle }}{% endblock %}
+{% block page_descrip %}Book detail page{% endblock %}
+{% block page_keywords %}Books, {{book.Title}} {% endblock %}
+
+{% block content %}
+	<div class="row mt-5">
+	<h2>Book Information</h2>
+	</div>
+	<div class="row mt-3">
+		<div class="col-md-2">
+			{% if book.BookImage %}
+				<img src="public/img/{{ book.BookImage }}" class="img-fluid" alt="Cover image of {{book.Title}}">
+			{% else %}
+				<img src="public/img/no_image_book.png" class="img-fluid" alt="Book image is not available">
+			{% endif %}
+		</div>
+		<div class="col-md-8 mb-3">
+			<table class="table table-sm">
+				<tbody>
+					<tr>
+						<th scope="row">Title: </th>
+						<td>{{book.Title}}</td>
+					</tr>
+					<tr>
+						<th scope="row">Author: </th>
+						<td>{{book.Author}}</td>
+					</tr>
+					<tr>
+						<th scope="row">Publisher: </th>
+						<td>{{book.Publisher}}</td>
+					</tr>
+					<tr>
+						<th scope="row">Year: </th>
+						<td>{{book.Year}}</td>
+					</tr>
+					<tr>
+						<th scope="row">Description: </th>
+						<td>{{book.Description}}</td>
+					</tr>
+					<tr>
+						<th scope="row">Status: </th>
+						<td>{{book.BookStatus}} </td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div class="row justify-content-center">
+								<ul class="search-results">
+									<!-- Favorate function doesn't support now. -->
+									<!-- <li><a href="#" class="icoFavor" title="Favorite"><i class="fa fa-heart fa-2x"></i></a></li> -->
+									{% if session.UserName !='' and book.BookStatus == "available" %}								
+										<li><a href="http://localhost:81/library_NORJ/search/detail/{{ book.ISBN }}#" class="icoReserv" title="Reservation"><i class="fa fa-plus-circle fa-2x mr-3"></i></a></li>
+									{% endif %}
+									<li><a href="http://localhost:81/library_NORJ/search/detail/{{ book.ISBN }}#" class="icoPrint" title="Print"><i class="fa fa-print fa-2x"></i></a></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="hidden" id="ISBN" value="{{ book.ISBN }}">
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %} <script src="public/js/book_detail.js"></script> {% endblock %}

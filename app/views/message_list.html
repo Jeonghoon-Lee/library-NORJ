@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block page_title %}Message List{% endblock %}
+
+{% block content %}
+	<div class="row justify-content-md-center mt-5">
+		<div class="col-md-12">
+			<h2>{{ subtitle }}</h2>
+			<h6 class="text-right">Total # of messages: {{ messages|length }}</h6><br>
+		</div>
+	</div>
+
+	<div class="row justify-content-md-center">
+		<div class="col-md-12 table-responsive">
+			<table class="table">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Subject</th>
+					<th scope="col">Message</th>
+					<th scope="col">UserName</th>
+					<th scope="col">Email</th>
+					<th></th>
+				</tr>
+				{% for message in messages %}
+					<tr {% if message.Status == 1 %} style="text-decoration: line-through" {% endif %}>
+						<td scope="col">{{ message.MsgID }}</td>
+						<td scope="col">{{ message.Subject }}</td>
+						<td scope="col">{{ message.Message }}</td>
+						<td scope="col">{{ message.Name }}</td>
+						<td scope="col"><a href="mailto:{{ message.Email }}">{{ message.Email }}</a></td>
+						<td>
+							<form action="contact/update" method="POST">
+							{% if message.Status == 0 %}
+								<input type="submit" class="btn-success" name="completed" value="Completed">
+							{% endif %}
+								<input type="submit" class="btn-warning" name="delete" value="Delete">
+								<input type="hidden" name="MsgID" value="{{ message.MsgID }}">
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>		
+	</div>
+{% endblock %}

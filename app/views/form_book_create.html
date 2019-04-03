@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ subtitle }}{% endblock %}
+{% block page_keywords %}Library-NORJ, Register Book, Update Books{% endblock %}
+
+{% block content %}
+<div class="row justify-content-md-center mt-5">
+  <div class="col-md-10 col-sm-12 mb-5">
+    <h2>{{ subtitle }}</h2>
+    <form action="{{ url }}" method="post">
+      <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" class="form-control" name="Title" id="title" value="{{ book.Title }}">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-7">
+          <label for="Author">Author</label>
+          <input type="text" class="form-control" name="Author" id="author" value="{{ book.Author }}">
+        </div>
+        <div class="form-group col-md-5">
+          <label for="Publisher">Publisher</label>
+          <input type="text" class="form-control" name="Publisher" id="publisher" value="{{ book.Publisher }}">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="LangID">Language</label>
+          <select name="LangID" class="form-control" id="language">
+            {% for lang in languages %}
+              <option value="{{ lang.LangID }}" {% if book.LangID == lang.LangID %}selected{% endif %}>
+                {{ lang.LangDescrip }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-5">
+          <label for="CategoryID">Category</label>
+          <select name="CategoryID" class="form-control" id="category">
+            {% for category in categories %}
+              <option value="{{ category.CategoryID }}" {% if book.CategoryID == category.CategoryID %}selected{% endif %}>
+                {{ category.CategoryDescrip }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="Year">Year</label>
+          <select name="Year" class="form-control" id="year">
+            {% for year in now|date('Y')..1980 %}
+              <option value="{{ year }}" {% if book.Year == year %}selected{% endif %}>
+                {{ year }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="BookStatus">Book Status</label>
+          <select name="BookStatus" class="form-control" id="status">
+            {% set bookStatus = ["available", "reserved", "loaned"] %}
+            {% for status in bookStatus %}
+              <option value="{{ status }}" {% if book.BookStatus == status %}selected{% endif %}>
+                {{ status }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>  
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-7">
+          <legend class="col-form-label pt-0">Age Rating</legend>
+          <div class="">
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" name="AgeRating" id="Rating1" value="0" {% if book.AgeRating == 0 %}checked{% endif %}>
+              <label for="Rating1" class="form-check-label">All Age</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" name="AgeRating" id="Rating2" value="1" {% if book.AgeRating == 1 %}checked{% endif %}>
+              <label for="Rating2" class="form-check-label">Adult Only</label>
+            </div>
+          </div>
+          <div class="mt-3">
+            <label for="Description">Description</label>
+            <textarea class="form-control" name="Description" id="descipt" cols="60" rows="8">{{ book.Description }}</textarea><br>
+          </div>
+        </div>
+        <div class="form-group col-md-5">
+          <label for="book-img">Book Photo:</label>
+          {# <input type="file" class="form-control" id="book-img" name="image" value=""> #}
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="book-img" name="image" value="">
+            <label class="custom-file-label" for="book-img">Choose file</label>
+          </div>
+
+          <!-- book image display area -->
+          <div class="book-image mt-3 px-2 py-2">
+            {% if book.ISBN != null %}
+              {% if book.BookImage != null %}
+                <img src="public/img/{{ book.BookImage }}" alt="Cover image of the {{ book.Title }}">
+              {% else %}
+                <img src="public/img/no_image_book.png" alt="Cover image of the {{ book.Title }}">     
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% if error!= '' %}
+      <div class="form-row">
+        <div class="form-group alert alert-danger col-md-12" role="alert">{{ error }}</div>
+      </div> 
+      {% endif %}
+      <div class="form-row">
+        <button type="submit" class="btn btn-primary mr-2 pl-4 pr-4">{{ subtitle }}</button>
+        <button type="reset" class="btn btn-secondary pl-5 pr-5">Reset</button>
+      </div>
+      <input type="hidden" name="ISBN" value="{{ book.ISBN }}">
+      <input type="hidden" name="BookImage" value="{{ book.BookImage }}">
+    </form>
+  </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+  <script src="public/js/register_book.js"></script>
+{% endblock %}
+

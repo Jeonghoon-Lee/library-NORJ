@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>{% block page_title %}Default title{% endblock %}</title>
+
+  <meta charset="UTF-8">
+  <meta name="description" content="{% block page_descrip %}This website is about ...{% endblock %}">
+  <meta name="keywords" content="{% block page_keywords %}Libary, Books{% endblock %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <base href="http://localhost:81/library_NORJ/">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <!--Font awesome-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  <!-- common css: main.css  -->
+  <link rel="stylesheet" href="public/css/main.css">
+
+  {% block page_css %}{% endblock %}
+</head>
+
+<body>
+  <!--Top page compaany name and search bar-->
+  <header>
+    <div class='sticky-top fixed-top header'>
+      <div class="row">
+        <div class="col-sm-4 mt-4 text-danger font-weight-bold">{% if session.UserType == 'admin' %}<span class="ml-2">ADMIN MODE</span>{% endif %}</div>
+        <div class="col-sm-4 justify-content-center" id="company-name">NORJ Library</div>
+        <div class="col-sm-4 justify-content-end search">
+          <form action="search/result" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control"  name="keyword" value = "" placeholder="Search">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="submit">
+                  <i class="fa fa-search"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Navigation Bar!-->
+      <nav class="navbar navbar-light bg-light navbar-expand-sm navbar-template">
+        <!-- Brand -->
+        {% if session.UserType == "admin" %}
+        <a class="navbar-brand" href="admin/home">        
+        {% else %}
+        <a class="navbar-brand" href="">      
+        {% endif %}
+          <img src="public/img/Library-2-icon.png" width="50" height="50">
+        </a>
+        <div class="collapse navbar-collapse order-3 order-sm-2" id="NavbarNavDropdown">
+          <ul class="navbar-nav">
+            {% if session.UserType == "user" %}
+              <li class="nav-item">
+                <a class="nav-link" href="user/detail">Home</a>
+              </li>
+            {% elseif session.UserType == "" %}
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="search">Catalog</a>
+            </li>            
+            {% if session.UserType != "admin" %}            
+              <li class="nav-item">
+                <a class="nav-link" href="about">About us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact">Contact us</a>
+              </li>
+            {% endif %}
+            {# {% if session.UserID == "" %}
+              <li class="nav-item">
+                  <a class="nav-link" href="user/create">Create Account</a>
+              </li>
+            {% endif %} #}
+            {% if session.UserType == "admin" %}
+            <li class="nav-item">
+                <a class="nav-link" href="admin/book_list">Book List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="admin/user_list">User List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="admin/message_list">Message List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="book/create">Create Book</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="user/create">Create User</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="d-flex flex-row order-2 ordes-sm-3">
+          <ul class="navbar-nav flex-row">
+            {% if session.UserID != "" %}
+              <a class="nav-link" href="user/logout"><i class="fa fa-user fa-2x"></i> Sign out</a>
+            {% else %}
+              <a class="nav-link" href="user/login"><i class="fa fa-user fa-2x"></i> Sign In</a>
+            {% endif %}
+          </ul>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>  
+
+  {# search bar #}
+  {# {% block search %}{% endblock %} #}
+
+  {# hero section #}
+  {% block hero_section %}{% endblock %}
+  <!-- Main Content -->
+  <div class="container" style="min-height: 500px">
+    {% block content %}{% endblock %}
+  </div>
+
+  <!--Footer-->
+  <div class="bg-1 pt-3">
+  <!--Footer navigation bar-->
+    <div class="row justify-content-center">
+      <ul class="nav footer-nav">
+        {% if session.UserType == "user" %}
+          <li class="nav-item">
+            <a class="nav-link" href="user/detail">Home</a>
+          </li>
+        {% elseif session.UserType == "" %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="search">Catalog</a>
+        </li>        
+        {% if session.UserType != "admin" %}            
+          <li class="nav-item">
+            <a class="nav-link" href="about">About us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact">Contact us</a>
+          </li>
+        {% endif %}
+        {# {% if session.UserID == "" %}
+          <li class="nav-item">
+              <a class="nav-link" href="user/create">Create Account</a>
+          </li>
+        {% endif %} #}
+        {% if session.UserType == "admin" %}
+          <li class="nav-item">
+            <a class="nav-link" href="book/create">Create Book</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="user/create">Create User</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin/book_list">Book List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin/user_list">User List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin/message_list">Message List</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+    <hr>
+    <div class="row justify-content-center ">
+      <ul class="social-network social-circle">
+        <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#" class="icoSkype" title="Skype"><i class="fa fa-skype"></i></a></li>
+        <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+      </ul>
+    </div>
+    <div class="row justify-content-center">
+      <p class="text-center text-light"><small>© 2019 by NORJ Library. Created by NORJ Team Corp.</small></p>
+    </div>
+  </div>
+
+  <!-- Bootstrap javascript source -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+
+  {% block javascripts %}{% endblock %}
+</body>
+
+</html>

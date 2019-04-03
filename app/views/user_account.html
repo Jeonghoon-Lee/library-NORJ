@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block page_title %}My Account{% endblock %}
+
+{% block content %}
+<!--<a href="user/logout" >Sign out</a><br /> moved to the top-->
+
+<div class="mt-5">
+  <h2>Hello {{session.FirstName}} {{session.LastName}}</h2>
+</div>
+{% if error!= ''%}
+  <div class="alert alert-danger" role="alert">{{error}}</div>
+{% endif %}
+<div class="py-2">
+  <div class="container">
+    <div class="row mt-3 mb-5">
+      <div id="user_profile" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pt-3 pb-3">
+        <!-- <img src="public/img/default-image.jpg" alt="user photo"><br /><br /> -->
+        <img src="public/img/default-image.jpg" width="90" heigth="110" alt="user photo"><br /><br />
+
+        <form action="{{form_action}}" method="POST" enctype="multipart/form-data"></form>
+        {# <input type="file" name="image"><br /><br /> #}
+        <span>{{error}}</span>
+        {# <input type="submit" name="btn_img" value="Upload photo"><br /><br /> #}
+      
+        <p><a href="http://localhost:81/library_NORJ/user/detail#" onclick="show_user_loans()">Loans ({{loan_amount}})</a></p>
+        <p><a href="http://localhost:81/library_NORJ/user/detail#" onclick="show_user_res()">Reservations ({{res_amount}})</a></p>
+        <p>Charges to pay: ${{charges}}</p>
+        <p><a href="user/update/{{ session.UserID }}">Edit account</a></p>
+      </div>
+      <div id="user_info"class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pt-3 pb-3">
+        <img class="img-fluid" src="public/img/bookpile.jpg" >
+      </div>
+    </div>
+  </div>
+</div> 
+<script type="text/javascript"  src="public/js/show_user_info.js" > </script>
+{% endblock %}

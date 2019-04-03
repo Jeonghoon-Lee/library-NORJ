@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block page_title %}Library-NORJ{% endblock %}
+{% block page_keywords %}Library-NORJ, Books, John-abbott Library{% endblock %}
+
+{% block hero_section %}
+  <div class="jumbotron text-center hero-main" style="margin-bottom:0">
+  </div>
+  <!--post hero-->
+  <div class="row justify-content-center" id="post-hero">
+      <div class="col-sm-3 align-middle">
+          <h3>Welcome to the NORJ Library</h3>
+      </div>
+      <div class="col-sm-3">Through our diverse resources and innovative programs, we aim to enrich the lives of our citizens through free access to information in many different media and formats.</div>
+      <div class="col-sm-3 ">
+          <input type="button" class="btn" name="about" value="Learn More"></input>
+      </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<!--Services-->
+<div class="row services mb-5">
+    <div class="col-lg-8">
+        <h2 class="heading-services text-center">New Releases</h2>
+        <p class="text-justify">What's new in books and hot in fiction, nonfiction, mystery and thrillers, 
+            science fiction and fantasy, biography and memoirs, business and more</p>
+        <div class="card-deck pt-3 mb-5 pb-5 text-left">
+            {% for book in newbooks %}
+                <div class="card">
+                    <div class="card-body">
+                        <img src="public/img/{{ book.BookImage }}" alt="JavaScript screen">
+                        <p class="pt-2"><strong>{{ book.Title }}</strong><br><small>{{ book.Author }}</small></p>
+                        <a href="search/detail/{{ book.ISBN }}"><button type="button" class="btn btn-md btn-block btn-outline-primary">Read more</button></a>
+                    </div>
+                </div>                   
+            {% endfor %}
+        </div>               
+        <hr>
+
+        <h2 class="heading-services text-center">Activities</h2>
+        <p class="text-justify">From storytime to knitting, business to crafts, 
+            computer basics support sessions and others activities offered by NORJ Library</p>
+        <p class="text-right"><input type="submit" class="btn" name="activities" value="Learn More"></input></p>
+        <hr>
+
+        <h2 class="heading-services text-center">News</h2>
+        <p class="text-justify">Up to date book news and new releases. Find information of authors, illustrators, fiction and non-fiction books.</p>
+            <p class="text-right"><a href="https://www.cbc.ca/books" target="_blank" 
+                class="btn" name="Submit" value="Learn More">Learn More</a></p>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-3 address">
+        <div class="contact-info">
+            <div class="text-center">
+                <ul class="list-unstyled mb-0">
+                    <li><i class="fa fa-map-marker fa-2x"></i>
+                        <p>1000 First avenue <br>Montreal H1H 2H3</p>
+                    </li>
+                    <li><i class="fa fa-phone mt-4 fa-2x"></i>
+                        <p>(514) 123-4567 </p>
+                    </li>
+                    <li><i class="fa fa-envelope mt-4 fa-2x"></i>
+                        <p><a href="mailto:info@horjlibrary.com">info@horjlibrary.com</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}<script src="public/js/home.js"></script>{% endblock %}

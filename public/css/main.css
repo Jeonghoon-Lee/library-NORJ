@@ -1,17 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei');
 @import url('https://fonts.googleapis.com/css?family=Barlow');
-/*Sign In*/
-.framed {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-	border: 1px solid black;
-	width: 60%;
-	margin: auto;
-	margin-top: 2%;
-	padding: 2em;
-	}
+
 /*research result icon --- advanse research page*/
 ul.search-results {
 	list-style: none;
@@ -19,10 +8,12 @@ ul.search-results {
 	margin-left: 0 !important;
 	padding: 0;
 }
+
 ul.search-results li {
 	display: inline;
 	margin: 0.5px;
 }
+
 /* manage_book.html.twig */
 .book-image {
   width: 200px;
@@ -34,13 +25,13 @@ ul.search-results li {
   width: 100%;
 }
 
-
 .heding-services {
 	margin-top: 5%;
 	margin-bottom: 3%;
 }
-hr{
-	margin-top: 8%
+
+hr {
+	margin-top: 3%;
 }
 
 /*Social media*/
@@ -126,12 +117,15 @@ div#company-name {
 }
 
 /*container home page*/
-
 .jumbotron.hero-main
  {     
-	background-image: url("../img/slider_3.jpg");
+	background-image: url("http://localhost:81/library_NORJ/public/img/home_hero.jpg");
+	background-repeat: no-repeat;
+  /*background-attachment: fixed;*/
+  background-position: center; 
 	width: 100%;
 	height: 350px;
+	background-size: cover;
   }
 
 /**header*/
@@ -146,7 +140,7 @@ div.header {
 /*post hero section home page*/
 #post-hero {
 	font-family: 'Barlow', sans-serif;
-  padding: 20px 0;
+	padding: 20px 0;
 	background: #E27E5F;
 	color: #fff;
 }
@@ -158,6 +152,7 @@ body {
 a.nav-link:first-of-type {
 	color: white;
 }
+
 /*search bar on header*/
 div.col-sm-4.justify-content-end.search{
    	padding-top: 20px;
@@ -184,4 +179,58 @@ img.img-fluid.book-cover{
 	width: 150px;
 	height: 100px;
 	background-image: url("../img/no_image_book.png");
+}
+
+/*about page style*/
+.jumbotron.jum-about {
+	background: url("../img/bookpile.jpg") center;
+	margin-top:5%; 
+	padding: 9rem 2rem;
+	background-size: cover;
+}
+
+h1.h1main {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+.col-lg-4.backgr-about {
+	margin-top: 5%;
+	margin-bottom: 2%;
+	background-color:  rgb(243, 244, 245);
+	border-radius: 0.3rem;
+}
+.col-lg-4.backgr-about-1 {
+	margin-top: 5%;
+	margin-bottom: 2%;
+	background-color:#E27E5F;
+	border-radius: 0.3rem;
+}
+
+/* homepage.html */
+.card-body img {
+	width: 100%;
+	height: auto;
+}
+
+/* manage_book.html */
+.book-image {
+  width: 100%;
+  height: 225px;
+	border: 1px solid lightgray;
+	border-radius: 1%;
+	text-align: center;
+}
+
+.book-image img {
+	width: auto;
+	height: 100%;
+}
+
+/* testing media query */
+/* search result view */
+@media only screen and (max-width: 768px) {
+  td.hide-column, th.hide-column {
+    display: none;
+  }
 }

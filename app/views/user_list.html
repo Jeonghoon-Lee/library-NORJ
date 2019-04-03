@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block page_title %}User List{% endblock %}
+
+{% block content %}
+	<div class="row justify-content-md-center mt-5">
+		<div class="col-md-12">
+			<h2>{{ subtitle }}</h2>
+			<h6 class="text-right">Total # of users: {{ users|length }}</h6><br>
+		</div>
+	</div>
+
+	<div class="row justify-content-md-center">
+		<div class="col-md-12 table-responsive">
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">UserName</th>
+						<th scope="col" class="hide-column">FirstName</th>
+						<th scope="col" class="hide-column">LastName</th>
+						<th scope="col">Email</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for user in users %}
+					<tr>
+						<td>{{ user.UserName }}</td>
+						<td class="hide-column">{{ user.FirstName }}</td>
+						<td class="hide-column">{{ user.LastName }}</td>
+						<td>{{ user.Email }}</td>
+						<td>
+							<a href="user/update/{{ user.UserID }}">Update</a>
+							<span>|</span>
+							<a href="user/delete/{{ user.UserID }}">Delete</a>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>		
+	</div>
+{% endblock %}

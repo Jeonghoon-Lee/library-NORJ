@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block page_title %}Create Account{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+  <h2>
+    {% if user.UserID != '' %}
+      Update Information
+    {% else %}
+      Create User
+    {% endif %}
+  </h2>
+</div>
+<form action="{{form_action}}" method="post" class="mt-3" enctype="multipart/form-data">
+  <!--Row 1-->
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      Enter your first name:
+    </div>
+    <div class="form-group col-md-6">
+      <input type="text" name="FirstName" class="form-control" placeholder="First name" value="{{user.FirstName}}" required />
+    </div>
+  </div>
+  <!--Row 2-->
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      Enter your middle name:
+    </div>
+    <div class="form-group col-md-6">
+      <input type="text" name="MiddleName" class="form-control" placeholder="Middle name" value="{{user.MiddleName}}" />
+    </div>
+  </div>
+  <!--Row 3-->
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      Enter your family name:
+    </div>
+    <div class="form-group col-md-6">
+      <input type="text" name="LastName" class="form-control" placeholder="Last name" value="{{user.LastName}}" />
+    </div>
+  </div>
+  <!--Row 4-->
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      Date of Birth:
+    </div>
+    <div class="form-group col-md-2">
+      <select name="day" class="form-control">
+        <option value="" selected disabled>Day</option>
+        {% for day in 1..31 %}
+        <option value="{{ day }}" {% if session.UserID != "" %}{% if day == user.BirthDate|date("d") %} selected {% endif %}{% endif %}>{{ day }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <select name="month" class="form-control">
+        <option value="" selected disabled>Month</option>
+        {% for month in months %}
+        <option value="{{ loop.index }}" {% if session.UserID != "" %}{% if month == user.BirthDate|date("F") %} selected {% endif %}{% endif %}>{{ month }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <select name="year" class="form-control">
+        <option value="" selected disabled>Year</option>
+        {% for year in cur_year..min_year %}
+        <option value="{{ year }}" {% if session.UserID != "" %}{% if year == user.BirthDate|date("Y") %} selected {% endif %}{% endif %}>{{ year }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <!--Row 5-->
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      Choose User name:
+    </div>
+    <div class="form-group col-md-6">
+      <input type="text" name="UserName" class="form-control" placeholder="User name" value="{{user.UserName}}" />
+    </div>
+  </div>
+  <!--Row 6-->
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      Enter e-mail:
+    </div>
+    <div class="form-group col-md-6">
+      <input type="email" name="Email" class="form-control" placeholder="Email" value="{{user.Email}}" />
+    </div>
+  </div>
+  <!--Row 7-->
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      Enter Password:
+    </div>
+    <div class="form-group col-md-6">
+      <input type="password" name="Password" class="form-control" placeholder="Password" minlength="7" />
+    </div>
+  </div>
+  <!--Row 8-->
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      Re-type Password:
+    </div>
+    <div class="form-group col-md-6">
+      <input type="password" name="Password_c" class="form-control" placeholder="Confirm password" />
+    </div>
+  </div>
+  {% if error!= '' %}
+    <div class="form-row alert alert-danger" role="alert">{{ error }}</div>
+  {% endif %}
+  <!--Row 9-->
+  <div class="form-row">
+    <div class="form-group col-md-9 righted">
+      <input type="hidden" name="UserID" value="{{user.UserID}}">
+      <input type="submit" name="btn_create" class="btn pr-4 pl-4" 
+        {% if user.UserID != null %}
+          value="Update Account"
+        {% else %}
+          value="Create Account"   
+        {% endif %}
+      >
+    </div>
+  </div>
+</form>
+</div>
+</div>
+</div>
+<!--</div> -->
+{% endblock %}

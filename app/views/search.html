@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block page_title %}Advanced Search{% endblock %}
+
+{% block content %}
+	<div class="mt-5 mb-4">
+		<h2>Advanced search</h2>
+	</div>
+
+	<form class="mb-5" action="search/result" method="POST">
+		{% for row in 1..3 %}
+			<div class="form-row">
+				{% if row > 1 %}			
+					<div class="form-group col-md-1">
+						<select name="operator{{row-1}}" class="form-control">
+							<option value="and" selected>AND</option>
+							<option value="or">OR</option>
+							<option value="not">NOT</option>
+						</select>
+					</div>
+				{% else %}
+					<div class="form-group col-md-1"></div>
+				{% endif %}
+				{# search criteria #}
+				<div class="form-group col-md-2">
+					<select name="field{{row}}" class="form-control" value="">
+						<option value="All">All</option>
+						<option value="Title" {% if row == 1 %}selected{% endif %}>Title</option>
+						<option value="Author" {% if row == 2 %}selected{% endif %}>Author</option>
+						<option value="Publisher" {% if row == 3 %}selected{% endif %}>Publisher</option>
+					</select>
+				</div>
+				<div class="form-group col-md-2">
+					<select name="match{{row}}" class="form-control" value="">
+						<option value=0 selected>All words</option>
+						<option value=1>Exact pharse</option>
+					</select>
+				</div>
+				<div class="form-group col-md-7">
+						<input type="text" class="form-control" name="keyword{{row}}" value="">
+				</div>
+			</div>
+		{% endfor %}
+		<div class="form-group">
+			<button type="submit" class="btn btn-info pl-4 pr-4">Search</button>
+		</div>
+
+		<hr>
+		<h5>Limit search (optional)</h5>
+		<br>
+
+		{# Audience #}
+		<div class="form-row">
+			<div class="form-group col-md-12 limit-search-category">
+				<h6>Audience</h6>
+			</div>
+			<div class="form-group col-md-2">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="checkAdult" name="adult">
+					<label class="form-check-label" for="checkAdult">Adult</label>
+				</div>
+			</div>
+			<div class="form-group col-md-2">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="checkChild" name="child">
+					<label class="form-check-label" for="checkChild">Child</label>
+				</div>
+			</div>
+		</div>
+
+		{# Language #}
+		<div class="form-row">
+			<div class="form-group col-md-12 limit-search-category">
+				<h6>Language</h6>
+			</div>
+			{% for lang in languages %}
+				<div class="form-group col-md-2 col-sm-3">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="check_lang{{loop.index}}" name="lang{{loop.index}}" value="{{ lang.LangDescrip }}">
+						<label class="form-check-label" for="check_lang{{loop.index}}">{{ lang.LangDescrip }}</label>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+		{# Categories #}
+		<div class="form-row">
+			<div class="form-group col-md-12 limit-search-category">
+				<h6>Categories</h6>
+			</div>
+      {% for category in categories %}
+				<div class="form-group col-md-3">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="check_cat{{loop.index}}" name="cate{{loop.index}}" value="{{ category.CategoryDescrip }}">
+						<label class="form-check-label" for="check_cat{{loop.index}}">{{ category.CategoryDescrip }}</label>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+		{# Year #}
+		<div class="form-row">
+			<div class="form-group col-md-12 limit-search-category">
+				<h6>Year of publication</h6>
+			</div>
+				<div class="form-group col-md-2">
+					<span>From</span>
+          <select name="From" class="form-control" id="from">
+						<option value=""></option>
+						{% for year in now|date('Y')..min_year %}
+							<option value="{{ year }}">{{ year }}</option>
+						{% endfor %}
+					</select>
+					<!-- <input type="text" class="form-control" id="year_from" size="4" placeholder="YYYY"> -->
+				</div>
+				<div class="form-group col-md-2">
+					<span>To</span>
+          <select name="To" class="form-control" id="to">
+						<option value=""></option>
+						{% for year in now|date('Y')..min_year %}
+							<option value="{{ year }}">{{ year }}</option>
+						{% endfor %}
+					</select>					
+					<!-- <input type="text" class="form-control" id="year_to" size="4" placeholder="YYYY"> -->
+				</div>
+		</div>
+
+		{# Search Button #}
+		<div class="form-row">
+			<button type="submit" class="btn btn-info ml-1 pl-4 pr-4">Search</button>
+		</div>
+	</form>
+{% endblock %}

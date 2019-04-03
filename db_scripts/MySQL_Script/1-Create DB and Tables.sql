@@ -126,21 +126,5 @@ create table Loans
 ;
 
 
--- 7. ContactMessages table
-drop table if exists ContactMessages
-;
-
-create table ContactMessages
-(
-	MsgID int not null auto_increment,
-	Email varchar(50) not null,		
-	Subject varchar(50) not null,		
-	Message varchar(512) not null,		
-	Name varchar(30) not null,
-	Status int not null default 0
-
-	constraint pk_ContactMessages primary key clustered (MsgID asc)   
-)
-;
 
 

@@ -2,13 +2,21 @@ function show_user_loans() {
   var info_container = document.getElementById("user_info");
   
   const xhrObj = new XMLHttpRequest();
+<<<<<<< HEAD
   xhrObj.open("POST", "http://localhost:81/NORJ/library-NORJ/src/get_user_loans.php");
+=======
+  xhrObj.open("POST", "user/get_user_loans");
+>>>>>>> fatfree
   xhrObj.send();
   //handle errors
   xhrObj.onerror = function () {
     console.error("An error has occured!");
   }
   xhrObj.onload = function (e) {
+<<<<<<< HEAD
+=======
+    console.log(xhrObj.response);
+>>>>>>> fatfree
     //parse received JSON to JS object to retrieve data
     responseObj = JSON.parse(xhrObj.response);
     console.log(JSON.stringify(responseObj));
@@ -63,7 +71,11 @@ function show_user_res() {
   var info_container = document.getElementById("user_info");
 
   const xhrObj = new XMLHttpRequest();
+<<<<<<< HEAD
         xhrObj.open("POST", "http://localhost:81/NORJ/library-NORJ/src/get_user_reservations.php");
+=======
+        xhrObj.open("POST", "user/get_user_reservations");
+>>>>>>> fatfree
         xhrObj.send();
         //handle errors
         xhrObj.onerror = function () {

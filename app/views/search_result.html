@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block page_title %}Book List{% endblock %}
+
+{% block content %}
+	<div class="row justify-content-md-center mt-5">
+		<div class="col-md-12">
+			<h2>{{ subtitle }}</h2>
+			<h6 class="text-right">Found {{ books|length }} books</h6><br>
+		</div>
+	</div>
+
+	<div class="row justify-content-md-center">
+		<div class="col-md-12 table-responsive">
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+					<th scope="col">#</th>
+					<th scope="col">Title</th>
+					<th scope="col">Author</th>
+					<th scope="col" class="hide-column">Category</th>
+					<th scope="col" class="hide-column">Language</th>
+					<th scope="col" class="hide-column">Status</th>
+					<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for book in books %}
+					<tr>
+						<th scope="row">{{loop.index}}</th>
+						<td>{{ book.Title }}</td>
+						<td>{{ book.Author }}</td>
+						<td class="hide-column">{{ book.Category }}</td>
+						<td class="hide-column">{{ book.Language }}</td>
+						<td class="hide-column">{{ book.BookStatus }}</td>
+						<td>
+							<a href="search/detail/{{book.ISBN}}">Detail</a>
+							{% if session.UserType == 'admin' %}
+								<br/><a href="book/update/{{book.ISBN}}">Update</a>
+								<br/><a href="book/delete/{{book.ISBN}}">Delete</a>
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>		
+	</div>
+{% endblock %}

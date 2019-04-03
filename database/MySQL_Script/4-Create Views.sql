@@ -25,6 +25,7 @@ from books as B
 		on B.CategoryID = C.CategoryID
 	inner join languages as L
 		on B.LangID = L.LangID
+order by B.ISBN
 ;
 
 select * 
@@ -45,6 +46,7 @@ from reservations as R
 		on R.UserID = U.UserID
 	inner join booklist_view as BV
 		on R.ISBN = BV.ISBN
+order by R.ReservID desc
 ;
 
 select *
@@ -59,12 +61,14 @@ drop view if exists loan_user_view
 create view loan_user_view
 as 
 select L.LoanID, L.ISBN, L.UserID, U.UserName, BV.Title, 
-	BV.Author, L.DateOut, L.DateDue, L.Datein
+	BV.Author, L.DateOut, L.DateDue, L.Datein, 
+    L.FineAssessed, L.FinePaid, L.FineWaived
 from loans as L
 	inner join users as U
 		on L.UserID = U.UserID
 	inner join booklist_view as BV
 		on L.ISBN = BV.ISBN
+order by L.LoanID desc
 ;
 
 select *
